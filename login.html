@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<!--<script src="d1_login.js" defer></script>-->
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="d1_login.css">
+        <link rel="stylesheet" href="web_font.css">
+        <title>CroxyWatch</title>
+    </head>
+    <center>
+    <body>
+        <img src="./CROXY_logo.png" alt="CROXY Dashboard Homepage"> <!--추후 이미지 변경-->
+        <div class="login"> <!--이미지 변경하면 필요 없을 수도?? 굳이 안써도 될듯-->
+            <form action="/login" target="_self" method="post" autocomplete="off">
+                <div id="id_box">
+                    <label class="label" for="id">ID</label>
+                        <input type="text" id="id" name="id" placeholder="Enter your ID" required>
+                </div>
+                <div id="pw_box">
+                    <lable class="label"for="password">PW</lable>
+                        <input type= "password" id="password" name="password" placeholder="Enter your Password" required>
+                </div>
+                <button type="submit">login</button>
+            </form>
+            <p> 관리자 : 02-000-0000 </p>
+        </div>
+    </body>
+    </center>
+</html>

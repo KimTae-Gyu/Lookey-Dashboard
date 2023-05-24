@@ -1,0 +1,44 @@
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+* {
+    font-family: 'Pretendard-Regular';
+    font-weight: 400;
+    user-select: none;
+}
+
+:root {
+    --black: #333333;
+    --light-black:#666666;
+    --blue:#0072C6;
+    --deep-blue: #00b6e4;
+    --gray:#F2F2F2;
+    --deep-gray:#CCCCCC;
+    --light-gray:#FAFAFA;
+    --green:#00A300;
+    --red:#FF4343;
+    --deep-red : #d13333;
+    --white: #FDFDFD;
+    --deep-green:#59C5A4;
+    --light-green:#daf7eb;
+  }
+
+/* 색상코드 연녹색 C4E8CC
+색상코드 진녹색 59C5A4
+바탕에 쓴 회색 F2F2F2
+선에 쓴 회색 CCCCCC 
+teal 008080*
+연녹색보다 더 연녹색 EBF7EE/
+
+/*데스크탑 1280x1024
+타블렛 834x1194
+핸드폰 428x926
+
+파란색: #0072C6
+검정색: #333333
+회색: #F2F2F2
+녹색: #00A300
+빨간색: #FF4343*/

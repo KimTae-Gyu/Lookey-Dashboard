@@ -1,0 +1,16 @@
+section{
+    padding-right : 10px;
+}
+table{
+    border : solid 2px;
+    border-color : var(--deep-gray);
+    width : 100%;
+    background-color: var(--white);
+    border-collapse : collapse;
+}
+
+th, td{
+    border : solid 2px;
+    border-color : var(--deep-gray);
+    padding : 10px;
+}

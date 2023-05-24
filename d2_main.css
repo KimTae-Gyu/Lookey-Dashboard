@@ -1,0 +1,258 @@
+/*전체*/
+*{
+    box-sizing: border-box;
+}
+
+html{
+    background-color: var(--light-gray);
+}
+
+body{
+    margin : 0;
+    display: grid;
+    grid-template-columns: 200px 5% 10fr;
+    grid-template-rows: 40px 1fr;
+    grid-gap: 10px;
+    grid-template-areas: 
+        "header header header"
+        "menubar menubar section";
+}
+
+/*링크*/
+a{
+    color: var(--black); /* 링크의 기본 색상을 상속 */
+    text-decoration: none; /* 밑줄 제거 */
+}
+
+a:hover{
+    color: var(--blue);
+    font-style : italic;
+}
+
+/*헤더*/
+header{
+    grid-area: header;
+    position :fixed;
+    top : 0;
+    left : 0;
+    width : 100%;
+    border-bottom : solid 2px; 
+    background-color: var(--deep-green);
+    border-color : var(--deep-green);
+    display : grid;
+    grid-column : 1 / span 12;
+    grid-row : 0;
+    padding : 5px;
+    margin-bottom: 2px;
+
+}
+
+.logo {
+    grid-column : 1 / 1   ;  
+    grid-row : 0;
+    height : 30px;
+}
+
+.headLine{
+    grid-column : 12;
+    display : flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-self: end;
+}
+
+.yourPic{
+    height : 30px;
+    margin-right : 5px;
+}
+
+.myinfo:hover,.logout:hover {
+    color : var(--light-green);
+}
+
+.myinfo {
+    margin : 0 5px 0 5px;
+}
+
+.logout {
+    margin : 0 5px 0 5px;
+}
+.alarm {
+    height: 100px;
+    margin-right : 5px;
+}
+
+/* #alarm-button{
+    border-radius: 100%;
+    border-color : #CCCCCC;
+    background-color: #CCCCCC;
+}*/
+
+
+
+/*네비게이션 바 위치*/
+/*네비게이션 바*/
+nav{
+    grid-area : menubar;
+    display : flex;
+    flex-direction: column;
+    /* grid-gap: 5px;
+    grid-template-rows: 3rem 1fr 0.8fr 0.5fr 0.5fr 0.5fr;
+    grid-template-areas :
+        "menuname"
+        "mainlog"
+        "awslog"
+        "control"
+        "export"
+        "address";*/
+    left : 0;
+    border : solid 2px;
+    background-color: var(--gray);
+    border-color : var(--gray);
+    margin-top: 0px;
+    padding : 5px 20px 0px 5px;
+}
+
+li{
+    list-style-type: none;
+    font-size : 20px;
+    margin-left : 5px;
+    padding-left : 10px;
+    border-left : 5px solid var(--black);
+    margin-bottom : 15px;
+}
+
+li:hover{
+    list-style-type: none;
+    font-size : 20px;
+    margin-left : 5px;
+    padding-left : 10px;
+    border-left : 5px solid var(--blue);
+    margin-bottom : 15px;
+}
+
+/*메뉴 아이콘 및 정보*/
+/*#expand-menu{
+    background-color : var(--white);
+    grid-area : menuicon;
+    align-self: left;
+}
+ .menuicon{
+    margin : 5px;
+    width : 45px;
+    height : 45px;
+}*/
+
+.index{
+    font-size : 25px;
+    border-color : var(--black);
+    padding-left : 5px;
+    padding-bottom : 5px;
+    /*margin-right: auto;*/
+}
+
+#main .index{
+    font-weight : 600;
+}
+
+.mainlog{
+    font-weight : 600;
+    color:var(--blue);
+}
+
+label{
+    /*grid-area: menuname;*/
+    padding-top : 5px;
+    margin-left : 10px;
+    font-weight: 900;
+}
+
+/*메뉴 항목*/
+/*
+#main{
+    grid-area : mainlog;
+}
+
+#aws-log{
+    grid-area : awslog;
+}
+
+#aws-con{
+    grid-area : control;
+}
+
+#aws-exp{
+    grid-area : export;
+}
+
+.address{
+    padding-left : 20px;
+    font-size: 15px;
+    font-style: italic;
+    grid-area: address;
+}*/
+/* 전체 섹션 */
+section{
+    grid-area : section;
+    gap : 5px;
+    
+    margin-right : 10px;
+    width : 100%;
+    max-height: 900px;
+    overflow : auto;
+/*    
+    border : solid 2px;
+    border-color : var(--gray);
+    */
+}
+
+/*섹션2 - 로그(오버뷰2) */
+
+.circle-log{
+    display : flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    border : solid 2px;
+    border-color : var(--gray);
+    background-color: var(--gray);
+    padding : 10px;
+    justify-content: center;
+    
+}
+.firstlog, .secondlog{
+    margin : 5px;
+    padding : 5px;
+    border : solid;
+    border-color: var(--white);
+    background-color: var(--white);
+    min-width : 750px;
+}
+
+.map-log{
+    border : solid 2px;
+    border-color : var(--gray);
+    background-color: var(--gray);
+    padding : 10px;
+    justify-content: center;
+}
+
+.thirdlog {
+    margin : 5px;
+    padding : 5px;
+    border : solid;
+    border-color: var(--white);
+    background-color: var(--white);
+    min-height: 400px;
+}
+
+#map{
+    min-height: 400px;
+}
+/*사이드*/
+/*#alarm-list{
+    grid-area : side;
+    border : solid 2px;
+    border-color : var(--gray);
+    background-color: var(--gray);
+}*/
+
