@@ -1,10 +1,10 @@
-@import "reset.css";
+
 
 html {
-    background-color: white;
+    background-color: var(--gray);
 }
 img {
-    margin-top : 10px;
+    margin-top : 50px;
     margin-left: auto;
     margin-right: auto;
     width: 30%;
@@ -13,10 +13,11 @@ img {
   }
 
 .login {
-    text-align : center;
     font-size : 100%;
-    color : black;
-    background-color : #C4E8CC;
+    color : var(--black);
+    border : solid 2px;
+    border-color : var(--deep-gray);
+    background-color : var(--white);
     padding : 5% auto 5% auto;
     margin-top : 10px;
     margin-bottom : 5%;
@@ -25,69 +26,76 @@ img {
     max-width : 500px;
     max-height: 600px;
     vertical-align: middle;
-    border-radius : 50px;
     user-select: none;
+}
+.description{
+    font-size: 200%;
+    font-weight: 800;
+    text-align: center;
+    margin : 10% auto 0% auto;
 }
 
 /*ID*/
 #id_box{
-    padding : 20% 5% 5% 5%;
-    display:flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    padding-left : 10%;
+    text-align: left;
+    margin : 5%;
 }
 /*PW*/
 #pw_box{
-    padding : 0% 5% 10% 5%;
-    display:flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    padding-left : 10%;
+    text-align: left;
+    margin : 5%;
 }
 
 .label{
     font-family: 'Pretendard-Regular';
     font-weight: 400;
-    font-size: 160%;
-    padding-right : 5%;
-    justify-content: flex-start;
+    font-size: 200%;
+    justify-content: left;
 }
 
 input[type="text"]{
-    width : 200px;
-    height: 25px;
+    width : 350px;
+    height: 50px;
     box-sizing: border-box;
     border-radius: 5px;
-    border-color: #CCCCCC;
+    border-color: var(--deep-gray);
+    background-color: var(--light-gray);
 }
 
 input[type="text"]:focus{
-    background-color: #F2F2F2;
+    background-color: var(--gray);
+    border-color: var(--deep-gray)
 }
 
 input[type="password"]{
-    width : 185px;
-    height: 25px;
+    width : 350px;
+    height: 50px;
     box-sizing: border-box;
     border-radius: 5px;
-    border-color: #CCCCCC;
+    border-color: var(--deep-gray);
+    background-color: var(--light-gray);
 }
 
 input[type="password"]:focus{
-    background-color: #F2F2F2;
+    background-color: var(--gray);
+    border-color: var(--deep-gray)
 }
 
 button[type="submit"]{
-    width :40%;
-    height:30px;
+    margin-top : 50px;
+    width :350px;
+    height:50px;
     box-sizing: border-box;
     border-radius: 5px;
-    background-color: #59C5A4;
-    border-color: #59C5A4;
+    background-color: var(--deep-green);
+    border-color: var(--deep-green);
 }
 
 button[type="submit"]:focus{
-    background-color:#5BB298;
-    border-color : #5BB298;
+    background-color: var(--light-green);
+    border-color : var(--light-green);
 }
 
 p{
@@ -97,3 +105,5 @@ p{
     text-align: center;
     font-style:italic;
 }
+
+@import "reset.css";
