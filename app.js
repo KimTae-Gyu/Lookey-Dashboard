@@ -32,7 +32,8 @@ connection.connect((err) => {
   console.log('MySQL 연결 성공');
 });
 
-const indexRouter = require('./routes/index'); // 라우트 파일 import
+// 라우트 파일 import
+const indexRouter = require('./routes/index'); 
 const loginRouter = require('./routes/login');
 
 // 미들 웨어 영역, 미들웨어 순서 생각
