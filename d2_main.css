@@ -215,7 +215,6 @@ section{
     border : solid 2px;
     border-color : var(--gray);
     background-color: var(--gray);
-    padding : 10px;
     justify-content: center;
     
 }
@@ -232,7 +231,6 @@ section{
     border : solid 2px;
     border-color : var(--gray);
     background-color: var(--gray);
-    padding : 10px;
     justify-content: center;
 }
 
