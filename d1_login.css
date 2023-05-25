@@ -1,7 +1,7 @@
 @import "reset.css";
 
 html {
-    background-color: white;
+    background-color: var(--gray);
 }
 img {
     margin-top : 10px;
@@ -15,8 +15,10 @@ img {
 .login {
     text-align : center;
     font-size : 100%;
-    color : black;
-    background-color : #C4E8CC;
+    color : var(--black);
+    border : solid 2px;
+    border-color : var(--deep-gray);
+    background-color : var(--white);
     padding : 5% auto 5% auto;
     margin-top : 10px;
     margin-bottom : 5%;
@@ -25,7 +27,6 @@ img {
     max-width : 500px;
     max-height: 600px;
     vertical-align: middle;
-    border-radius : 50px;
     user-select: none;
 }
 
@@ -34,14 +35,16 @@ img {
     padding : 20% 5% 5% 5%;
     display:flex;
     flex-wrap: wrap;
-    justify-content: center;
+    flex-direction: column;
+    place-content: left;
 }
 /*PW*/
 #pw_box{
     padding : 0% 5% 10% 5%;
     display:flex;
     flex-wrap: wrap;
-    justify-content: center;
+    flex-direction: column;
+    place-content: left;
 }
 
 .label{
