@@ -8,6 +8,7 @@
         <link rel="stylesheet" href="web_font.css">
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8PNtOtvMSJuUp6OqPOpNX7rGWULCDYp4&callback=initMap&v=weekly" defer></script>
         <script src="https://unpkg.com/@googlemaps/markerclusterer/dist/index.min.js"></script>
+        <link rel="icon" href="./pic/favicon.ico">
         <script src="d2_main.js" defer></script>
         <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.3/leaflet.css" integrity="sha512-mD70nAW2ThLsWH0zif8JPbfraZ8hbCtjQ+5RU1m4+ztZq6/MymyZeB55pWsi4YAX+73yvcaJyk61mzfYMvtm9w==" crossorigin="anonymous" referrerpolicy="no-referrer" />!-->
         
@@ -63,15 +64,26 @@
     <section>
         <div class="circle-log">
             <div class="firstlog" alt="지표 1">
+                <div class="desc">네트워크 F/W 차단 IP</div>
                 <canvas id="firstlog" style="width:45%"></canvas>
             </div>
             <div class="secondlog" alt="지표 2">
+                <div class="desc">WAF 차단 룰셋</div>
                 <canvas id="secondlog" style="width:45%"></canvas>
             </div>
         </div>
-        <div class="map-log">
-            <div class="thirdlog">
-                <div id="map" style="width: 100%;"> </div>
+        <div class="api-log">
+            <div class="map-log">
+                <div class="thirdlog">
+                    <div class="desc">네트워크 F/W 및 WAF 차단 지도</div>
+                    <div id="map" style="width:45%"> </div>
+                </div>
+            </div>
+            <div class="grade-log">
+                <div class="fourthlog">
+                    <div class="desc">GuardDuty 점수</div>
+                    <div id="duty_grade" style="width:45%"></div>
+                </div>
             </div>
         </div>
     </section>
