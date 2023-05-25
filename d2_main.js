@@ -25,33 +25,50 @@ const firstlog = new Chart("firstlog",{
             ],
             hoverOffset: 4
           }]
+        },
+    options :{
+      plugins: {
+        legend:{
+        position : 'right'
+          }
         }
+      }
     }
 );
 
 const secondlog = new Chart("secondlog",{
-    type: "doughnut",
-    data: {
-        labels: secondLabel,
-          datasets: [{
-            label: 'My First Dataset',
-            data: secondValue,
-            backgroundColor: [
-                'rgba(255, 67, 67, 1)',
-                'rgba(209, 51, 51, 1)',
-                'rgba(0, 114, 198, 1)',
-                'rgba(0, 182, 228, 1)',
-                'rgba(0, 163, 0, 1)',
-                'rgba(89, 197, 164, 1)',
-                'rgba(218, 247, 235, 1)',
-                'rgb(255, 99, 132)',
-                'rgb(54, 162, 235)',
-                'rgb(255, 205, 86)'
-            ],
-            hoverOffset: 4
-          }]
-        }
-    }
+  type: "doughnut",
+  data: {
+      labels: firstLabel,
+        datasets: [{
+          label: 'My First Dataset',
+          data: fitstValue,
+          backgroundColor: [
+              'rgba(255, 67, 67, 1)',
+              'rgba(209, 51, 51, 1)',
+              'rgba(0, 114, 198, 1)',
+              'rgba(0, 182, 228, 1)',
+              'rgba(0, 163, 0, 1)',
+              'rgba(89, 197, 164, 1)',
+              'rgba(218, 247, 235, 1)',
+              'rgb(255, 99, 132)',
+              'rgb(54, 162, 235)',
+              'rgb(255, 205, 86)'
+          ],
+          hoverOffset: 4
+        }]
+      },
+  overrides: {
+    doughnut:{
+      plugins: {
+        legend:{
+        position : 'right',
+        fullWidth : false
+                    }
+                  }
+              }
+          }
+  }
 );
 
 function initMap() {
