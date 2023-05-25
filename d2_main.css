@@ -214,7 +214,6 @@ section{
     border : solid 2px;
     border-color : var(--gray);
     background-color: var(--gray);
-    padding : 10px;
     justify-content: center;
     
 }
@@ -244,7 +243,6 @@ section{
     background-color: var(--gray);
     padding : 10px;
     max-width : 70%;
-    justify-content: center;
 }
 
 .thirdlog {
