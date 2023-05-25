@@ -12,15 +12,16 @@
     </head>
     <center>
     <body>
-        <img src="./pic/Lookey_logo.png" alt="Lookey Dashboard Homepage"> <!--추후 이미지 변경-->
-        <div class="login"> <!--이미지 변경하면 필요 없을 수도?? 굳이 안써도 될듯-->
+        <img src="./pic/Lookey_logo.png" alt="Lookey Dashboard Homepage">
+        <div class="login">
+            <div class="description">로그인 하세요</div>
             <form action="/login" target="_self" method="post" autocomplete="off">
                 <div id="id_box">
-                    <label class="label" for="id">ID</label>
+                    <div class="label" for="id">ID</div>
                     <input type="text" id="id" name="id" placeholder="Enter your ID" required>
                 </div>
                 <div id="pw_box">
-                    <lable class="label"for="password">PW</lable>
+                    <div class="label"for="password">PW</div>
                     <input type= "password" id="password" name="password" placeholder="Enter your Password" required>
                 </div>
                 <button type="submit">login</button>
