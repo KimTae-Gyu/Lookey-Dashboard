@@ -75,6 +75,15 @@ function initMap() {
   const map = new google.maps.Map(document.getElementById("map"), {
     zoom: 2,
     center: { lat: 37, lng: 150 },
+    minZoom: 2,
+    restriction: {
+      latLngBounds: {
+        north: 90,
+        south: -90,
+        east: 240,
+        west: 40,
+      },
+    },
   });
   const infoWindow = new google.maps.InfoWindow({
     content: "",
