@@ -61,17 +61,26 @@
     <section>
         <div class="circle-log">
             <div class="firstlog" alt="지표 1">
+                <div class="desc">네트워크 F/W 차단 IP</div>
                 <canvas id="firstlog" style="width:45%"></canvas>
             </div>
             <div class="secondlog" alt="지표 2">
+                <div class="desc">WAF 차단 룰셋</div>
                 <canvas id="secondlog" style="width:45%"></canvas>
             </div>
         </div>
-        <div class="map-log">
-            <div class="thirdlog">
-                <center>
-                    <div id="map" style="width: 100%;"> </div>
-                </center>
+        <div class="api-log">
+            <div class="map-log">
+                <div class="thirdlog">
+                    <div class="desc">네트워크 F/W 및 WAF 차단 지도</div>
+                    <div id="map" style="width:45%"> </div>
+                </div>
+            </div>
+            <div class="grade-log">
+                <div class="fourthlog">
+                    <div class="desc">GuardDuty 점수</div>
+                    <div id="duty_grade" style="width:45%"></div>
+                </div>
             </div>
         </div>
     </section>
