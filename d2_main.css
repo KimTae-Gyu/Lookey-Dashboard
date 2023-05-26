@@ -215,7 +215,7 @@ section{
     border-color : var(--gray);
     background-color: var(--gray);
     justify-content: center;
-    
+    max-width: 100%;
 }
 .firstlog, .secondlog{
     margin : 5px;
@@ -224,6 +224,13 @@ section{
     border-color: var(--white);
     background-color: var(--white);
     min-width : 750px;
+    max-height: 450px;
+    min-height : 300px;
+}
+canvas{
+    margin : 10px;
+    max-height : 450px;
+    min-height : 300px;
 }
 
 .api-log{
@@ -233,16 +240,17 @@ section{
     border : solid 2px;
     border-color : var(--gray);
     background-color: var(--gray);
-    padding : 10px;
     justify-content: center;
+    max-width: 100%;
+    place-content: center;
 }
 
 .map-log{
     border : solid 2px;
     border-color : var(--gray);
     background-color: var(--gray);
-    padding : 10px;
-    max-width : 70%;
+    min-width : 70%;
+    min-height : 480px;
 }
 
 .thirdlog {
@@ -251,11 +259,13 @@ section{
     border : solid;
     border-color: var(--white);
     background-color: var(--white);
-    min-height: 400px;
+    min-width: 1000px;
+    min-height: 480px;
 }
 
 #map{
-    min-height: 400px;
+    min-width: 1000px;
+    min-height: 480px;
 }
 
 .grade-log{
@@ -263,27 +273,62 @@ section{
     border : solid 2px;
     border-color : var(--gray);
     background-color: var(--gray);
-    padding : 10px;
-    max-width : 20%;
+    min-width : 25%;
     justify-content: center;
+    min-height: 510px;
 }
 
 .fourthlog {
-    margin : 5px;
-    padding : 5px;
+    margin : 6px;
+    padding : 6px;
     border : solid;
     border-color: var(--white);
     background-color: var(--white);
-    min-height: 400px;
-}
-
-#duty_grade {
-    min-height: 400px;
+    min-height: 510px;
 }
 
 .desc{
     text-align: center;
-    color : var(--black);
+    color : var(--white);
+    background-color: var(--blue);
+}
+
+.gd{
+    width : 300px;
+    height: 100px;
+    background-color : var(--white);
+    display : flex;
+    flex-wrap: wrap;
+    flex-direction: row;    
+    place-items: space-around;
+    row-gap: 30px;
+    margin-top : 15%;
+}
+
+#high, #mid, #low {
+    width : 300px;
+    height: 100px;
+    border : solid 2px;
+    padding : 10px;
+    border-radius: 100px 100px 100px 100px;
+    color : var(--white);
+    font-size: 60px;
+    -webkit-text-stroke: 1px var(--black);
+}
+
+#high{
+    background-color: var(--red);
+    border-color : var(--deep-red);
+}
+
+#mid{
+    background-color: var(--orange);
+    border-color : var(--deep-orange);
+}
+
+#low {
+    background-color: var(--yellow);
+    border-color : var(--deep-yellow);
 }
 
 /*사이드*/
