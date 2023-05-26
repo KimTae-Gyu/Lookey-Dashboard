@@ -1,13 +1,6 @@
-// 차트 부분
-function renderChart(firstValue, firstLabel, secondValue, secondLabel) {
-  // 1번째 차트 => NFW => IP
-  const firstValue = [50,60,70,80,90,100,110,120]; //ALL영역에서 차단 IP개수를 넣기 -> group by
-  const firstLabel = [7,8,8,9,9,9,10,11]; //차단된 IP이름을 넣고
-
-  // 2번째 차트 => WAF => Rule Set
-  const secondValue = [50,60,70,80,90,100,110,120]; // 룰셋 별 막은 횟수 -> group by 해야될듯?
-  const secondLabel = [7,8,8,9,9,9,10,11]; // 차단 룰셋 이름
-
+// 차트 렌더링 함수
+function renderChart() {
+  // 차트에서 사용될 색깔 정의
   const backColor = [
     'rgba(255, 67, 67, 1)',
     'rgba(209, 51, 51, 1)',
@@ -20,58 +13,83 @@ function renderChart(firstValue, firstLabel, secondValue, secondLabel) {
     'rgb(54, 162, 235)',
     'rgb(255, 205, 86)'
   ];
+  // 1번째 차트 => NFW => IP ** NFW 그룹 바이한 결과를 서버에 요청해서 받는 코드 작성해야함.
+  // 서버에 NFW 그룹 바이한 결과를 요청해서 받아오는 코드
+  // fetch('http://localhost:3000/log/nfwChart')
+  //   .then(data => {
+  //     const firstValue = [50,60,70,80,90,100,110,120]; //ALL영역에서 차단 IP개수를 넣기 -> group by
+  //     const firstLabel = [7,8,8,9,9,9,10,11]; //차단된 IP이름을 넣고
+  //     const firstLogChart = document.getElementById('firstLogChart');
 
-  const firstLogChart = document.getElementById('firstLogChart');
-  const secondLogChart = document.getElementById('secondLogChart');
+  //     new Chart(firstLogChart, {
+  //       type: 'doughnut',
+  //       data:{
+  //         labels : firstLabel,
+  //         datasets:[
+  //           {
+  //             label : 'IP',
+  //             data : firstValue.sort(),
+  //             backgroundColor : backColor,
+  //             hoverOffset : 4
+  //             }]
+  //           },
+  //           options :{
+  //             legend : {
+  //               display : true,
+  //               position : 'right',
+  //               align :'start',
+  //               fullWidth : false,
+  //             },
+  //             responsive : false
+  //           }
+  //       });
+  //   })
+  //   .catch(error => {
+  //     console.error('MainPage NFW Chart Error: ', error);
+  //   });
+  
+  // 서버에 WAF 그룹 바이한 결과를 요청해서 받아오는 코드
+  fetch('http://localhost:3000/log/wafChart')
+    .then(data => {
+      const secondValue = [];
+      const secondLabel = [];
 
-  new Chart(firstLogChart, {
-  type: 'doughnut',
-  data:{
-    labels : firstLabel,
-    datasets:[
-      {
-        label : 'IP',
-        data : firstValue.sort(),
-        backgroundColor : backColor,
-        hoverOffset : 4
-        }]
-      },
-      options :{
-        legend : {
-          display : true,
-          position : 'right',
-          align :'start',
-          fullWidth : false,
-        },
-        responsive : false
-      }
+      data.forEach(wafRuleSet => {
+        secondValue.push(wafRuleSet.count);
+        secondLabel.push(wafRuleSet._id);
       });
+      // // 2번째 차트 => WAF => Rule Set
+      // const secondValue = [50,60,70,80,90,100,110,120]; // 룰셋 별 막은 횟수 -> group by 해야될듯?
+      // const secondLabel = [7,8,8,9,9,9,10,11]; // 차단 룰셋 이름      
+      const secondLogChart = document.getElementById('secondLogChart');
 
-
-  new Chart(secondLogChart, {
-  type: 'doughnut',
-  data:{
-    labels : secondLabel,
-    datasets:[
-      {
-        label : 'RuleSet',
-        data : secondValue,
-        backgroundColor :backColor,
-        hoverOffset : 4
-        }]
-      },
-      options :{
-        legend : {
-          display : true,
-          position : 'right',
-          align :'start',
-          fullWidth : false,
-        },
-        responsive : false
-      }
-      });
+      new Chart(secondLogChart, {
+      type: 'doughnut',
+      data:{
+        labels : secondLabel,
+        datasets:[
+          {
+            label : 'RuleSet',
+            data : secondValue,
+            backgroundColor :backColor,
+            hoverOffset : 4
+            }]
+          },
+          options :{
+            legend : {
+              display : true,
+              position : 'right',
+              align :'start',
+              fullWidth : false,
+            },
+            responsive : false
+          }
+          });
+    })
+    .catch(error => {
+      console.error('MainPage WAF Chart Error: ', error);
+    });
 }
-
 renderChart();
 
 // GuardDuty    
@@ -169,11 +187,6 @@ const locations = [
 ];
 
 initMap();
-
-// 새로운 로그가 들어왔을때 차트 갱신 d2_main.html에서 emit
-io.on('wafGroupBy', (wafGroupBy) => {
-
-});
 
 window.renderChart = renderChart;
 
