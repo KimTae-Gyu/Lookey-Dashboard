@@ -214,8 +214,8 @@ section{
     border : solid 2px;
     border-color : var(--gray);
     background-color: var(--gray);
-    justify-content: flex-start;
-    min-width : 550px;    
+    justify-content: center;
+    max-width: 100%; 
 }
 .firstlog, .secondlog{
     margin : 5px;
@@ -223,8 +223,14 @@ section{
     border : solid;
     border-color: var(--white);
     background-color: var(--white);
-    min-width : 550px;
-    max-height: 350px;
+    min-width : 750px;
+    min-height: 300px;
+    max-height: 450px;
+}
+canvas{
+    margin : 10px;
+    min-width : 450px;
+    max-height: 300px;
 }
 
 .api-log{
@@ -236,7 +242,7 @@ section{
     background-color: var(--gray);
     padding-right : 10px;
     padding-left : 10px;
-    place-items: flex-start;
+    place-content: center;
     min-width: 100%;
 }
 
@@ -244,8 +250,8 @@ section{
     border : solid 2px;
     border-color : var(--gray);
     background-color: var(--gray);
-    padding : 10px;
-    min-width : 75%;
+    min-height:480px;
+    min-width : 70%;
 }
 
 .thirdlog {
@@ -254,13 +260,13 @@ section{
     border : solid;
     border-color: var(--white);
     background-color: var(--white);
-    min-height: 500px;
-    min-width: 100%;
+    min-height: 480px;
+    min-width: 1000px;
 }
 
 #map{
-    min-height: 500px;
-    max-width : 100%;
+    min-height: 480px;
+    max-width : 1000px;
 }
 
 .grade-log{
@@ -268,7 +274,6 @@ section{
     border : solid 2px;
     border-color : var(--gray);
     background-color: var(--gray);
-    padding : 10px;
     min-width : 25%;
     justify-content: center;
     min-height: 510px;
@@ -280,12 +285,7 @@ section{
     border : solid;
     border-color: var(--white);
     background-color: var(--white);
-    min-height: 400px;
-    min-width: 100%;
-}
-
-#duty_grade {
-    min-height: 400px;
+    min-height: 510px;
     min-width: 100%;
 }
 
@@ -329,8 +329,8 @@ section{
 }
 
 #low {
-    background-color: var(--yellow);
-    border-color : var(--deep-yellow);
+    background-color: var(--deep-blue);
+    border-color : var(--blue);
 }
 
 /*사이드*/
