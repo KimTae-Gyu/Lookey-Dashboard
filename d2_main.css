@@ -215,8 +215,7 @@ section{
     border-color : var(--gray);
     background-color: var(--gray);
     justify-content: flex-start;
-    min-width : 550px;
-    
+    min-width : 550px;    
 }
 .firstlog, .secondlog{
     margin : 5px;
@@ -272,11 +271,12 @@ section{
     padding : 10px;
     min-width : 25%;
     justify-content: center;
+    min-height: 510px;
 }
 
 .fourthlog {
-    margin : 5px;
-    padding : 5px;
+    margin : 6px;
+    padding : 6px;
     border : solid;
     border-color: var(--white);
     background-color: var(--white);
@@ -291,7 +291,46 @@ section{
 
 .desc{
     text-align: center;
-    color : var(--black);
+    color : var(--white);
+    background-color: var(--blue);
+}
+
+.gd{
+    width : 300px;
+    height: 100px;
+    background-color : var(--white);
+    display : flex;
+    flex-wrap: wrap;
+    flex-direction: row;    
+    place-items: space-around;
+    row-gap: 30px;
+    margin-top : 15%;
+}
+
+#high, #mid, #low {
+    width : 300px;
+    height: 100px;
+    border : solid 2px;
+    padding : 10px;
+    border-radius: 100px 100px 100px 100px;
+    color : var(--white);
+    font-size: 60px;
+    -webkit-text-stroke: 1px var(--black);
+}
+
+#high{
+    background-color: var(--red);
+    border-color : var(--deep-red);
+}
+
+#mid{
+    background-color: var(--orange);
+    border-color : var(--deep-orange);
+}
+
+#low {
+    background-color: var(--yellow);
+    border-color : var(--deep-yellow);
 }
 
 /*사이드*/

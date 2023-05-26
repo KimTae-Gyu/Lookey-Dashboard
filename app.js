@@ -8,6 +8,8 @@ const morgan = require('morgan'); // 서버에 들어온 요청과 응답의 로
 const mysql = require('mysql');
 const fs = require('fs');
 const cors = require('cors');
+const { wafParse, nfwParse } = require('./logParse.js');
+const mongoInsert = require('./mongo.js');
 
 dotenv.config(); // .env 파일 내용을 process.env에 적재
 const app = express();
@@ -32,7 +34,8 @@ connection.connect((err) => {
   console.log('MySQL 연결 성공');
 });
 
-const indexRouter = require('./routes/index'); // 라우트 파일 import
+// 라우트 파일 import
+const indexRouter = require('./routes/index'); 
 const loginRouter = require('./routes/login');
 
 // 미들 웨어 영역, 미들웨어 순서 생각
@@ -62,17 +65,14 @@ app.get('/socket', (req, res) => {
   res.sendFile(path.join(__dirname, './socketTest.html'));
 });
 
-app.post('/log/waf', (req, res) => {
-  const logs = JSON.stringify(req.body);
-  console.log(logs);
-  const filePath = './logs/wafLogs.txt';
-  fs.appendFile(filePath, logs, (err) => {
-  	if (err) {
-		console.error('파일에 추가 실패', err);
-		return;
-	}
-	console.log('파일에 내용이 성공적으로 추가되었습니다.');
-  });
+app.get('/log/waf', (req, res) => {
+  let logs = [{"timestamp":1684825816966,"formatVersion":1,"webaclId":"arn:aws:wafv2:us-east-1:944697335072:regional/webacl/cloudmonitoring-waf/8acf338d-9594-449d-b99a-f4e88a4cbac5","terminatingRuleId":"AWS-AWSManagedRulesAnonymousIpList","terminatingRuleType":"MANAGED_RULE_GROUP","action":"BLOCK","terminatingRuleMatchDetails":[],"httpSourceName":"ALB","httpSourceId":"944697335072-app/alb/1e3b6eac51c9c245","ruleGroupList":[{"ruleGroupId":"AWS#AWSManagedRulesCommonRuleSet","terminatingRule":null,"nonTerminatingMatchingRules":[],"excludedRules":null,"customerConfig":null},{"ruleGroupId":"AWS#AWSManagedRulesAnonymousIpList","terminatingRule":{"ruleId":"HostingProviderIPList","action":"BLOCK","ruleMatchDetails":null},"nonTerminatingMatchingRules":[],"excludedRules":null,"customerConfig":null}],"rateBasedRuleList":[],"nonTerminatingMatchingRules":[],"requestHeadersInserted":null,"responseCodeSent":null,"httpRequest":{"clientIp":"185.254.196.186","country":"US","headers":[{"name":"Host","value":"52.54.199.152"},{"name":"User-agent","value":"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.129 Safari/537.36"},{"name":"Accept-Encoding","value":"gzip, deflate"},{"name":"Accept","value":"*/*"},{"name":"Connection","value":"keep-alive"}],"uri":"/.env","args":"REDACTED","httpVersion":"HTTP/1.1","httpMethod":"GET","requestId":"1-646c66d8-23174f95617bd0c633b81f3a"},"labels":[{"name":"awswaf:managed:aws:anonymous-ip-list:HostingProviderIPList"}]},
+  {"timestamp":1684825826966,"formatVersion":1,"webaclId":"arn:aws:wafv2:us-east-1:944697335072:regional/webacl/cloudmonitoring-waf/8acf338d-9594-449d-b99a-f4e88a4cbac5","terminatingRuleId":"AWS-AWSManagedRulesAnonymousIpList","terminatingRuleType":"MANAGED_RULE_GROUP","action":"BLOCK","terminatingRuleMatchDetails":[],"httpSourceName":"ALB","httpSourceId":"944697335072-app/alb/1e3b6eac51c9c245","ruleGroupList":[{"ruleGroupId":"AWS#AWSManagedRulesCommonRuleSet","terminatingRule":null,"nonTerminatingMatchingRules":[],"excludedRules":null,"customerConfig":null},{"ruleGroupId":"AWS#AWSManagedRulesAnonymousIpList","terminatingRule":{"ruleId":"HostingProviderIPList","action":"BLOCK","ruleMatchDetails":null},"nonTerminatingMatchingRules":[],"excludedRules":null,"customerConfig":null}],"rateBasedRuleList":[],"nonTerminatingMatchingRules":[],"requestHeadersInserted":null,"responseCodeSent":null,"httpRequest":{"clientIp":"185.254.196.186","country":"US","headers":[{"name":"Host","value":"52.54.199.152"},{"name":"User-agent","value":"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.129 Safari/537.36"},{"name":"Accept-Encoding","value":"gzip, deflate"},{"name":"Accept","value":"*/*"},{"name":"Connection","value":"keep-alive"}],"uri":"/.env","args":"REDACTED","httpVersion":"HTTP/1.1","httpMethod":"GET","requestId":"1-646c66d8-23174f95617bd0c633b81f3a"},"labels":[{"name":"awswaf:managed:aws:anonymous-ip-list:HostingProviderIPList"}]}];
+  //let logs = req.body;
+  logs = wafParse(logs);
+
+  console.log(logs.length);
+  mongoInsert(logs);
 
   io.emit('wafLogs', logs);
   res.sendStatus(200);
@@ -85,10 +85,6 @@ io.on('connection', (socket) => {
     console.log('Data : ', data);
   });
 });
-
-// app.listen(process.env.PORT || 3000, (req, res) => {
-//   process.env.PORT ? console.log(process.env.PORT + '번 포트 서버 실행중') : console.log('3000번 포트 서버 실행 중');
-// });
 
 http.listen(process.env.PORT || 3000, () => {
   process.env.PORT ? console.log(process.env.PORT + '번 포트 서버 실행중') : console.log('3000번 포트 서버 실행 중');
