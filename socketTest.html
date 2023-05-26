@@ -13,12 +13,12 @@
     <ul id="logList"></ul>
     <script>
         socket.on('wafLogs', (data) => {
-	    console.log(data);
+            console.log(data);
             console.log('호출');
             const logList = document.getElementById('logList');
             const logItem = document.createElement('li');	   
-	    //const parsedData = JSON.parse(data);
-	    logItem.innerText = data;
+            //const parsedData = JSON.parse(data);
+            logItem.innerText = data;
             logList.appendChild(logItem);
         });
     </script>

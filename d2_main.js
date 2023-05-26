@@ -1,8 +1,10 @@
-const fitstValue = [50,60,70,80,90,100,110,120]; //ALL영역에서 차단 IP개수를 넣기
+// 1번째 차트 => NFW => IP
+const fitstValue = [50,60,70,80,90,100,110,120]; //ALL영역에서 차단 IP개수를 넣기 -> group by
 const firstLabel = [7,8,8,9,9,9,10,11]; //차단된 IP이름을 넣고
 
-const secondValue = [50,60,70,80,90,100,110,120];
-const secondLabel = [7,8,8,9,9,9,10,11];
+// 2번째 차트 => WAF => Rule Set
+const secondValue = [50,60,70,80,90,100,110,120]; // 룰셋 별 막은 횟수 -> group by 해야될듯?
+const secondLabel = [7,8,8,9,9,9,10,11]; // 차단 룰셋 이름
 
 const firstlog = new Chart("firstlog",{
     type: "doughnut",
