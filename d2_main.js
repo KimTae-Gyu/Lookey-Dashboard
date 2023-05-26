@@ -1,6 +1,6 @@
 
 // 1번째 차트 => NFW => IP
-const fitstValue = [50,60,70,80,90,100,110,120]; //ALL영역에서 차단 IP개수를 넣기 -> group by
+const firstValue = [50,60,70,80,90,100,110,120]; //ALL영역에서 차단 IP개수를 넣기 -> group by
 const firstLabel = [7,8,8,9,9,9,10,11]; //차단된 IP이름을 넣고
 
 // 2번째 차트 => WAF => Rule Set
@@ -108,15 +108,6 @@ function initMap() {
   const map = new google.maps.Map(document.getElementById("map"), {
     zoom: 2,
     center: { lat: 37, lng: 150 },
-    minZoom: 2,
-    restriction: {
-      latLngBounds: {
-        north: 90,
-        south: -90,
-        east: 240,
-        west: 40,
-      },
-    },
   });
   const infoWindow = new google.maps.InfoWindow({
     content: "",
