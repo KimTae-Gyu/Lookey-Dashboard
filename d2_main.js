@@ -15,34 +15,35 @@ function renderChart() {
   ];
   // 1번째 차트 => NFW => IP ** NFW 그룹 바이한 결과를 서버에 요청해서 받는 코드 작성해야함.
   // 서버에 NFW 그룹 바이한 결과를 요청해서 받아오는 코드
+  const firstValue = [50,60,70,80,90,100,110,120]; //ALL영역에서 차단 IP개수를 넣기 -> group by
+  const firstLabel = [7,8,8,9,9,9,10,11]; //차단된 IP이름을 넣고
+  const firstLogChart = document.getElementById('firstLogChart');
+
+  new Chart(firstLogChart, {
+    type: 'doughnut',
+    data:{
+      labels : firstLabel,
+      datasets:[
+        {
+          label : 'IP',
+          data : firstValue.sort(),
+          backgroundColor : backColor,
+          hoverOffset : 4
+          }]
+        },
+        options :{
+          legend : {
+            display : true,
+            position : 'right',
+            align :'start',
+            fullWidth : false,
+          },
+          responsive : false
+        }
+    });
   // fetch('http://localhost:3000/log/nfwChart')
   //   .then(data => {
-  //     const firstValue = [50,60,70,80,90,100,110,120]; //ALL영역에서 차단 IP개수를 넣기 -> group by
-  //     const firstLabel = [7,8,8,9,9,9,10,11]; //차단된 IP이름을 넣고
-  //     const firstLogChart = document.getElementById('firstLogChart');
-
-  //     new Chart(firstLogChart, {
-  //       type: 'doughnut',
-  //       data:{
-  //         labels : firstLabel,
-  //         datasets:[
-  //           {
-  //             label : 'IP',
-  //             data : firstValue.sort(),
-  //             backgroundColor : backColor,
-  //             hoverOffset : 4
-  //             }]
-  //           },
-  //           options :{
-  //             legend : {
-  //               display : true,
-  //               position : 'right',
-  //               align :'start',
-  //               fullWidth : false,
-  //             },
-  //             responsive : false
-  //           }
-  //       });
+      
   //   })
   //   .catch(error => {
   //     console.error('MainPage NFW Chart Error: ', error);
