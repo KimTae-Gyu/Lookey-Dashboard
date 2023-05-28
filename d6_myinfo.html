@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="d6_myinfo.css">
+        <link rel="stylesheet" href="web_font.css">
+        <link rel="icon" href="./pic/favicon.ico">
+        <title>Lookey Dashboard</title>
+    </head>
+    <body>
+        <header>
+            <img src="./pic/Lookey_logo.png" alt="Lookey Dashboard homepage" class="logo"> <!--회사의 로고-->
+            <div class="headLine">
+                <img src="./pic/person.svg" alt="your Picture" class="yourPic"> <!--사람의 사진-->
+                <a class="myinfo" href="" target="_self">내 정보</a>
+                <t>|</t>
+                <a class="logout" href="/logout" target="_self">로그아웃</a>
+            </div>
+        </header>
+        <nav>
+            <div id="expand-menu" name="expand-menu" class="expand-menu">
+            </div>
+            <label for="expand-menu" class="index">메뉴</label>
+            <ul id="main">
+                <div class="index">Main</div> <!--볼드 처리-->
+                <li> <a class="mainlog" href="d2_main.html" target="_self">HOME</a></li> <!--볼드 처리-->
+            </ul>
+            <ul id="aws-log">
+                <div class="index">AWS 보안 로그</div>
+                <li> <a class="nfwlog" href="d3_log_nfw.html" target="_self">Network firewall 로그</a> </li>
+                <li> <a class="waflog" href="d3_log_waf.html" target="_self">WAF 로그</a> </li>
+                <li> <a class="gdlog" href="d3_log_gd.html" target="_self">GuardDuty 로그</a> </li>
+            </ul>
+            <ul id="aws-con">
+                <div class="index">AWS 제어 항목</div>
+                <li> <a class="nfwcon" href="d4_nfwcon.html" target="_self">Network firewall Rule Set</a> </li>
+            </ul>
+            <ul id="aws-exp">
+                <div class="index">기타 항목</div>
+                <li> <a class="export" href="d5_export.html" target="_self">내보내기</a> </li>
+            </ul>
+            <p class="address"> 관리자 : 02-000-0000 </p>
+        </nav>  
+        <section>
+            <div id="info-all">
+                <div id="main-desc">내 정보</div>
+                <div class="info-list">
+                    <div class="my-info" id="login">
+                        <!-- 대 : 로그인 기록-->
+                        <div class="big-desc"> 로그인 기록</div>
+                        <div class="section">
+                            <!--중 : 로그인 세션리스트 -->
+                            <div class="mid-desc">
+                                현재 로그인 중인 세션은 <span id="login-num"> 1개 </span> 입니다.
+                            </div>
+                            <div id="login-list">
+                                <table id="login-table", class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">시간</td>
+                                            <th scope="col">IP</td>
+                                            <th scope="col">위치</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!--임의 생성-->
+                                        <tr>
+                                            <td scope="col">23-05-21 AM 9:48</td>
+                                            <td scope="col">213.162.68.1</td>
+                                            <td scope="col">중구</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!--중 : 비밀번호 변경-->
+                            <div id="pwd-change">
+                                <div class="mid-desc">비밀번호 변경</div>
+                                <form>
+                                    <div id="pwd-form">
+                                        <sapn class="sm-desc" for="pwd-pre">현재 비밀번호 :</sapn>
+                                        <input type="password" id="pwd-pre" class="pwd">
+                                        <sapn class="sm-desc" for="pwd-new">새 비밀번호 :</sapn>
+                                        <input type="password" id="pwd-new" class="pwd">
+                                        <sapn class="sm-desc" for="pwd-check">새 비밀번호 확인 :</sapn>
+                                        <input type="password" id="pwd-check" class="pwd">
+                                    </div>
+                                <button type="submit">변경</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <div class="my-info" id="notice">
+                        <!--대 : 알람 목록-->
+                        <div class="big-desc">알람 목록</div>
+                        <div class="section">
+                        <!--중 : 알람 SNS-->
+                            <div id="sns">
+                                <div class="mid-desc">현재 AWS SNS 알람을 받고 있는 경로는 다음과 같습니다.</div>
+                                <div id="sns-dest">
+                                    <!--임의 작성-->
+                                    <div class="sm-desc">이메일 : wlrdnjs11@gmail.com </div>
+                                    <div class="sm-desc">핸드폰 : 010-6666-6666</div>
+                                </div>
+                                <a id="sns-go" src="" >SNS 알람 설정하러 가기</a>
+                            </div>
+                            <!--중 : 알람 내역-->
+                            <div id="alarm">
+                                <div class="mid-desc">알람 내역</div>
+                                <div id="alarm-history">
+                                    <!--알람 리스트-->
+                                    <table id="alarm-table", class="table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">시간</td>
+                                                <th scope="col">활동</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <!--임의 데이터-->
+                                                <th scope="col"> 23-05-21 AM 10시 24분</td>
+                                                <th scope="col"> IP 경보 알람</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </body>
+</html>
