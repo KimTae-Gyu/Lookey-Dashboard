@@ -129,6 +129,15 @@ label{
     font-weight: 900;
 }
 
+#aws-con .index{
+    font-weight : 600;
+}
+
+.nfwcon{
+    font-weight : 600;
+    color:var(--blue);
+}
+
 /* 전체 섹션 */
 section{
     margin-right : 10px;
@@ -144,27 +153,29 @@ form{
     flex-wrap: wrap;
     flex-direction: row;
     place-content: start;
-    gap : 20px;
+    gap : 10px;
     padding : 20px;
     background-color: var(--deep-gray);
 }
 input{
-    padding : 5px 10px 5px 10px;
-    font-size: 120%;
+    padding : 5px;
+    font-size: 100%;
+    width : 180px;
 }
 
 select {
-    padding : 5px 20px 5px 20px;
-    font-size: 120%;
+    padding : 5px 10px 5px 10px;
+    font-size: 100%;
 }
 
 option {
-    font-size: 120%;
+    font-size: 100%;
 }
 
 #input-button {
+    width : 120px;
     font-size: 120%;
-    padding : 5px 20px 5px 20px;
+    padding : 5px;
     background-color: var(--light-gray);
 }
 
