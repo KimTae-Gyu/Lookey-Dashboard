@@ -58,20 +58,36 @@
             <div class="big-desc">Network Firewall 규칙 설정</div>
             <div class="input-box">
                 <form action="/control/nfw" method="POST">
-                    <span class="input-port">
-                        <span class="mid-desc" for="port">포트 번호</span>
-                        <input type="text" id="port">
-                    </span>
-                    <span class="input-ip">
-                        <span class="mid-desc" for="ip">IP</span>
-                        <input type="text" id="ip">
-                    </span>
-                    <span class="input-action">
-                        <span class="mid-desc" for="action">액션</span>
-                        <select name="action" id="action">
-                            <option value="">block</option>
-                            <option value="">allow</option>
+                    <span class="input-protocol">
+                        <span class="mid-desc" for="protocol">프로토콜</span>
+                        <select name="protocol" id="protocol">
+                            <option value="'IP'">IP</option>
+                            <option value="'TCP'">TCP</option>
+                            <option value="'UDP'">UDP</option>
                         </select>
+                    </span>
+                    <span class="input-source-port">
+                        <span class="mid-desc" for="source-port">출발 포트</span>
+                        <input type="text" id="source-port">
+                    </span>
+                    <span class="input-source">
+                        <span class="mid-desc" for="source">출발 IP</span>
+                        <input type="text" id="source">
+                    </span>
+                    <span class="input-direction">
+                        <span class="mid-desc" for="direction">방향</span>
+                        <select name="direction" id="direction">
+                            <option value="'FORWARD'">FORWARD</option>
+                            <option value="'ANY'">ANY</option>
+                        </select>
+                    </span>
+                    <span class="input-dest-port">
+                        <span class="mid-desc" for="dest-port">도착 포트</span>
+                        <input type="text" id="dest-port">
+                    </span>
+                    <span class="input-dest">
+                        <span class="mid-desc" for="dest">도착 IP</span>
+                        <input type="text" id="dest">
                     </span>
                     <input type="button" value="입력" id="input-button">
                 </form>
@@ -81,17 +97,23 @@
             <table id="table", class="table">
                 <thead>
                     <tr>
-                        <th scope="col">포트</td>
-                        <th scope="col">IP</td>
-                        <th scope="col">액션</td>
+                        <th scope="col">프로토콜</td>
+                        <th scope="col">출발포트</td>
+                        <th scope="col">출발 IP</td>
+                        <th scope="col">방향</td>
+                        <th scope="col">도착포트</td>
+                        <th scope="col">도착 IP</td>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <!--예시 데이터-->
+                        <th scope="col">IP</td>
                         <th scope="col">80</td>
                         <th scope="col">222.222.222.222</td>
-                        <th scope="col">block</td>
+                        <th scope="col">ANY</td>
+                        <th scope="col">80</td>
+                        <th scope="col">10.0.0.5</td>
                     </tr>
                 </tbody>
             </table>
