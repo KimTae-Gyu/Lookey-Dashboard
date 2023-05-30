@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="d4_nfwcon.css">
+    <link rel="stylesheet" href="web_font.css">
+    <link rel="icon" href="./pic/favicon.ico">
+    <title>Lookey Dashboard</title>
+</head>
+<body>
+    <header>
+        <img src="./pic/Lookey_logo.png" alt="Lookey Dashboard homepage" class="logo"> <!--회사의 로고-->
+        <div class="headLine">
+            <img src="./pic/person.svg" alt="your Picture" class="yourPic"> <!--사람의 사진-->
+            <a class="myinfo" href="D6_myinfo.html" target="_self">내 정보</a>
+            <t>|</t>
+            <a class="logout" href="d1_login.html" target="_self">로그아웃</a>
+            <!--<img src="alarm.png" alt="alarm icon" class="alarm-icon">-->
+            <!--<a class="alarm" href="d7_alarm.html>알람</a>-->
+            <!--<button type="button" id="alarm-button" name="alarm">
+                <img src="./pic/notification.svg" alt="alarm" class="alarm"> 알람 버튼
+            </button>-->
+        </div>
+    </header>   
+    <!--기존 nav자리-->
+    <nav>
+        <div id="expand-menu" name="expand-menu" class="expand-menu">
+            <!--<img src="./pic/menu.svg" alt="menu icon" class="menuicon">-->
+        </div>
+        <label for="expand-menu" class="index">메뉴</label>
+        <ul id="main">
+            <div class="index">Main</div> <!--볼드 처리-->
+            <li> <a class="mainlog" href="d2_main.html" target="_self">HOME</a></li> <!--볼드 처리-->
+            <!--<li><a class="livelog" href="livelog.html" target="_self">실시간 로그</a></li>-->
+        </ul>
+        <ul id="aws-log">
+            <div class="index">AWS 보안 로그</div>
+            <li> <a class="nfwlog" href="d4_nfwlog.html" target="_self">Network firewall 로그</a> </li>
+            <li> <a class="waflog" href="d4_waflog.html" target="_self">WAF 로그</a> </li>
+            <li> <a class="gdlog" href="d4_gdlog.html" target="_self">GuardDuty 로그</a> </li>
+            <!--<li> <a class="nsglog" href="D4_nsglog.html" target="_self">NACL/SG 로그</a></li>-->
+        </ul>
+        <ul id="aws-con">
+            <div class="index">AWS 제어 항목</div>
+            <li> <a class="nfwcon" href="d5_nfwcon.html" target="_self">Network firewall Rule Set</a> </li>
+        </ul>
+        <ul id="aws-exp">
+            <div class="index">기타 항목</div>
+            <li> <a class="export" href="export.html" target="_self">내보내기</a> </li>
+        </ul>
+        <p class="address"> 관리자 : 02-000-0000 </p>
+    </nav>
+    <!--임시 데이터 적용 중-->    
+    <section>
+        <div class="control-box"> 
+            <div class="big-desc">Network Firewall 규칙 설정</div>
+            <div class="input-box">
+                <form>
+                    <span class="input-port">
+                        <span class="mid-desc" for="port">포트 번호</span>
+                        <input type="text" id="port">
+                    </span>
+                    <span class="input-ip">
+                        <span class="mid-desc" for="ip">IP</span>
+                        <input type="text" id="ip">
+                    </span>
+                    <span class="input-action">
+                        <span class="mid-desc" for="action">액션</span>
+                        <select name="action" id="action">
+                            <option value="">block</option>
+                            <option value="">allow</option>
+                        </select>
+                    </span>
+                    <input type="button" value="입력" id="input-button">
+                </form>
+            </div>
+        </div>
+        <div class="control-table">
+            <table id="table", class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">포트</td>
+                        <th scope="col">IP</td>
+                        <th scope="col">액션</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <!--예시 데이터-->
+                        <th scope="col">80</td>
+                        <th scope="col">222.222.222.222</td>
+                        <th scope="col">block</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</body>
+</html>
