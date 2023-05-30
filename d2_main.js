@@ -50,19 +50,33 @@ function renderChart() {
   //   });
   
   // 서버에 WAF 그룹 바이한 결과를 요청해서 받아오는 코드
-  fetch('http://52.6.101.20:3000/log/wafChart')
+  fetch('http://localhost:3000/log/wafChart')
     .then(response => response.json())
     .then(data => {
       let secondValue = [];
       let secondLabel = [];
+      let groupByList = []; // 룰셋 이름 (ex: CoreRuleSet)및 카운트를 가진 객체 배열
       let ruleSet;
-   
+      
+      // split한 룰셋 이름 ex: coreRuleSet
       data.forEach(wafRuleSet => {
-        secondValue.push(wafRuleSet.count);
-	ruleSet = wafRuleSet._id.name.split(':');
-        secondLabel.push(ruleSet[ruleSet.length - 2]);	
+	      ruleSet = wafRuleSet._id.name.split(':'); // CoreRuleSet:.... 이렇게 들어오고 있음. 따라서 룰셋 별로 가공해줘야함.
+        const label = ruleSet[ruleSet.length - 2];
+        // 룰셋별로 groupByList에 저장. 기존에 없으면 새로 추가 있으면 검출된 카운트 더해줌.
+        foundRuleSet = groupByList.find(obj => obj.label === label);
+        if (foundRuleSet) {
+          foundRuleSet.count += wafRuleSet.count;
+        } else {
+          groupByList.push( { label: label, count: wafRuleSet.count } );
+        }
       });
 
+      groupByList.forEach(wafRuleSet => {
+        secondValue.push(wafRuleSet.count);
+        secondLabel.push(wafRuleSet.label);	
+      });
+
+      
       // // 2번째 차트 => WAF => Rule Set
       // const secondValue = [50,60,70,80,90,100,110,120]; // 룰셋 별 막은 횟수 -> group by 해야될듯?
       // const secondLabel = [7,8,8,9,9,9,10,11]; // 차단 룰셋 이름      
