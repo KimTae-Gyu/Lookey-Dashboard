@@ -5,13 +5,23 @@ const invokeLambda = require('../aws.js');
 const router = express.Router(); // 라우터 객체 생성
 
 router.post('/nfw', async (req, res) => {
-    const payload = req.body;
     // payload를 활용해서 NFW 룰그룹 JSON을 생성해야함.
+    const payload = {
+        Action: 'PASS',
+        Header: {
+            protocol: req.body.protocol,
+            sourcePort: req.body.sourcePort,
+            sourceIP: req.body.source,
+            direction: req.body.direction,
+            destPort: req.body.destPort,
+            destIP: req.body.dest
+        }
+    };
 
     try {
         const flag = await invokeLambda(payload);
         if (flag) {
-            res.sendStatus(200);
+            res.redirect('/');
         } else {
             res.sendStatus(500);
         }

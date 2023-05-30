@@ -57,39 +57,39 @@
         <div class="control-box"> 
             <div class="big-desc">Network Firewall 규칙 설정</div>
             <div class="input-box">
-                <form action="/control/nfw" method="POST">
+                <form action="http://localhost:3000/control/nfw" method="POST">
                     <span class="input-protocol">
                         <span class="mid-desc" for="protocol">프로토콜</span>
                         <select name="protocol" id="protocol">
-                            <option value="'IP'">IP</option>
-                            <option value="'TCP'">TCP</option>
-                            <option value="'UDP'">UDP</option>
+                            <option value="IP">IP</option>
+                            <option value="TCP">TCP</option>
+                            <option value="UDP">UDP</option>
                         </select>
                     </span>
                     <span class="input-source-port">
                         <span class="mid-desc" for="source-port">출발 포트</span>
-                        <input type="text" id="source-port">
+                        <input type="text" id="source-port" name="sourcePort">
                     </span>
                     <span class="input-source">
                         <span class="mid-desc" for="source">출발 IP</span>
-                        <input type="text" id="source">
+                        <input type="text" id="source" name="source">
                     </span>
                     <span class="input-direction">
                         <span class="mid-desc" for="direction">방향</span>
                         <select name="direction" id="direction">
-                            <option value="'FORWARD'">FORWARD</option>
-                            <option value="'ANY'">ANY</option>
+                            <option value="FORWARD">FORWARD</option>
+                            <option value="ANY">ANY</option>
                         </select>
                     </span>
                     <span class="input-dest-port">
                         <span class="mid-desc" for="dest-port">도착 포트</span>
-                        <input type="text" id="dest-port">
+                        <input type="text" id="dest-port" name="destPort">
                     </span>
                     <span class="input-dest">
                         <span class="mid-desc" for="dest">도착 IP</span>
-                        <input type="text" id="dest">
+                        <input type="text" id="dest" name="dest">
                     </span>
-                    <input type="button" value="입력" id="input-button">
+                    <input type="submit" value="입력" id="input-button">
                 </form>
             </div>
         </div>
