@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="d3_log_waf.css">
+    <link rel="stylesheet" href="d3_log_gd.css">
     <!--<link rel="stylesheet" href="d2_main.css">-->
     <link rel="stylesheet" href="web_font.css">
     <link rel="icon" href="./pic/favicon.ico">
-    <script src="d3_log_waf.js" defer></script>
+    <script src="d3_log_gd.js" defer></script>
     <script src="/socket.io/socket.io.js"></script>
     <script> const socket = io(); </script>
     <title>Lookey Dashboard</title>
@@ -69,27 +69,31 @@
                     <span class="mid-desc" for="end-time">종료시간</span>
                     <input type="time" id="end-time">
                 </span>
-                <span class="input-action">
-                    <span class="mid-desc" for="action">action</span>
-                    <select name="action" id="action">
+                <span class="input-search">
+                    <span class="mid-desc" for="search-word">검색단어</span>
+                    <input type="search" id="search-word">
+                </span>
+                <span class="input-severity">
+                    <span class="mid-desc" for="severity">심각도</span>
+                    <select name="severity" id="severity">
                         <option value="">all</option>
-                        <option value="">block</option>
-                        <option value="">allow</option>
+                        <option value="">low</option>
+                        <option value="">mid</option>
+                        <option value="">high</option>
                     </select>
                 </span>
                 <input type="button" value="찾기" id="input-button">
             </form>
         </div>
-        <div class="log-page">
+        <div class="log_page">
             <table id="table", class="table">
                 <thead>
                     <tr>
                         <th scope="col">시간</td>
-                        <th scope="col">규칙</td>
-                        <th scope="col">액션</td>
-                        <th scope="col">소스ID</th>
-                        <th scope="col">IP</td>
-                        <th scope="col">국가</td>
+                        <th scope="col">유형</td>
+                        <th scope="col">이름</td>
+                        <th scope="col">설명</th>
+                        <th scope="col">심각도</td>
                     </tr>
                 </thead>
                 <tbody>
@@ -97,7 +101,8 @@
             </table>
         </div>
     </section>
-    <script>
+    <!--스크립트 생략-->
+    <!--<script>
         socket.on('wafLogs', (data) => {
             console.log(data);
             console.log('호출');
@@ -107,6 +112,6 @@
             logItem.innerText = data;
             logList.appendChild(logItem);
         });
-    </script>
+    </script>-->
 </body>
 </html>
