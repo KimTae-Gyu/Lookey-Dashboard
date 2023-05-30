@@ -54,7 +54,7 @@ function renderChart() {
     .then(data => {
       const secondValue = [];
       const secondLabel = [];
-
+      console.log(data.body);
       data.forEach(wafRuleSet => {
         secondValue.push(wafRuleSet.count);
         secondLabel.push(wafRuleSet._id);
