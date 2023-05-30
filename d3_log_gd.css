@@ -155,7 +155,7 @@ li:hover{
     font-weight : 600;
 }
 
-.waflog{
+.gdlog{
     font-weight : 600;
     color:var(--blue);
 }
@@ -166,7 +166,6 @@ label{
     margin-left : 10px;
     font-weight: 900;
 }
-
 
 section{
     grid-area : section;
