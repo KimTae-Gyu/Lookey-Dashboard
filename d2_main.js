@@ -135,6 +135,15 @@ function initMap() {
   const map = new google.maps.Map(document.getElementById("map"), {
     zoom: 2,
     center: { lat: 37, lng: 150 },
+    minZoom: 2,
+    restriction: {
+      latLngBounds: {
+        north: 90,
+        south: -90,
+        east: 240,
+        west: 40,
+      },
+    },
   });
   const infoWindow = new google.maps.InfoWindow({
     content: "",
@@ -192,36 +201,3 @@ const locations = [
 ];
 
 initMap();
-
-window.renderChart = renderChart;
-
-// 아이피 주소를 위,경도로 변환
-// function getLocation() {
-//     const url = `/location`;
-  
-//     // API 요청 보내기
-//     fetch(url)
-//       .then(response => {
-//         if (response.ok) {
-//           //console.log(response.json())
-//           return response.json();
-//         } else {
-//           throw new Error('Request failed. Status:', response.status);
-//         }
-//       })
-//       .then(data => {
-//         const latitude = data.location.latitude;
-//         const longitude = data.location.longitude;
-//         //console.log(latitude); // 위도 조회
-//         //console.log(longitude); // 경도 조회
-//         addMarker(latitude, longitude); // 위도와 경도를 사용하여 마커 추가
-//         // TODO: 위도, 경도를 사용하여 리프레 맵에 마커를 찍는 등의 작업을 수행할 수 있습니다.
-//       })
-//       .catch(error => {
-//         console.error('Request failed:', error.message);
-//       });
-//   }
-  
-// getLocation();
-
-  
