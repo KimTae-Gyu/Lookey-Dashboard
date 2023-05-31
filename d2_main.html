@@ -82,17 +82,7 @@
                 <div class="desc">WAF 차단 룰셋</div>
                 <canvas id="secondLogChart"></canvas>
             </div>
-        </div>
-        <div class="api-log">
-            <div class="map-log">
-                <div class="thirdlog">
-                    <div class="desc">네트워크 F/W 및 WAF 차단 지도</div>
-                    <center>
-                        <div id="map"> </div>
-                    </center>
-                </div>
-            </div>
-            <div class="grade-log">
+            <!--<div class="grade-log">-->
                 <div class="fourthlog">
                     <div class="desc">GuardDuty 위험도 갯수</div>
                     <center>
@@ -103,8 +93,32 @@
                         </div>
                     </center>
                 </div>
-            </div>
+            <!--</div>-->
         </div>
+        <!--<div class="api-log">-->
+            <div class="map-log">
+                <div class="thirdlog">
+                    <div class="desc">네트워크 F/W 및 WAF 차단 지도</div>
+                    <center>
+                        <div id="map"> </div>
+                    </center>
+                </div>
+                <div class="thirdlog-list">
+                    <table id="table", class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">시간</th>
+                                <th scope="col">국가</th>
+                                <th scope="col">IP</th>
+                                <th scope="col">로그</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        <!--</div>-->
     </section>
     <script>
         // 서버에 로그가 새로 들어오면 차트 갱신
