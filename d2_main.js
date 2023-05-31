@@ -73,7 +73,7 @@ function renderChart() {
 
 
   // 서버에 WAF 그룹 바이한 결과를 요청해서 받아오는 코드
-  fetch('http://localhost:3000/log/wafChart')
+  fetch('http://52.6.101.20:3000/log/wafChart')
     .then(response => response.json())
     .then(data => {
       let secondValue = [];
@@ -82,7 +82,7 @@ function renderChart() {
       let ruleSet;
 
       // split한 룰셋 이름 ex: coreRuleSet
-      data.forEach(wafRuleSet => {
+      data.forEach(wafRuleSet => {  
         ruleSet = wafRuleSet._id.name.split(':'); // CoreRuleSet:.... 이렇게 들어오고 있음. 따라서 룰셋 별로 가공해줘야함.
         const label = ruleSet[ruleSet.length - 2];
         // 룰셋별로 groupByList에 저장. 기존에 없으면 새로 추가 있으면 검출된 카운트 더해줌.
@@ -94,7 +94,7 @@ function renderChart() {
         }
       });
 
-      groupByList.forEach(wafRuleSet => {
+        groupByList.forEach(wafRuleSet => {
         secondValue.push(wafRuleSet.count);
         secondLabel.push(wafRuleSet.label);
       });
@@ -223,6 +223,12 @@ function initMap() {
 //     console.error('location json Error:', error);
 //   });
 
+// 서버에 WAF 그룹 바이한 결과를 요청해서 받아오는 코드
+fetch('http://52.6.101.20:3000/log/nfw')
+  .then(response => response.json())
+  .then(data => {
+    console.log(data)
+  });
 const locations = [
   // Marker positions (json파일로 받아올 것)
   { lat: -31.56391, lng: 147.154312 }
