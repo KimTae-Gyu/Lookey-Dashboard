@@ -1,4 +1,0 @@
-rules = "{'StatefulRules': [{'Action': 'PASS', 'Header': {'Protocol': 'IP', 'Source': '[10.0.0.0/24,10.0.5.0/24]', 'SourcePort': '[80,443,22]', 'Direction': 'ANY', 'Destination': 'ANY', 'DestinationPort': 'ANY'}, 'RuleOptions': [{'Keyword': 'sid', 'Settings': ['4']}]}, {'Action': 'PASS', 'Header': {'Protocol': 'IP', 'Source': 'ANY', 'SourcePort': 'ANY', 'Direction': 'FORWARD', 'Destination': '[10.0.0.0/24,10.0.5.0/24]', 'DestinationPort': '[1024:65535,]'}, 'RuleOptions': [{'Keyword': 'sid', 'Settings': ['5']}]}, {'Action': 'PASS', 'Header': {'Protocol': 'IP', 'Source': 'ANY', 'SourcePort': '[80,443,22]', 'Direction': 'FORWARD', 'Destination': 'ANY', 'DestinationPort': 'ANY'}, 'RuleOptions': [{'Keyword': 'sid', 'Settings': ['6']}]}]}"
-
-convert_rules = rules.replace("'", "\"")
-print(convert_rules)

@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="d2_main.css">
     <link rel="stylesheet" href="web_font.css">
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8PNtOtvMSJuUp6OqPOpNX7rGWULCDYp4&callback=initMap&v=weekly" defer></script>
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8PNtOtvMSJuUp6OqPOpNX7rGWULCDYp4&callback=initMap&v=weekly"
+        defer></script>
     <script src="https://unpkg.com/@googlemaps/markerclusterer/dist/index.min.js"></script>
     <link rel="icon" href="./pic/favicon.ico">
     <script src="d2_main.js" defer></script>
@@ -18,6 +21,7 @@
     <script> const socket = io(); </script>
     <title>Lookey Dashboard</title>
 </head>
+
 <body>
     <header>
         <img src="./pic/Lookey_logo.png" alt="Lookey Dashboard homepage" class="logo"> <!--회사의 로고-->
@@ -61,8 +65,14 @@
         </ul>
         <p class="address"> 관리자 : 02-000-0000 </p>
     </nav>
-    <!--임시 데이터 적용 중 / 클릭하면 비안전 예시도 볼 수 있도록 제공할 것-->    
+    <!--임시 데이터 적용 중 / 클릭하면 비안전 예시도 볼 수 있도록 제공할 것-->
     <section>
+        <div id="modalContainer" class="modal-container">
+            <div class="modal-content">
+                <span id="modalMessage"></span>
+                <button id="modalCloseButton">Close</button>
+            </div>
+        </div>
         <div class="circle-log">
             <div class="firstlog" alt="지표 1">
                 <div class="desc">네트워크 F/W 차단 IP</div>
@@ -77,18 +87,20 @@
             <div class="map-log">
                 <div class="thirdlog">
                     <div class="desc">네트워크 F/W 및 WAF 차단 지도</div>
-                    <center><div id="map"> </div></center>
+                    <center>
+                        <div id="map"> </div>
+                    </center>
                 </div>
             </div>
             <div class="grade-log">
                 <div class="fourthlog">
                     <div class="desc">GuardDuty 위험도 갯수</div>
                     <center>
-                    <div class="gd">
-                        <div id="high">2</div>
-                        <div id="mid">3</div>
-                        <div id="low">4</div>
-                    </div>
+                        <div class="gd">
+                            <div id="high">2</div>
+                            <div id="mid">3</div>
+                            <div id="low">4</div>
+                        </div>
                     </center>
                 </div>
             </div>
@@ -99,6 +111,11 @@
         socket.on('wafChart', (data) => {
             renderChart();
         });
+        // 서버에 로그가 새로 들어오면 침입 탐지 경고
+        socket.on('alert', (data) => {
+            showModal('침입이 탐지되었습니다');
+        });
     </script>
 </body>
+
 </html>
