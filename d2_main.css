@@ -218,7 +218,7 @@ section {
     border: solid 2px;
     border-color: var(--gray);
     background-color: var(--gray);
-    justify-content: center;
+    place-content: center;
     max-width: 100%;
 }
 
@@ -229,21 +229,19 @@ section {
     border: solid;
     border-color: var(--white);
     background-color: var(--white);
-    min-width: 750px;
-    min-height: 300px;
-    max-height: 450px;
+    min-width: 550px;
+    min-height: 250px;
+    max-height: 300px;
 }
 
 canvas {
     margin: 10px;
     min-width: 450px;
     max-height: 300px;
+    place-self : center;
 }
 
-.api-log {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
+/*.api-log {
     border: solid 2px;
     border-color: var(--gray);
     background-color: var(--gray);
@@ -251,14 +249,18 @@ canvas {
     padding-left: 10px;
     place-content: center;
     min-width: 100%;
-}
+}*/
 
 .map-log {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
     border: solid 2px;
     border-color: var(--gray);
     background-color: var(--gray);
     min-height: 480px;
     min-width: 70%;
+    place-content: center;
 }
 
 .thirdlog {
@@ -268,35 +270,73 @@ canvas {
     border-color: var(--white);
     background-color: var(--white);
     min-height: 480px;
-    min-width: 1000px;
+    min-width: 100px;
+}
+
+.thirdlog-list{
+    border: solid 2px;
+    border-color: var(--gray);
+    background-color: var(--gray);
+    min-width: 25%;
+    place-content: center;
+    margin: 5px;
+    padding: 5px;
+    border: solid;
+    border-color: var(--white);
+    background-color: var(--white);
+    min-height: 480px;
+    min-width : 500px;
 }
 
 #map {
     min-height: 480px;
-    max-width: 1000px;
+    min-width: 1000px;
 }
 
-.grade-log {
+
+table{
+    border : solid 2px;
+    border-color : var(--deep-gray);
+    width : 100%;
+    background-color: var(--white);
+    border-collapse : collapse;
+}
+
+th, td{
+    border : solid 2px;
+    border-color : var(--deep-gray);
+    padding : 10px;
+}
+
+/*.grade-log {
     margin-right: 0px;
     border: solid 2px;
     border-color: var(--gray);
     background-color: var(--gray);
     min-width: 25%;
     justify-content: center;
-    min-height: 510px;
-}
+    max-height: 300px;
+    min-height: 300px;
+}*/
 
 .fourthlog {
-    margin: 6px;
-    padding: 6px;
+    border: solid 2px;
+    border-color: var(--gray);
+    background-color: var(--gray);
+    min-width: 25%;
+    justify-content: center;
+    margin: 5px;
+    padding: 5px;
     border: solid;
     border-color: var(--white);
     background-color: var(--white);
-    min-height: 400px;
+    max-height: 300px;
+    min-height: 300px;
 }
 
 #duty_grade {
-    min-height: 400px;
+    max-height: 300px;
+    min-height: 300px;
 }
 
 .desc {
@@ -313,20 +353,20 @@ canvas {
     flex-wrap: wrap;
     flex-direction: row;
     place-items: space-around;
-    row-gap: 30px;
+    gap: 30px;
     margin-top: 15%;
 }
 
 #high,
 #mid,
 #low {
-    width: 300px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
     border: solid 2px;
     padding: 10px;
     border-radius: 100px 100px 100px 100px;
     color: var(--white);
-    font-size: 60px;
+    font-size: 50px;
     -webkit-text-stroke: 1px var(--black);
 }
 
