@@ -228,6 +228,7 @@ fetch('http://52.6.101.20:3000/log/nfw/map')
   .then(response => response.json())
   .then(data => {
     console.log(data);
+    console.log(data._id)
   });
 const locations = [
   // Marker positions (json파일로 받아올 것)
