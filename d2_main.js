@@ -58,8 +58,10 @@ function renderChart() {
       console.log(data.body);
       data.forEach(wafRuleSet => {
         secondValue.push(wafRuleSet.count);
-        secondLabel.push(wafRuleSet._id);
+	ruleSet = wafRuleSet._id.name.split(':');
+        secondLabel.push(ruleSet[ruleSet.length - 2]);	
       });
+
       // // 2번째 차트 => WAF => Rule Set
       // const secondValue = [50,60,70,80,90,100,110,120]; // 룰셋 별 막은 횟수 -> group by 해야될듯?
       // const secondLabel = [7,8,8,9,9,9,10,11]; // 차단 룰셋 이름      
