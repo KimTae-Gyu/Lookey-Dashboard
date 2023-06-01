@@ -167,9 +167,9 @@ function severityData(dataGd) {
 
 severityData(dataGd);
 
-function location(ipAddress){
-    const ipAddress = ipAddress;
-
+function loc($ipAddress){
+    const ipAddress = $ipAddress;
+    console.log(ipAddress);
     const apiUrl = `https://geolite.info/geoip/v2.1/city/${ipAddress}`;
     const username = '867355';
     const password = '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';
@@ -252,11 +252,14 @@ function initMap() {
 //     console.error('location json Error:', error);
 //   });
 let locations=[];
-// 서버에 WAF 그룹 바이한 결과를 요청해서 받아오는 코드
+// 서버에 nfw 그룹 바이한 결과를 요청해서 받아오는 코드
 fetch('http://52.6.101.20:3000/log/nfw/map')
   .then(response => response.json())
   .then(data => {
-    locations = location(data._id)
-  });
-
+    let ruleSet;
+    data.forEach(nfwRuleSet => {  
+    ruleSet = nfwRuleSet._id.split(':'); // CoreRuleSet:.... 이렇게 들어오고 있음. 따라서 룰셋 별로 가공해줘야함.
+    console.log(ruleSet);
+  }
+  )}); 
 initMap();

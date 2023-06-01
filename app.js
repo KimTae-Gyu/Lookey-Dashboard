@@ -56,7 +56,7 @@ app.use(express.static(path.join(__dirname, '.'))); // 정적 파일(html, css) 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true })); // URL-encoded 데이터를 추출해 req.body에 저장, 없으면 Form을 통해 POST로 보낸 데이터 접근 불가
 app.use(cors({
-  origin: "http://127.0.0.1:3000", // 접근 권한을 부여하는 도메인
+  origin: "http://http://52.6.101.20:3000", // 접근 권한을 부여하는 도메인
   credentials: true, // 응답 헤더에 Access-Control-Allow-Credentials 추가
   optionsSuccessStatus: 200, // 응답 상태 200으로 설정
 }));
