@@ -48,4 +48,24 @@ function mongoWafGroupBy(connection) {
     });
 }
 
-module.exports = { wafMongoInsert, nfwMongoInsert, mongoWafGroupBy };
+function mongoNfwGroupBy(connection) {
+  // 컬렉션 이름
+  const collectionName = 'nfw';
+  const collection = connection.collection(collectionName);
+  // labels 필드로 그룹핑해서 카운트 상위 5개만 반환
+  return collection.aggregate([
+    { $unwind: '$ipAddress' },
+    { $group: { _id: '$ipAddress', count: { $sum: 1 } } },
+    { $sort: { count: -1 } },
+    { $limit: 5 }
+  ])
+    .toArray()
+    .then((result) => {
+      return result;
+    })
+    .catch((error) => {
+      throw error;
+    });
+}
+
+module.exports = { wafMongoInsert, nfwMongoInsert, mongoWafGroupBy, mongoNfwGroupBy };

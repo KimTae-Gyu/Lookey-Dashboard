@@ -224,10 +224,10 @@ function initMap() {
 //   });
 
 // 서버에 WAF 그룹 바이한 결과를 요청해서 받아오는 코드
-fetch('http://52.6.101.20:3000/log/nfw')
+fetch('http://52.6.101.20:3000/log/nfw/map')
   .then(response => response.json())
   .then(data => {
-    console.log(data)
+    console.log(data);
   });
 const locations = [
   // Marker positions (json파일로 받아올 것)
