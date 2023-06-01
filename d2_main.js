@@ -256,10 +256,11 @@ let locations=[];
 fetch('http://52.6.101.20:3000/log/nfw/map')
   .then(response => response.json())
   .then(data => {
-    let ruleSet;
+    let ip;
     data.forEach(nfwRuleSet => {  
-    ruleSet = nfwRuleSet._id.split(':'); // CoreRuleSet:.... 이렇게 들어오고 있음. 따라서 룰셋 별로 가공해줘야함.
-    console.log(ruleSet);
+    ip = nfwRuleSet._id.split(':'); // CoreRuleSet:.... 이렇게 들어오고 있음. 따라서 룰셋 별로 가공해줘야함.
+    console.log(ip);
+    locations=loc(ip)
   }
   )}); 
 initMap();
