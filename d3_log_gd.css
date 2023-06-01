@@ -196,15 +196,35 @@ th, td{
     padding : 10px;
 }
 
+.log-control{
+    display : flex;
+    flex-wrap : wrap;
+    flex-direction: row;
+    place-content: space-around;
+    background-color: var(--deep-gray);
+    padding : 5px;
+}
+
+#csv-export{
+    font-size: 120%;
+    height : 40px;
+    padding : 5px 20px 5px 20px;
+    place-self: center;
+    background-color: var(--light-gray);
+}
+#csv-export:active{
+    background-color: var(--light-black);
+    color : var(--light-gray);
+}
+
 /*form*/
 form{
     display : flex;
     flex-wrap: wrap;
     flex-direction: row;
-    place-content: start;
     gap : 20px;
+    place-content: start;
     padding : 20px;
-    background-color: var(--deep-gray);
 }
 input{
     padding : 5px 10px 5px 10px;

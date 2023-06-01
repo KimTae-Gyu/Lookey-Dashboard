@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="d5_export.css">
+        <link rel="stylesheet" href="web_font.css">
+        <script src="https://html2canvas.hertzen.com/dist/html2canvas.js" defer></script>
+        <script src="d5_export.js" defer></script>
+        <link rel="icon" href="./pic/favicon.ico">
+        <title> </title>
+    </head>
+    <body>
+        <header>
+            <img src="./pic/Lookey_logo.png" alt="Lookey Dashboard homepage" class="logo"> <!--회사의 로고-->
+            <div class="headLine">
+                <img src="./pic/person.svg" alt="your Picture" class="yourPic"> <!--사람의 사진-->
+                <a class="myinfo" href="" target="_self">내 정보</a>
+                <t>|</t>
+                <a class="logout" href="/logout" target="_self">로그아웃</a>
+                <!--<img src="alarm.png" alt="alarm icon" class="alarm-icon">-->
+                <!--<a class="alarm" href="d7_alarm.html>알람</a>-->
+                <!--<button type="button" id="alarm-button" name="alarm">
+                    <img src="./pic/notification.svg" alt="alarm" class="alarm"> 알람 버튼
+                </button>-->
+            </div>
+        </header>
+        <!--기존 nav자리-->
+        <nav>
+            <div id="expand-menu" name="expand-menu" class="expand-menu">
+                <!--<img src="./pic/menu.svg" alt="menu icon" class="menuicon">-->
+            </div>
+            <label for="expand-menu" class="index">메뉴</label>
+            <ul id="main">
+                <div class="index">Main</div> <!--볼드 처리-->
+                <li> <a class="mainlog" href="d2_main.html" target="_self">HOME</a></li> <!--볼드 처리-->
+                <!--<li><a class="livelog" href="livelog.html" target="_self">실시간 로그</a></li>-->
+            </ul>
+            <ul id="aws-log">
+                <div class="index">AWS 보안 로그</div>
+                <li> <a class="nfwlog" href="d3_log_nfw.html" target="_self">Network firewall 로그</a> </li>
+                <li> <a class="waflog" href="d3_log_waf.html" target="_self">WAF 로그</a> </li>
+                <li> <a class="gdlog" href="d3_log_gd.html" target="_self">GuardDuty 로그</a> </li>
+                <!--<li> <a class="nsglog" href="D4_nsglog.html" target="_self">NACL/SG 로그</a></li>-->
+            </ul>
+            <ul id="aws-con">
+                <div class="index">AWS 제어 항목</div>
+                <li> <a class="nfwcon" href="d4_nfwcon.html" target="_self">Network firewall Rule Set</a> </li>
+            </ul>
+            <ul id="aws-exp">
+                <div class="index">기타 항목</div>
+                <li> <a class="export" href="d5_export.html" target="_self">내보내기</a> </li>
+            </ul>
+            <p class="address"> 관리자 : 02-000-0000 </p>
+        </nav>
+        <section>
+            <button id="clickThis" onclick="downloadFile()">클릭하면 다운로드</button>
+        </section>
+    </body>
+</html>

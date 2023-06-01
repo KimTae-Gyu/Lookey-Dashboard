@@ -151,11 +151,11 @@ li:hover{
     /*margin-right: auto;*/
 }
 
-#aws-log .index{
+#aws-exp .index{
     font-weight : 600;
 }
 
-.nfwlog{
+.export{
     font-weight : 600;
     color:var(--blue);
 }
@@ -166,7 +166,6 @@ label{
     margin-left : 10px;
     font-weight: 900;
 }
-
 
 section{
     grid-area : section;
@@ -195,61 +194,6 @@ th, td{
     border : solid 2px;
     border-color : var(--deep-gray);
     padding : 10px;
-}
-
-.log-control{
-    display : flex;
-    flex-wrap : wrap;
-    flex-direction: row;
-    place-content: space-around;
-    background-color: var(--deep-gray);
-    padding : 5px;
-}
-
-#csv-export{
-    font-size: 120%;
-    height : 40px;
-    padding : 5px 20px 5px 20px;
-    place-self: center;
-    background-color: var(--light-gray);
-}
-#csv-export:active{
-    background-color: var(--light-black);
-    color : var(--light-gray);
-}
-
-/*form*/
-form{
-    display : flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    gap : 20px;
-    place-content: start;
-    padding : 20px;
-}
-input{
-    padding : 5px 10px 5px 10px;
-    font-size: 120%;
-}
-
-select {
-    padding : 5px 20px 5px 20px;
-    font-size: 120%;
-}
-
-option {
-    font-size: 120%;
-}
-
-#input-button {
-    font-size: 120%;
-    padding : 5px 20px 5px 20px;
-    background-color: var(--light-gray);
-}
-
-#input-button:active{
-    background-color: var(--light-black);
-    color : var(--light-gray);
 }
 
 /*맨 위 제목*/
