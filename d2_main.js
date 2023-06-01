@@ -167,6 +167,35 @@ function severityData(dataGd) {
 
 severityData(dataGd);
 
+function location(ipAddress){
+    const ipAddress = ipAddress;
+
+    const apiUrl = `https://geolite.info/geoip/v2.1/city/${ipAddress}`;
+    const username = '867355';
+    const password = '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';
+    // API 호출
+    fetch(apiUrl,{
+        headers: {
+        Authorization: `Basic ${btoa(`${username}:${password}`)}`,
+      },
+    })
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error('Request failed. Status:', response.status);
+        }
+      })
+      .then(data => {
+        res.json(data); // API 응답을 클라이언트에게 전달
+      })
+      .catch(error => {
+        console.error('Request failed:', error.message);
+        res.status(500).json({ error: 'Request failed' });
+      }); 
+  };
+
+
 function initMap() {
   const map = new google.maps.Map(document.getElementById("map"), {
     zoom: 2,
@@ -222,17 +251,12 @@ function initMap() {
 //     // 오류 처리
 //     console.error('location json Error:', error);
 //   });
-
+let locations=[];
 // 서버에 WAF 그룹 바이한 결과를 요청해서 받아오는 코드
 fetch('http://52.6.101.20:3000/log/nfw/map')
   .then(response => response.json())
   .then(data => {
-    console.log(data);
-    console.log(data._id)
+    locations = location(data._id)
   });
-const locations = [
-  // Marker positions (json파일로 받아올 것)
-  { lat: -31.56391, lng: 147.154312 }
-];
 
 initMap();
