@@ -7,7 +7,7 @@ const router = express.Router(); // 라우터 객체 생성
 router.post('/nfw', async (req, res) => {
     // payload를 활용해서 NFW 룰그룹 JSON을 생성해야함.
     const payload = {
-        Action: 'PASS',
+        Action: req.body.action,
         Header: {
             protocol: req.body.protocol,
             sourcePort: req.body.sourcePort,
