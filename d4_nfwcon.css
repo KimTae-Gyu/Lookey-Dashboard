@@ -153,30 +153,39 @@ form{
     flex-wrap: wrap;
     flex-direction: row;
     place-content: start;
-    gap : 10px;
-    padding : 20px;
     background-color: var(--deep-gray);
+}
+#wrap-form{
+    display : flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    place-content: start;
+    gap : 20px;
+    padding : 10px 20px 10px 20px;
+    width : 1200px
 }
 input{
     padding : 5px;
-    font-size: 100%;
-    width : 180px;
+    font-size: 120%;
 }
 
 select {
-    padding : 5px 10px 5px 10px;
-    font-size: 100%;
+    padding : 5px 20px 5px 20px;
+    font-size: 120%;
 }
 
 option {
-    font-size: 100%;
+    padding : 5px 10px 5px 10px;
+    font-size: 120%;
 }
 
 #input-button {
-    width : 120px;
+    width : 180px;
     font-size: 120%;
     padding : 5px;
     background-color: var(--light-gray);
+    height: 50px;
+    align-self: center;
 }
 
 #input-button:active{

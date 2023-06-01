@@ -57,39 +57,63 @@
         <div class="control-box"> 
             <div class="big-desc">Network Firewall 규칙 설정</div>
             <div class="input-box">
-                <form action="/control/nfw" method="POST">
-                    <span class="input-protocol">
-                        <span class="mid-desc" for="protocol">프로토콜</span>
-                        <select name="protocol" id="protocol">
-                            <option value="'IP'">IP</option>
-                            <option value="'TCP'">TCP</option>
-                            <option value="'UDP'">UDP</option>
-                        </select>
+                <form action="http://localhost:3000/control/nfw" method="POST">
+                    <span id="wrap-form">
+                        <span class="input-source-port">
+                            <span class="mid-desc" for="source-port">출발 포트</span>
+                            <input type="text" id="source-port" name="sourcePort">
+                        </span>
+                        <span class="input-source">
+                            <span class="mid-desc" for="source">출발 IP</span>
+                            <input type="text" id="source" name="source">
+                        </span>
+                        <span class="input-protocol">
+                            <span class="mid-desc" for="protocol">프로토콜</span>
+                            <select name="protocol" id="protocol" onchange="changeProtocol(this.value)">
+                                <option value="IP">IP</option>
+                                <option value="TCP" id="targetCheck">TCP</option>
+                                <option value="UDP">UDP</option>
+                            </select>
+                        </span>
+                        <span class="input-action">
+                            <span class="mid-desc" for="action">액션</span>
+                            <select name="action" id="action">
+                                <option value="PASS">통과</option>
+                                <option value="DROP">삭제</option>
+                                <option value="ALERT">알림</option>
+                                <script>
+                                    function changeProtocol(value) {
+                                        if (value === "TCP") {
+                                            document.getElementById("action").innerHTML += '<option value="REJECT">거부</option>';
+                                            } 
+                                        else {
+                                        // TCP가 선택되지 않은 경우, 거부 옵션을 제거합니다.
+                                            var rejectOption = document.querySelector('#action option[value="REJECT"]');
+                                        if (rejectOption) {
+                                            rejectOption.remove();
+                                            }
+                                        }
+                                    }
+                                </script>
+                            </select>
+                        </span>
+                        <span class="input-dest-port">
+                            <span class="mid-desc" for="dest-port">도착 포트</span>
+                            <input type="text" id="dest-port" name="destPort">
+                        </span>
+                        <span class="input-dest">
+                            <span class="mid-desc" for="dest">도착 IP</span>
+                            <input type="text" id="dest" name="dest">
+                        </span>
+                        <span class="input-direction">
+                            <span class="mid-desc" for="direction">방향</span>
+                            <select name="direction" id="direction">
+                                <option value="FORWARD">단방향</option>
+                                <option value="ANY">양방향</option>
+                            </select>
+                        </span>
                     </span>
-                    <span class="input-source-port">
-                        <span class="mid-desc" for="source-port">출발 포트</span>
-                        <input type="text" id="source-port">
-                    </span>
-                    <span class="input-source">
-                        <span class="mid-desc" for="source">출발 IP</span>
-                        <input type="text" id="source">
-                    </span>
-                    <span class="input-direction">
-                        <span class="mid-desc" for="direction">방향</span>
-                        <select name="direction" id="direction">
-                            <option value="'FORWARD'">FORWARD</option>
-                            <option value="'ANY'">ANY</option>
-                        </select>
-                    </span>
-                    <span class="input-dest-port">
-                        <span class="mid-desc" for="dest-port">도착 포트</span>
-                        <input type="text" id="dest-port">
-                    </span>
-                    <span class="input-dest">
-                        <span class="mid-desc" for="dest">도착 IP</span>
-                        <input type="text" id="dest">
-                    </span>
-                    <input type="button" value="입력" id="input-button">
+                    <input type="submit" value="입력" id="input-button">
                 </form>
             </div>
         </div>
@@ -97,23 +121,23 @@
             <table id="table", class="table">
                 <thead>
                     <tr>
-                        <th scope="col">프로토콜</td>
-                        <th scope="col">출발포트</td>
-                        <th scope="col">출발 IP</td>
-                        <th scope="col">방향</td>
-                        <th scope="col">도착포트</td>
-                        <th scope="col">도착 IP</td>
+                        <th scope="col">프로토콜</th>
+                        <th scope="col">출발포트</th>
+                        <th scope="col">출발 IP</th>
+                        <th scope="col">방향</th>
+                        <th scope="col">도착포트</th>
+                        <th scope="col">도착 IP</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <!--예시 데이터-->
-                        <th scope="col">IP</td>
-                        <th scope="col">80</td>
-                        <th scope="col">222.222.222.222</td>
-                        <th scope="col">ANY</td>
-                        <th scope="col">80</td>
-                        <th scope="col">10.0.0.5</td>
+                        <th scope="col">IP</th>
+                        <th scope="col">80</th>
+                        <th scope="col">222.222.222.222</th>
+                        <th scope="col">ANY</th>
+                        <th scope="col">80</th>
+                        <th scope="col">10.0.0.5</th>
                     </tr>
                 </tbody>
             </table>

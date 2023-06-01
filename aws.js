@@ -12,30 +12,12 @@ function awsSet() {
     return AWS;
 }
 
-async function invokeLambda() {
-    const AWS = awsSet();
-    const lambda = new AWS.Lambda();
-    const params = {
-        FunctionName: 'NFW_Control',
-        //Payload: JSON.stringify(payload)
-    };
-
-    try {
-        const response = await lambda.invoke(params).promise();
-        console.log(response);
-        return true;
-    } catch (error) {
-        console.error(error);
-        return false;
-    }
-}
-
-// async function invokeLambda(payload) {
+// async function invokeLambda() {
 //     const AWS = awsSet();
 //     const lambda = new AWS.Lambda();
 //     const params = {
 //         FunctionName: 'NFW_Control',
-//         Payload: JSON.stringify(payload)
+//         //Payload: JSON.stringify(payload)
 //     };
 
 //     try {
@@ -47,5 +29,23 @@ async function invokeLambda() {
 //         return false;
 //     }
 // }
+
+async function invokeLambda(payload) {
+    const AWS = awsSet();
+    const lambda = new AWS.Lambda();
+    const params = {
+        FunctionName: 'NFW_Control',
+        Payload: JSON.stringify(payload)
+    };
+
+    try {
+        const response = await lambda.invoke(params).promise();
+        console.log(response);
+        return true;
+    } catch (error) {
+        console.error(error);
+        return false;
+    }
+}
 
 module.exports = invokeLambda;
