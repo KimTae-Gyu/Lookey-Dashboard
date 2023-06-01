@@ -1,6 +1,19 @@
 const dotenv = require('dotenv');
+// const { MongoClient } = require('mongodb');
 dotenv.config();
 const uri = process.env.MONGO_URI;
+
+// async function connectMongoDB() {
+//   try {
+//     const client = new MongoClient(uri);
+//     await client.connect();
+//     console.log('MongoDB 연결이 성공했습니다.');
+
+//     return client;
+//   } catch (error) {
+//     console.error('MongoDB Connection Error: ' + error);
+//   }
+// }
 
 function mongoInsert(connection, logs) {
   // 컬렉션 이름
