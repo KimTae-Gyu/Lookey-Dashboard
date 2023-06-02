@@ -16,8 +16,9 @@ function downloadFile() {
           'Content-Type': 'image/jpg'
         },
         body: imageData,
-        mode: 'cors', // CORS를 허용하는 모드로 설정
-        credentials: 'same-origin' // 동일 출처 요청을 위해 credentials를 same-origin으로 설정
+        mode: 'no-cors', // CORS를 허용하는 모드로 설정
+        credentials: 'include'
+        //credentials: 'same-origin' // 동일 출처 요청을 위해 credentials를 same-origin으로 설정
       })
         .then(response => response.blob())
         .then(blob => {
