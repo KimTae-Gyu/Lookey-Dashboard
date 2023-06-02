@@ -178,6 +178,8 @@ function loc($ipAddress){
     const headers = new Headers();
     headers.append('Authorization', `Basic ${btoa(`${username}:${password}`)}`);
     headers.append('Accept', 'application/json');
+    headers.append('Access-Control-Allow-Origin: * ')
+    headers.append('Access-Control-Allow-Headers: * ')
 
     fetch(apiUrl,{headers})
       .then(response => {

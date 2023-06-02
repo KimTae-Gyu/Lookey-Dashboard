@@ -59,7 +59,7 @@
     origin: "http://52.6.101.20:3000", // 접근 권한을 부여하는 도메인
     credentials: true, // 응답 헤더에 Access-Control-Allow-Credentials 추가
     optionsSuccessStatus: 200, // 응답 상태 200으로 설정
-    headers: '*'
+    allowdHeaders: '*'
   }));
   app.use(session({
       secret: process.env.SESSION_SECRET, // # 세션 시크릿 키를 어떻게 할 것인지 생각 .env 파일에 저장해 직접 입력을 피함
