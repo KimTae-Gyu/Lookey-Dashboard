@@ -69,11 +69,8 @@ function renderChart() {
 	//   .catch(error => {
 	//     console.error('MainPage NFW Chart Error: ', error);
 	//   });
-
-
-
 	// 서버에 WAF 그룹 바이한 결과를 요청해서 받아오는 코드
-	fetch('http://52.6.101.20:3000/log/wafChart')
+	fetch('http://localhost:3000/log/wafChart')
 		.then(response => response.json())
 		.then(data => {
 			let secondValue = [];
@@ -169,7 +166,7 @@ severityData(dataGd);
 
 function loc($ipAddress){
 	const ipAddress = $ipAddress;
-	console.log(ipAddress);
+	//console.log(ipAddress);
 	const apiUrl = `https://geolite.info/geoip/v2.1/city/${ipAddress}`;
 	const username = '867355';
 	const password = '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';
@@ -199,28 +196,28 @@ function loc($ipAddress){
 		}); 
 }
 
-function loc2($ipAddress) {
-	const apiUrl = 'http://52.6.101.20:3000/geoip'; // 서버의 API 엔드포인트
-	const ipAddress = $ipAddress;
+function loc2(ip) {
+	const apiUrl = 'http://localhost:3000/geoip'; // 서버의 API 엔드포인트
+	const ipAddress = ip;
 	console.log('$ipAddress ');
-	console.log($ipAddress);
+	console.log(ip);
 
-	fetch(apiUrl, { method: 'POST', body: JSON.stringify({ ipAddress }) })
+	fetch(apiUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ 'ip': ipAddress }) })
 		.then(response => {
 			if (response.ok) {
+				console.log(response.body);
 				return response.json();
 			} else {
 				throw new Error('Request failed. Status:', response.status);
 			}
 		})
 		.then(data => {
-			console.log(data); // 서버에서 받은 응답을 처리
+			//console.log(data); // 서버에서 받은 응답을 처리
 		})
 		.catch(error => {
 			console.error('Request failed:', error.message);
 		});
 }                           
-
 
 function initMap() {
 	const map = new google.maps.Map(document.getElementById("map"), {
@@ -261,7 +258,6 @@ function initMap() {
 
 	// Add a marker clusterer to manage the markers.
 	new markerClusterer.MarkerClusterer({ map, markers });
-
 }
 
 // // json 파일 불러와서 locations에 저장
@@ -279,15 +275,15 @@ function initMap() {
 //   });
 let locations=[];
 // 서버에 nfw 그룹 바이한 결과를 요청해서 받아오는 코드
-fetch('http://52.6.101.20:3000/log/nfw/map')
+fetch('http://localhost:3000/log/nfw/map')
 	.then(response => response.json())
 	.then(data => {
 		let ip;
 		data.forEach(nfwRuleSet => {  
-			ip = nfwRuleSet._id.split(':'); // CoreRuleSet:.... 이렇게 들어오고 있음. 따라서 룰셋 별로 가공해줘야함.
-			console.log(ip);
-			locations=loc2(ip);
+			ip = nfwRuleSet._id; // CoreRuleSet:.... 이렇게 들어오고 있음. 따라서 룰셋 별로 가공해줘야함.
+			console.log('ip: ', ip);
+			locations = loc2(ip);
+		});
+	});
 
-		}
-		)});		 
 initMap();
