@@ -174,11 +174,12 @@ function loc($ipAddress){
     const username = '867355';
     const password = '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';
     // API 호출
-    fetch(apiUrl,{
-        headers: {
-        Authorization: `Basic ${btoa(`${username}:${password}`)}`,
-      },
-    })
+
+    const headers = new Headers();
+    headers.append('Authorization', `Basic ${btoa(`${username}:${password}`)}`);
+    headers.append('Accept', 'application/json');
+
+    fetch(apiUrl,{headers})
       .then(response => {
         if (response.ok) {
           return response.json();
