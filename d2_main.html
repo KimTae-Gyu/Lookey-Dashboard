@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="ko">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -18,6 +17,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"> </script>
     <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.3/leaflet.js" integrity="sha512-Dqm3h1Y4qiHUjbhxTuBGQsza0Tfppn53SHlu/uj1f+RT+xfShfe7r6czRf5r2NmllO2aKx+tYJgoxboOkn1Scg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>!-->
     <script src="/socket.io/socket.io.js"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.js" defer></script>
     <script> const socket = io(); </script>
     <title>Lookey Dashboard</title>
 </head>
@@ -64,6 +64,7 @@
             <li> <a class="export" href="d5_export.html" target="_self">내보내기</a> </li>
         </ul>
         <p class="address"> 관리자 : 02-000-0000 </p>
+        <button id="clickThis" onclick="downloadFile()">클릭하면 다운로드</button>
     </nav>
     <!--임시 데이터 적용 중 / 클릭하면 비안전 예시도 볼 수 있도록 제공할 것-->
     <section id="reportImg">

@@ -49,8 +49,6 @@ mongoConnection.on('error', (error) => {
 const indexRouter = require('./routes/index'); 
 const loginRouter = require('./routes/login');
 const controlRouter = require('./routes/control.js');
-/*추가*/
-const captureRouter = require('./routes/test');
 
 // 미들 웨어 영역, 미들웨어 순서 생각
 app.use(morgan('dev')); // 배포 시에는 'dev'대신 'combined'를 사용하는 것이 일반적.
@@ -75,10 +73,6 @@ passportConfig(connection); // Passport 로그인 설정 모듈
 app.use('/', indexRouter); // localhost:3000/ 으로 들어오는 요청을 indexRouter 객체를 이용해 라우팅.
 app.use('/login', loginRouter); // localhost:3000/login 으로 들어오는 요청을 loginRouter로 라우팅.
 app.use('/control', controlRouter); // localhost:3000/control 으로 들어오는 요청을 loginRouter로 라우팅.
-
-/*추가*/
-app.use('/capture', captureRouter); // localhost:3000/control 으로 들어오는 요청을 loginRouter로 라우팅.
-/*-------------- */
 
 // lambda에서 WAF 로그를 발송할때 받는 라우팅
 app.post('/log/waf', (req, res) => {
