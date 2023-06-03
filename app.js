@@ -120,8 +120,8 @@ app.get('/log/wafChart', (req, res) => {
 // app.get('/log/nfwChart', (req, res) => {
 // });
 
-app.post('/geoip', (req, res) => {
-	const ipAddress = req.body.ip;
+app.get('/geoip', (req, res) => {
+	const ipAddress = req.query.ip;
 	//console.log(req.body);
 	//console.log({ ipAddress });
 	const apiUrl = `https://geolite.info/geoip/v2.1/city/${ipAddress}`;
@@ -140,12 +140,25 @@ app.post('/geoip', (req, res) => {
 				throw new Error('Request failed. Status:', response.status);
 			}
 		})
-		.then(data => {
-			res.json(data); // 서버에서 받은 응답을 클라이언트에게 전달
+		.then(data => { 
+      loc_data={lat:data.location.latitude, lng:data.location.longitude};
+      res.status(200).json(loc_data); // 서버에서 받은 응답을 클라이언트에게 전달
 		})
 		.catch(error => {
-			console.error('Request failed:', error.message);
+			console.error('Request failed:', error.message);      
 			res.status(500).send('Internal Server Error');
+		});
+});
+
+// 메인 페이지의 map에 데이터 전송
+app.get('/log/nfw/map', (req, res) => {
+	mongoNfwGroupBy(mongoConnection)
+		.then((result) => {
+      console.log('nfw Group By: ', result);
+			res.status(200).json(result);
+		})
+		.catch((error) => {
+			console.error(error);
 		});
 });
 
@@ -155,17 +168,6 @@ io.on('connection', (socket) => {
 	//   console.log('클라이언트로부터 wafLogs 이벤트를 받았습니다.');
 	//   console.log('Data : ', data);
 	// });
-});
-// 메인 페이지의 map에 데이터 전송
-app.get('/log/nfw/map', (req, res) => {
-	mongoNfwGroupBy(mongoConnection)
-		.then((result) => {
-      //console.log(result);
-			res.status(200).json(result);
-		})
-		.catch((error) => {
-			console.error(error);
-		});
 });
 // 서버 종료시 DB들의 커넥션 종료 코드
 

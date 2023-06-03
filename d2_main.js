@@ -164,61 +164,12 @@ function severityData(dataGd) {
 
 severityData(dataGd);
 
-function loc($ipAddress){
-	const ipAddress = $ipAddress;
-	//console.log(ipAddress);
-	const apiUrl = `https://geolite.info/geoip/v2.1/city/${ipAddress}`;
-	const username = '867355';
-	const password = '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';
-	// API 호출
+// -------------------------------------------------------------------------
+// IP 리스트, 위도 경도 리스트
+let ipList = [];
+let locations=[];
 
-	const headers = new Headers();
-	headers.append('Authorization', `Basic ${btoa(`${username}:${password}`)}`);
-	headers.append('Accept', 'application/json');
-	headers.append('Access-Control-Allow-Origin', '*');
-	headers.append('Access-Control-Allow-Headers', '*');
-	headers.append('Access-Control-Allow-Headers', 'Accept');
-
-	fetch(apiUrl,{headers})
-		.then(response => {
-			if (response.ok) {
-				return response.json();
-			} else {
-				throw new Error('Request failed. Status:', response.status);
-			}
-		})
-		.then(data => {
-			res.json(data); // API 응답을 클라이언트에게 전달
-		})
-		.catch(error => {
-			console.error('Request failed:', error.message);
-			res.status(500).json({ error: 'Request failed' });
-		}); 
-}
-
-function loc2(ip) {
-	const apiUrl = 'http://localhost:3000/geoip'; // 서버의 API 엔드포인트
-	const ipAddress = ip;
-	console.log('$ipAddress ');
-	console.log(ip);
-
-	fetch(apiUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ 'ip': ipAddress }) })
-		.then(response => {
-			if (response.ok) {
-				console.log(response.body);
-				return response.json();
-			} else {
-				throw new Error('Request failed. Status:', response.status);
-			}
-		})
-		.then(data => {
-			//console.log(data); // 서버에서 받은 응답을 처리
-		})
-		.catch(error => {
-			console.error('Request failed:', error.message);
-		});
-}                           
-
+// 지도 마커 찍는 부분 (위도 경도)
 function initMap() {
 	const map = new google.maps.Map(document.getElementById("map"), {
 		zoom: 2,
@@ -240,7 +191,10 @@ function initMap() {
 	// Create an array of alphabetical characters used to label the markers.
 	const labels = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	// Add some markers to the map.
+  
 	const markers = locations.map((position, i) => {
+    console.log('position: ', position);
+    console.log('i: ', i);
 		const label = labels[i % labels.length];
 		const marker = new google.maps.Marker({
 			position,
@@ -260,30 +214,65 @@ function initMap() {
 	new markerClusterer.MarkerClusterer({ map, markers });
 }
 
-// // json 파일 불러와서 locations에 저장
-// fetch('./locations_json')
-//   .then(response => response.json())
-//   .then(data => {
-//     // data 변수에 JSON 데이터가 저장됨
-//     // 이후에 필요한 작업을 수행합니다
-//     console.log(data); // 예시: 데이터 출력
-//     const locations = data;
-//   })
-//   .catch(error => {
-//     // 오류 처리
-//     console.error('location json Error:', error);
-//   });
-let locations=[];
-// 서버에 nfw 그룹 바이한 결과를 요청해서 받아오는 코드
-fetch('http://localhost:3000/log/nfw/map')
-	.then(response => response.json())
-	.then(data => {
-		let ip;
-		data.forEach(nfwRuleSet => {  
-			ip = nfwRuleSet._id; // CoreRuleSet:.... 이렇게 들어오고 있음. 따라서 룰셋 별로 가공해줘야함.
-			console.log('ip: ', ip);
-			locations = loc2(ip);
-		});
-	});
+// IP 그룹 바이해서 받아오는 함수
+function getIP() {
+  return fetch('http://localhost:3000/log/nfw/map')
+    .then(response => response.json())
+    .then(data => {
+      data.forEach(group => {
+        ipList.push(group._id)
+      });
+    })
+    .then(() => {
+      console.log('getIP: ', ipList);
+    })
+    .catch(error => {
+      console.error('map ', error);
+      throw error;
+    });
+}
 
-initMap();
+// IP를 위도 경도로 바꾸는 함수
+function getLocation(ip) {
+	const apiUrl = `http://localhost:3000/geoip?ip=${ip}`; // 서버의 API 엔드포인트
+
+	return fetch(apiUrl)
+		.then(response => {
+			if (response.ok) {
+				return response.json();
+			} else {
+				throw new Error('Request failed. Status:', response.status);
+			}
+		})
+    .then(data => {
+      locations.push(data);
+    })
+		.catch(error => {
+			console.error('Request failed:', error.message);
+      throw error;
+		});
+}
+
+// IP 받는 코드와 위 경도 변환 프로미스 제어하는 함수
+function processData() {
+  return getIP()
+    .then(() => {
+      const promises = ipList.map(ip => getLocation(ip));
+      return Promise.all(promises);
+    })
+    .then(() => {
+      console.log('locations: ', locations);
+    })
+    .catch(error => {
+      console.error('Failed to process data: ', error.message);
+    });
+}
+
+// 프로미스 제어 함수 호출 -> ipList, Locations 초기화 -> 이후 지도 마커 함수 호출
+processData()
+  .then(() => {
+    initMap();
+  })
+  .catch(error => {
+    console.error('error: ', error.message);
+  });
