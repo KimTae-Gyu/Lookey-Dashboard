@@ -1,0 +1,8 @@
+json_str = "{'Records': [{'eventVersion': '2.1', 'eventSource': 'aws:s3', 'awsRegion': 'us-east-1', 'eventTime': '2023-06-01T11:30:56.538Z', 'eventName': 'ObjectCreated:Put', 'userIdentity': {'principalId': 'AWS:AROA5X5CZLUQFG4INLGE3:AWSFirehoseToS3'}, 'requestParameters': {'sourceIPAddress': '3.233.224.255'}, 'responseElements': {'x-amz-request-id': 'BM6QV0PZX8Q1DRKF', 'x-amz-id-2': 'Fk0m5R9KArGerNoolElGZuCAXUuwGwwfdDk+vqx0ydTGQ0ckFQqnNvjQkjym0JJpTQtcvIhKdT+SkXLIlIAtTPsxrrQCBhlQ'}, 's3': {'s3SchemaVersion': '1.0', 'configurationId': '440f74e9-e7a5-49fb-8821-209130a20ed9', 'bucket': {'name': 'cloudmonitoring-network-fw-flow-kinesis', 'ownerIdentity': {'principalId': 'A37DSEYTO8WEUG'}, 'arn': 'arn:aws:s3:::cloudmonitoring-network-fw-flow-kinesis'}, 'object': {'key': '2023/06/01/11/cloudmonitoring-network-fw-flow-kinesis-1-2023-06-01-11-25-55-a11e2cfc-ed7c-49e4-bbcb-9c96f9c5c629', 'size': 661644, 'eTag': '3f958ee11a18669ce5488d0714061205', 'sequencer': '006478817066FEA578'}}}]}"
+
+json_str = json_str.replace("'", '"')
+print(json_str)
+
+# a = {'firewall_name': 'cloudmonitoring-network-firewall', 'availability_zone': 'us-east-1a', 'event': {'src_ip': '10.0.0.171', 'src_port': 30311, 'tcp': {'tcp_flags': '14', 'rst': True, 'ack': True}, 'netflow': {'pkts': 1, 'bytes': 40, 'start': '2023-06-01T11:15:39.092211+0000', 'end': '2023-06-01T11:15:39.093218+0000', 'age': 0, 'min_ttl': 63, 'max_ttl': 254}, 'event_type': 'netflow', 'flow_id': 1735140981827635, 'dest_ip': '131.153.201.254', 'proto': 'TCP', 'dest_port': 51331, 'timestamp': '2023-06-01T11:19:23.532879+0000'}}
+# print(a['event']['event_type'])
+# print(a['event']['netflow']['pkts'])
