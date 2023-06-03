@@ -175,14 +175,14 @@ function initMap() {
 		zoom: 2,
 		center: { lat: 37, lng: 150 },
 		minZoom: 2,
-		restriction: {
-			latLngBounds: {
-				north: 90,
-				south: -90,
-				east: 240,
-				west: 40,
-			},
-		},
+		// restriction: {
+		// 	latLngBounds: {
+		// 		north: 90,
+		// 		south: -90,
+		// 		east: 240,
+		// 		west: 40,
+		// 	},
+		// },
 	});
 	const infoWindow = new google.maps.InfoWindow({
 		content: "",
