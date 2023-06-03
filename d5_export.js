@@ -1,48 +1,8 @@
-/*
-function downloadFile() {
-    // 이미지로 캡처할 HTML 요소 선택
-    //const element = document.querySelector('section'); //오류로 주석처리
-    const element = document.body; //body요소들을 가져옴.
-  
-    // html2canvas를 사용하여 요소를 이미지로 캡처
-    html2canvas(element)
-        .then(canvas => {
-        // 캡처된 이미지를 Data URL로 변환
-        //const imageData = canvas.toDataURL('image/jpg');
-        return new Promise((resolve, reject) => {
-            canvas.toBlob(blob => {
-              if (blob) {
-                resolve(blob);
-              } else {
-                reject(new Error('Failed to convert canvas to blob'));
-              }
-            }, 'image/jpeg');
-          });
-        })
-  }
-  */
-
-function checkElement(element){
-    if (window.document.contains(element)) {
-        renderElement(element, opts)
-          .then(canvas => {
-            // 캔버스 처리 로직
-            captureHTML(element);
-          })
-          .catch(error => {
-            // 오류 처리 로직
-            console.log("checkElement 오류");
-          });
-      } else {
-        throw new Error('Element is not attached to the current Window');
-      }
-      
-}
-
 function loadCheck(){
     console.log('로딩 완료');
     processMainHtml();
     }
+
 
 function downloadFile() {
     console.log('download를 위한 버튼 클릭');
@@ -52,7 +12,14 @@ function downloadFile() {
 function captureHTML(element){
     //const element = document.querySelector(captureX);
     console.log('캡처 HTML 실행');
-    html2canvas(element)
+
+    html2canvas(element, { //여기서 문제 발생
+        useCORS: true,
+            onrendered: function(canvas) {
+                var dataUrl= canvas.toDataURL("image/png"); 
+                document.write('<img src="' + dataUrl + '"/>');
+            }
+        })
       .then(canvas => {
         // 캡처된 이미지를 Data URL로 변환
         const imageData = canvas.toDataURL('image/jpg');
@@ -77,7 +44,7 @@ function captureHTML(element){
       });
 }
 
-  // Data URL을 Blob으로 변환하는 함수
+  // Data URL을 Blob으로 변환하는 함수 - 성공
 function dataURLtoBlob(dataURL) {
     const byteString = atob(dataURL.split(',')[1]);
     const arrayBuffer = new ArrayBuffer(byteString.length);
@@ -88,7 +55,7 @@ function dataURLtoBlob(dataURL) {
     const blob = new Blob([arrayBuffer], { type: 'image/jpeg' });
     return blob;
   }
-// main.html 파일을 가져오는 함수
+// main.html 파일을 가져오는 함수 - 성공
 function fetchMainHtml() {
     return fetch('/d2_main.html')
       .then(response => response.text())
@@ -97,7 +64,7 @@ function fetchMainHtml() {
       });
   }
   
-  // main.html 파일을 가져와서 요소를 사용하는 함수
+  // main.html 파일을 가져와서 요소를 사용하는 함수 - 성공
   function processMainHtml() {
     fetchMainHtml()
       .then(html => {
@@ -106,10 +73,11 @@ function fetchMainHtml() {
         const doc = parser.parseFromString(html, 'text/html');
         // 원하는 요소를 선택하고 작업을 수행
         const element = doc.querySelector('#reportImg');
+        //확인 완료된 사항 - console.log("element:", element);
         if (element) {
           console.log('reportImg 요소를 찾았습니다:', element);
           // 요소와 함께 작업을 수행하면 됩니다.
-          checkElement(element);
+          captureHTML(element);
         } else {
           console.error('reportImg 요소를 찾을 수 없습니다.');
         }

@@ -27,6 +27,7 @@
     "passport": "^0.6.0",
     "passport-local": "^1.0.0",
     "pizzip": "^3.1.4",
+    "puppeteer": "^20.5.0",
     "socket.io": "^4.6.1",
     "socket.io-client": "^4.6.1"
   }

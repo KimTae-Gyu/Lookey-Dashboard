@@ -40,7 +40,7 @@ function renderChart() {
   const firstLabel = [7, 8, 8, 9, 9, 9, 10, 11]; //차단된 IP이름을 넣고
   const firstLogChart = document.getElementById('firstLogChart');
 
-  new Chart(firstLogChart, {
+new Chart(firstLogChart, {
     type: 'doughnut',
     data: {
       labels: firstLabel,
@@ -58,10 +58,10 @@ function renderChart() {
         position: 'right',
         align: 'start',
         fullWidth: false,
+        }
       },
       responsive: false
-    }
-  });
+    });
   // fetch('http://localhost:3000/log/nfwChart')
   //   .then(data => {
 
@@ -233,6 +233,7 @@ initMap();
 window.onload=function(){
   console.log("로딩완료");
 }
+
 
 function downloadFile() {
   console.log('download를 위한 버튼 클릭');
