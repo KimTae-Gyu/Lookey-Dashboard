@@ -53,7 +53,12 @@ const controlRouter = require('./routes/control.js');
 // 미들 웨어 영역, 미들웨어 순서 생각
 app.use(morgan('dev')); // 배포 시에는 'dev'대신 'combined'를 사용하는 것이 일반적.
 app.use(express.static(path.join(__dirname, '.'))); // 정적 파일(html, css) 접근하게 해주는 코드
-app.use(express.json());
+app.use(express.json({
+	type: [
+		'application/json',
+		'text/plain',
+	],
+}));
 app.use(express.urlencoded({ extended: true })); // URL-encoded 데이터를 추출해 req.body에 저장, 없으면 Form을 통해 POST로 보낸 데이터 접근 불가
 app.use(cors({
 	origin: ["http://52.6.101.20:3000","https://geolite.info/geoip/v2.1/city/219.240.87.167"], // 접근 권한을 부여하는 도메인
@@ -122,8 +127,6 @@ app.get('/log/wafChart', (req, res) => {
 
 app.get('/geoip', (req, res) => {
 	const ipAddress = req.query.ip;
-	//console.log(req.body);
-	//console.log({ ipAddress });
 	const apiUrl = `https://geolite.info/geoip/v2.1/city/${ipAddress}`;
 	const username = '867355';
 	const password = '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';
@@ -131,9 +134,12 @@ app.get('/geoip', (req, res) => {
 		Authorization: `Basic ${Buffer.from(`${username}:${password}`).toString('base64')}`,
 		Accept: 'application/json',
 	};
+	console.log(headers);
 
 	fetch(apiUrl, { headers })
 		.then(response => {
+			//console.log(response);
+			//console.log(response.json());
 			if (response.ok) {
 				return response.json();
 			} else {
@@ -160,6 +166,31 @@ app.get('/log/nfw/map', (req, res) => {
 		.catch((error) => {
 			console.error(error);
 		});
+
+app.get('/alarm', (req, res) => {
+	const subscribeURL = req.query.SubscribeURL;
+
+	fetch(subscribeURL, { method: 'GET' })
+	.then(response => {
+		if(response.ok) {
+			console.log('Subscription Confirmed');
+			res.sendStatus(200);
+		} else {
+			console.error('Subscription Failed');
+			res.sendStatus(500);
+		}
+	})
+	.catch(error => {
+		console.error('Subscription failed: ', error);
+		res.sendStatus(500);
+	});
+});
+
+app.post('/alarm', (req, res) => {
+	console.log('subscribe: ', req.body);
+	console.log('subscribe header: ', req.headers);
+	console.log('Message : ', req.body.SubscribeURL);
+	io.emit('alarm');
 });
 
 io.on('connection', (socket) => {
