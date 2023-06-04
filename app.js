@@ -235,5 +235,5 @@ io.on('connection', (socket) => {
 // 서버 종료시 DB들의 커넥션 종료 코드
 
 http.listen(process.env.PORT || 3000, () => {
-	process.env.PORT ? console.log(process.env.PORT + '번 포트 서버 실행중') : console.log('3000번 포트 서버 실행 중');
+	process.env.PORT ? console.log(process.env.PORT + '번 포트 서버 실행중') : console.log('3000번 포트 서버 실행중');
 });
