@@ -124,11 +124,11 @@
     </section>
     <script>
         // 서버에 NFW 로그가 새로 들어오면 차트 갱신
-        socket.on('nfwNewLogs', (data) => {
+        socket.on('nfwNew', (data) => {
             renderNfwChartAndMap();
         });
         // 서버에 WAF 로그가 새로 들어오면 차트 갱신
-        socket.on('wafNewLogs', (data) => {
+        socket.on('wafNew', (data) => {
             renderWafChart();
         });
         // 서버에 로그가 새로 들어오면 침입 탐지 경고
