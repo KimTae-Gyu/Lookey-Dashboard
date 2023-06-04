@@ -17,7 +17,7 @@ function showModal(message) {
 	});
 }
 
-showModal('침입이 탐지되었습니다');
+//showModal('침입이 탐지되었습니다');
 
 // 차트 렌더링 함수
 function renderChart() {
@@ -70,7 +70,7 @@ function renderChart() {
 	//     console.error('MainPage NFW Chart Error: ', error);
 	//   });
 	// 서버에 WAF 그룹 바이한 결과를 요청해서 받아오는 코드
-	fetch('http://localhost:3000/log/wafChart')
+	fetch('http://52.6.101.20:3000/log/wafChart')
 		.then(response => response.json())
 		.then(data => {
 			let secondValue = [];
