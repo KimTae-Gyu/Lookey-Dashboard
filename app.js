@@ -118,7 +118,7 @@ app.get('/log/nfw/groupBy', (req, res) => {
 app.post('/log/waf', (req, res) => {
 	let logs = req.body;
 	// 로그가 새로 추가되었으므로 로그 테이블에 새로운 데이터 추가 및 차트 데이터 갱신 이벤트 전송
-	io.emit('wafChart');
+	io.emit('wafNewLogs');
 	res.sendStatus(200);
 });
 
@@ -128,7 +128,7 @@ app.post('/log/waf/new', (req, res) => {
 	let waf_flag = req.body.message;
 	console.log("NFW New Log Flag", waf_flag);
 
-	io.emit('wafNewLogs');
+	io.emit('wafNew');
 });
 
 // wafNew 이벤트를 받아서 차트와 맵을 새로 렌더링할 때 호출
