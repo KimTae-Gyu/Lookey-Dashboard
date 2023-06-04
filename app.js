@@ -166,7 +166,8 @@ app.get('/log/nfw/map', (req, res) => {
 		.catch((error) => {
 			console.error(error);
 		});
-
+});
+	
 app.get('/alarm', (req, res) => {
 	const subscribeURL = req.query.SubscribeURL;
 
