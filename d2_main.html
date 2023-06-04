@@ -123,9 +123,13 @@
         <!--</div>-->
     </section>
     <script>
-        // 서버에 로그가 새로 들어오면 차트 갱신
-        socket.on('wafChart', (data) => {
-            renderChart();
+        // 서버에 NFW 로그가 새로 들어오면 차트 갱신
+        socket.on('nfwNewLogs', (data) => {
+            renderNfwChartAndMap();
+        });
+        // 서버에 WAF 로그가 새로 들어오면 차트 갱신
+        socket.on('wafNewLogs', (data) => {
+            renderWafChart();
         });
         // 서버에 로그가 새로 들어오면 침입 탐지 경고
         socket.on('alarm', (data) => {
