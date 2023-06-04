@@ -55,10 +55,27 @@ function mongoNfwGroupBy(connection) {
   const collection = connection.collection(collectionName);
   // labels 필드로 그룹핑해서 카운트 상위 5개만 반환
   return collection.aggregate([
-    { $unwind: '$ipAddress' },
-    { $group: { _id: '$ipAddress', count: { $sum: 1 } } },
-    { $sort: { count: -1 } },
-    { $limit: 5 }
+    {
+      $match: {
+        "event.src_ip": {
+          $not: {
+            $regex: "^10\\.|^172\\.(1[6-9]|2[0-9]|3[0-1])\\.|^192\\.168\\."
+          }
+        }
+      }
+    },
+    {
+      $group: {
+        blocked_ip: "$event.src_ip",
+        count: { $sum: 1 }
+      }
+    },
+    {
+      $sort: { count: -1 }
+    },
+    {
+      $limit: 10
+    }
   ])
     .toArray()
     .then((result) => {
