@@ -1,3 +1,5 @@
+//취합 후 삭제 부탁드립니다.
+
 const headers = ['Name', 'Age', 'Email']; // 헤더(열 이름) 배열 정의
 
 function downloadCSV(data, filename) {
