@@ -40,6 +40,7 @@ const firstLabel = []; //차단된 IP이름을 넣고
 // IP 리스트, 위도 경도 리스트
 const ipList = [];
 const locations = [];
+const timestamps = [];
 
 // NFW Render에 사용될 데이터를 할당하는 Promise 반환
 function getNewNfwData() {
@@ -50,6 +51,7 @@ function getNewNfwData() {
 				firstValue.push(nfwLog.count);
 				firstLabel.push(nfwLog._id);
 				ipList.push(nfwLog._id);
+				timestamps.push(nfwLog.timestamps[0]);
 			});
 		})
 		.catch(error => {
@@ -132,13 +134,29 @@ function getLocation(ip) {
 				throw new Error('Request failed. Status:', response.status);
 			}
 		})
-    .then(data => {
-      locations.push(data);
-    })
+		.then(data => {
+			locations.push(data);
+		})
 		.catch(error => {
 			console.error('Request failed:', error.message);
-      throw error;
+      		throw error;
 		});
+}
+
+function addTableMap() {
+	const table = document.getElementById("map-table");
+	const tbody = table.querySelector("tbody");
+
+	const newRow = tbody.insertRow(); // 새로운 행 생성
+
+	for(let i=0; i<10; i++) {
+		const timeCell = newRow.insertCell();
+		timeCell.textContent = timestamps[i];
+		const countryCell = newRow.insertCell();
+		countryCell.textContent = locations[i].country;
+		const ipCell = newRow.insertCell();
+		ipCell.textContent = ipList[i];
+	}
 }
 
 async function renderNfwChartAndMap() {
@@ -146,6 +164,7 @@ async function renderNfwChartAndMap() {
 	renderNfwChart();
 	await Promise.all(ipList.map(ip => getLocation(ip)));
 	initMap();
+	addTableMap();
 }
 
 //----------------------------------------------------------------------------------
