@@ -31,7 +31,7 @@ function nfwMongoInsert(connection, logs) {
 
 function mongoWafGroupBy(connection) {
   // 컬렉션 이름
-  const collectionName = 'waf';
+  const collectionName = 'wafs2';
   const collection = connection.collection(collectionName);
   // labels 필드로 그룹핑해서 카운트 상위 5개만 반환
   return collection.aggregate([
