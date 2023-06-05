@@ -178,7 +178,7 @@ app.get('/geoip', (req, res) => {
 			}
 		})
 		.then(data => { 
-      loc_data={lat:data.location.latitude, lng:data.location.longitude};
+      loc_data={country:data.country.iso_code, lat:data.location.latitude, lng:data.location.longitude};
       res.status(200).json(loc_data); // 서버에서 받은 응답을 클라이언트에게 전달
 		})
 		.catch(error => {

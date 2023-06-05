@@ -70,19 +70,32 @@ function mongoNfwGroupBy(connection) {
         count: { $sum: 1 },
         timestamps: { $push: "$event_timestamp" }
       }
-    },
-    {
-      $project: {
-        _id: 1,
-        count: 1,
-        timestamps: { $sort: -1 }
-      }
-    },
+    },  
     {
       $sort: { count: -1 }
     },
     {
       $limit: 10
+    },
+	  {
+		  $unwind: "$timestamps"
+	  },
+	  {
+		  $sort: { timestamps: -1 }
+	  },
+	  {
+		  $group: {
+			  _id: "$_id",
+			  count: { $first: "$count" },
+			  timestamps: { $push: "$timestamps" }
+		  }
+	  },
+    {
+      $project: {
+      	_id: 1,
+        count: 1,
+        timestamps: 1
+      }
     }
   ])
     .toArray()

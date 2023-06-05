@@ -51,6 +51,7 @@ function getNewNfwData() {
 				firstValue.push(nfwLog.count);
 				firstLabel.push(nfwLog._id);
 				ipList.push(nfwLog._id);
+				console.log(nfwLog.timestamps);
 				timestamps.push(nfwLog.timestamps[0]);
 			});
 		})
@@ -64,7 +65,7 @@ function renderNfwChart() {
 	// 서버에 NFW 그룹 바이한 결과를 요청해서 받아오는 코드
 	const firstLogChart = document.getElementById('firstLogChart');
 
-	new Chart(firstLogChart, {
+new Chart(firstLogChart, {
 		type: 'doughnut',
 		data: {
 			labels: firstLabel,
@@ -147,9 +148,8 @@ function addTableMap() {
 	const table = document.getElementById("map-table");
 	const tbody = table.querySelector("tbody");
 
-	const newRow = tbody.insertRow(); // 새로운 행 생성
-
 	for(let i=0; i<10; i++) {
+		const newRow = tbody.insertRow(); // 새로운 행 생성
 		const timeCell = newRow.insertCell();
 		timeCell.textContent = timestamps[i];
 		const countryCell = newRow.insertCell();
@@ -273,5 +273,6 @@ severityData(dataGd);
 
 window.renderNfwChartAndMap = renderNfwChartAndMap;
 window.renderWafChart = renderWafChart;
+window.showModal = showModal;
 
 // -------------------------------------------------------------------------
