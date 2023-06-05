@@ -48,8 +48,8 @@ function getNewNfwData() {
 		.then(data => {
 			data.forEach(nfwLog => {
 				firstValue.push(nfwLog.count);
-				firstLabel.push(nfwLog.blocked_ip);
-				ipList.push(data.blocked_ip);
+				firstLabel.push(nfwLog._id);
+				ipList.push(nfwLog._id);
 			});
 		})
 		.catch(error => {

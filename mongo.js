@@ -5,7 +5,7 @@ const uri = process.env.MONGO_URI;
 
 function wafMongoInsert(connection, logs) {
   // 컬렉션 이름
-  const collectionName = 'waf';
+  const collectionName = 'wafs2';
   // 문서 삽입
   connection.collection(collectionName).insertMany(logs)
     .then(() => {
@@ -31,7 +31,7 @@ function nfwMongoInsert(connection, logs) {
 
 function mongoWafGroupBy(connection) {
   // 컬렉션 이름
-  const collectionName = 'waf';
+  const collectionName = 'wafs2';
   const collection = connection.collection(collectionName);
   // labels 필드로 그룹핑해서 카운트 상위 5개만 반환
   return collection.aggregate([
@@ -51,7 +51,7 @@ function mongoWafGroupBy(connection) {
 
 function mongoNfwGroupBy(connection) {
   // 컬렉션 이름
-  const collectionName = 'nfw2';
+  const collectionName = 'nfw3';
   const collection = connection.collection(collectionName);
   // labels 필드로 그룹핑해서 카운트 상위 5개만 반환
   return collection.aggregate([
@@ -66,7 +66,7 @@ function mongoNfwGroupBy(connection) {
     },
     {
       $group: {
-        blocked_ip: "$event.src_ip",
+        _id: "$event.src_ip",
         count: { $sum: 1 }
       }
     },
