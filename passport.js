@@ -11,7 +11,7 @@ module.exports = (connection) => {
     
     passport.deserializeUser((user_id, done) => { // user_id는 serial..의 done의 user.id
         // # 세션에 담긴 req.user의 정보를 데이터베이스에 저장된 정보와 일치하는지 계속하여 검증하는 코드가 들어가야 함
-        console.log('deserial', user_id);
+        //console.log('deserial', user_id);
         connection.query(userInfoQuery, [user_id], (err, res, fields) => {
             if(err) console.log(err);
             if(res[0] != undefined) done(null, user_id); // 이 user가 req.user가 됨.

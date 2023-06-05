@@ -135,7 +135,7 @@ app.post('/log/waf/new', (req, res) => {
 // 클라이언트는 /log/waf/groupBy로 새로운 waf 데이터를 갱신받음
 app.get('/log/waf/groupBy', (req, res) => {
 	mongoWafGroupBy(mongoConnection)
-		.then((result) => {
+		.then((result) => {			
 			res.status(200).json(result);
 		})
 		.catch((error) => {
@@ -166,7 +166,6 @@ app.get('/geoip', (req, res) => {
 		Authorization: `Basic ${Buffer.from(`${username}:${password}`).toString('base64')}`,
 		Accept: 'application/json',
 	};
-	console.log(headers);
 
 	fetch(apiUrl, { headers })
 		.then(response => {

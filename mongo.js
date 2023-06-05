@@ -51,7 +51,7 @@ function mongoWafGroupBy(connection) {
 
 function mongoNfwGroupBy(connection) {
   // 컬렉션 이름
-  const collectionName = 'nfw2';
+  const collectionName = 'nfw3';
   const collection = connection.collection(collectionName);
   // labels 필드로 그룹핑해서 카운트 상위 5개만 반환
   return collection.aggregate([
@@ -66,7 +66,7 @@ function mongoNfwGroupBy(connection) {
     },
     {
       $group: {
-        blocked_ip: "$event.src_ip",
+        _id: "$event.src_ip",
         count: { $sum: 1 }
       }
     },
