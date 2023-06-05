@@ -218,9 +218,7 @@ app.get('/alarm', (req, res) => {
 });
 
 app.post('/alarm', (req, res) => {
-	console.log('subscribe: ', req.body);
-	console.log('subscribe header: ', req.headers);
-	console.log('Message : ', req.body.SubscribeURL);
+	
 	io.emit('alarm');
 });
 
