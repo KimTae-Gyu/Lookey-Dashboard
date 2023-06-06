@@ -55,12 +55,21 @@ function getNewNfwData() {
 	return fetch('http://52.6.101.20:3000/log/nfw/groupBy')
 		.then(response => response.json())
 		.then(data => {
+			if(firstValue.length > 0) {
+				firstValue = [];
+				firstLabel = [];
+				ipList = [];
+				locations = [];
+				timestamps = [];
+			}
+
 			data.forEach(nfwLog => {
 				firstValue.push(nfwLog.count);
 				firstLabel.push(nfwLog._id);
 				ipList.push(nfwLog._id);
 				console.log(timestamps);
 				timestamps.push(nfwLog.timestamps[0]);
+
 			});
 		})
 		.catch(error => {
@@ -112,8 +121,8 @@ function initMap() {
 	const labels = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	// Add some markers to the map.  
 	const markers = locations.map((position, i) => {
-    console.log('position: ', position);
-    console.log('i: ', i);
+		console.log('position: ', position);
+		console.log('i: ', i);
 		const label = labels[i % labels.length];
 		const marker = new google.maps.Marker({
 			position,
@@ -148,7 +157,7 @@ function getLocation(ip) {
 		})
 		.catch(error => {
 			console.error('Request failed:', error.message);
-      		throw error;
+			throw error;
 		});
 }
 
@@ -156,9 +165,8 @@ function addTableMap() {
 	const table = document.getElementById("map-table");
 	const tbody = table.querySelector("tbody");
 
-	const newRow = tbody.insertRow(); // 새로운 행 생성
-
 	for(let i=0; i<10; i++) {
+		const newRow = tbody.insertRow(); // 새로운 행 생성
 		const timeCell = newRow.insertCell();
 		timeCell.textContent = timestamps[i];
 		const countryCell = newRow.insertCell();

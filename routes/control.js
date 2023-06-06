@@ -1,5 +1,6 @@
 const express = require('express');
 const invokeLambda = require('../aws.js');
+const path = require('path');
 // 라우팅을 파일 단위로 분리 할 수 있음.
 
 const router = express.Router(); // 라우터 객체 생성

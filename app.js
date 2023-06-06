@@ -95,7 +95,7 @@ app.post('/log/nfw', (req, res) => {
 // nfwNew 이벤트를 발행
 app.post('/log/nfw/new', (req, res) => {
 	let nfw_flag = req.body.message;
-	console.log("NFW New Log Flag", nfw_flag);
+	console.log("New NFW Log Flag", nfw_flag);
 
 	io.emit('nfwNew');
 });
@@ -126,7 +126,7 @@ app.post('/log/waf', (req, res) => {
 // wafNew 이벤트를 발행
 app.post('/log/waf/new', (req, res) => {
 	let waf_flag = req.body.message;
-	console.log("NFW New Log Flag", waf_flag);
+	console.log("New WAF Log Flag", waf_flag);
 
 	io.emit('wafNew');
 });
