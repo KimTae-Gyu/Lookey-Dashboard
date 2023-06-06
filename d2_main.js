@@ -267,6 +267,53 @@ function severityData(dataGd) {
 	low.innerHTML = gradeData['low'];
 }
 
+const fourthColor = [
+	'rgba(255, 67, 67, 1)',
+	'rgba(255, 150, 54, 1)',
+	'rgba(0, 182, 228, 1)',
+];
+
+function testchart() {
+	// 차트 1 => NFW	
+	// 서버에 NFW 그룹 바이한 결과를 요청해서 받아오는 코드
+	const fourthLogChart = document.getElementById('fourthLogChart');
+	var fourthLabel =['high', 'mid', 'low'];
+	var fourthValue = [10, 15, 20];
+
+	new Chart(fourthLogChart, {
+		type: 'horizontalBar',
+		data: {
+			labels: fourthLabel,
+			datasets: [
+				{
+					label: '개수',
+					data: fourthValue,
+					backgroundColor: fourthColor,
+					hoverOffset: 4
+				}]
+		},
+		options: {
+			legend: {
+				display: true,
+				position: 'bottom',
+				align: 'start',
+				fullWidth: false,
+			},
+			responsive: false,
+			scales : {
+				xAxes: [
+					{
+						ticks: {
+							beginAtZero: true
+						}
+					}
+				]
+			}
+		}
+	});
+}
+
+testchart();
 severityData(dataGd);
 
 // -------------------------------------------------------------------------
