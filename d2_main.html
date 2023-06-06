@@ -58,7 +58,7 @@
         </ul>
         <ul id="aws-con">
             <div class="index">AWS 제어 항목</div>
-            <li> <a class="nfwcon" href="d4_nfwcon.html" target="_self">Network firewall Rule Set</a> </li>
+            <li> <a class="nfwcon" href="/control/nfw" target="_self">Network firewall Rule Set</a> </li>
         </ul>
         <ul id="aws-exp">
             <div class="index">기타 항목</div>
@@ -68,13 +68,13 @@
         <button id="clickThis" onclick="downloadFile()">화면 다운로드</button>
     </nav>
     <!--임시 데이터 적용 중 / 클릭하면 비안전 예시도 볼 수 있도록 제공할 것-->
-    <!--<div id="modalContainer" class="modal-container">
-
+    <div id="modalContainer" class="modal-container">
         <div class="modal-content">
             <span id="modalMessage"></span>
+            <button id="modalActionButton">Action</button>
             <button id="modalCloseButton">Close</button>
         </div>
-    </div>!-->    
+    </div>
     <section>  
         <div class="circle-log">
             <div class="firstlog" alt="지표 1">
@@ -105,7 +105,7 @@
                     </center>
                 </div>
                 <div class="thirdlog-list">
-                    <table id="table", class="table">
+                    <table id="map-table", class="table">
                         <thead>
                             <tr>
                                 <th scope="col">시간</th>
@@ -131,7 +131,7 @@
         });
         // 서버에 로그가 새로 들어오면 침입 탐지 경고
         socket.on('alarm', (data) => {
-            showModal('침입이 탐지되었습니다');
+            showModal(data);
         });
     </script>
 </body>
