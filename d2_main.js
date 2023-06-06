@@ -311,7 +311,7 @@ function testchart() {
 		},
 		options: {
 			legend: {
-				display: true,
+				display: false,
 				position: 'bottom',
 				align: 'start',
 				fullWidth: false,

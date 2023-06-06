@@ -323,7 +323,7 @@ th, td{
 }*/
 
 #fourthLogChart {
-    max-width: 300px;
+    max-width: 400px;
     min-height: 100px;
     place-content: center;
     margin : 10px;
@@ -371,7 +371,7 @@ th, td{
     margin-top: 15%;
     */
 
-    display : flex;
+    /* display : flex; */
 }
 
 /*
