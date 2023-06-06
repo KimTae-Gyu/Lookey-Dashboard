@@ -13,6 +13,7 @@
     <script src="https://unpkg.com/@googlemaps/markerclusterer/dist/index.min.js"></script>
     <link rel="icon" href="./pic/favicon.ico">
     <script src="d2_main.js" defer></script>
+    <script src="d2_main_sub.js" defer></script>
     <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.3/leaflet.css" integrity="sha512-mD70nAW2ThLsWH0zif8JPbfraZ8hbCtjQ+5RU1m4+ztZq6/MymyZeB55pWsi4YAX+73yvcaJyk61mzfYMvtm9w==" crossorigin="anonymous" referrerpolicy="no-referrer" />!-->
     <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.3.0/chart.umd.js" integrity="sha512-CMF3tQtjOoOJoOKlsS7/2loJlkyctwzSoDK/S40iAB+MqWSaf50uObGQSk5Ny/gfRhRCjNLvoxuCvdnERU4WGg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"> </script>
@@ -89,9 +90,7 @@
                     <div class="desc">GuardDuty 위험도 갯수</div>
                     <center>
                         <div class="gd">
-                            <div id="high">2</div>
-                            <div id="mid">3</div>
-                            <div id="low">4</div>
+                            <canvas id="fourthLogChart"></canvas>
                         </div>
                     </center>
                 </div>
@@ -112,7 +111,6 @@
                                 <th scope="col">시간</th>
                                 <th scope="col">국가</th>
                                 <th scope="col">IP</th>
-                                <th scope="col">로그</th>
                             </tr>
                         </thead>
                         <tbody>
