@@ -81,15 +81,33 @@ function mongoNfwGroupBy(connection) {
     });
 }
 
-function mongoDDosGroupBy(connection) {
+function mongoPortScanGroupBy(connection) {
   const collectionName = 'nfw3';
   const collection = connection.collection(collectionName);
 
   return collection.aggregate([
-    
+    {
+      $group: {
+        _id: "$event.src_ip",
+        dest_ports: { $addToSet: "$event.dest_port" }
+      }
+    },
+    {
+      $match: {
+        dest_ports: { $size: { $gte: 100 } }
+      }
+    },
+    {
+      $project: {
+        _id: 0,
+        src_ip: "$_id",
+        dest_port_count: { $size: "$dest_ports" }
+      }
+    }
   ])
     .toArray()
     .then((result) => {
+      console.log('Port Scan: ', result);
       return result;
     })
     .catch((error) => {
@@ -97,4 +115,4 @@ function mongoDDosGroupBy(connection) {
     });
 }
 
-module.exports = { mongoWafGroupBy, mongoNfwGroupBy };
+module.exports = { mongoWafGroupBy, mongoNfwGroupBy, mongoPortScanGroupBy };

@@ -8,7 +8,7 @@ const morgan = require('morgan'); // 서버에 들어온 요청과 응답의 로
 const mysql = require('mysql');
 const cors = require('cors');
 const { wafParse, nfwParse } = require('./logParse.js');
-const { wafMongoInsert, nfwMongoInsert, mongoWafGroupBy, mongoNfwGroupBy } = require('./mongo.js');
+const { wafMongoInsert, nfwMongoInsert, mongoWafGroupBy, mongoNfwGroupBy, mongoPortScanGroupBy } = require('./mongo.js');
 const mongoose = require('mongoose');
 
 dotenv.config(); // .env 파일 내용을 process.env에 적재
@@ -145,18 +145,6 @@ app.get('/log/waf/groupBy', (req, res) => {
 
 //------------------------------------------------------
 
-// 메인 페이지의 NFW 차트 데이터 전송
-// app.get('/log/nfw/chart', (req, res) => {
-// 	mongoNfwGroupBy(mongoConnection)
-// 		.then((result) => {
-// 			console.log('NFW Group By: ', result);
-// 			res.status(200).json(result);
-// 		})
-// 		.catch((error) => {
-// 			console.error(error);
-// 		});
-// });
-
 app.get('/geoip', (req, res) => {
 	const ipAddress = req.query.ip;
 	const apiUrl = `https://geolite.info/geoip/v2.1/city/${ipAddress}`;
@@ -186,18 +174,6 @@ app.get('/geoip', (req, res) => {
 			res.status(500).send('Internal Server Error');
 		});
 });
-
-// 메인 페이지의 map에 데이터 전송
-// app.get('/log/nfw/map', (req, res) => {
-// 	mongoNfwGroupBy(mongoConnection)
-// 		.then((result) => {
-//       		console.log('nfw Group By: ', result);
-// 			res.status(200).json(result);
-// 		})
-// 		.catch((error) => {
-// 			console.error(error);
-// 		});
-// });
 	
 app.get('/alarm', (req, res) => {
 	const subscribeURL = req.query.SubscribeURL;
@@ -217,9 +193,47 @@ app.get('/alarm', (req, res) => {
 	});
 });
 
+// 포트 스캐닝 알람
 app.post('/alarm', (req, res) => {
-	
-	io.emit('alarm');
+	// 포트 스캐닝을 판별
+	mongoPortScanGroupBy(mongoConnection)
+		.then((groupByResult) => {	
+			// 포트 스캐닝인 경우 알람 정보를 MySQL에 저장
+			if (groupByResult.length > 0) {
+				const alarmInsert = 'INSERT INTO dash_alarm (alarm_id, alarm_user_id, alarm_info, flag) VALUES (UUID(), ?, ?, false)';
+				const userId = 'dash';
+				const alarmInfo = "Port Scanning이 감지되었습니다.\nIP: ";
+
+				groupByResult.forEach(res => {
+					alarmInfo + res.src_ip + " ";
+				});
+
+				connection.query(alarmInsert, [userId, alarmInfo], (error, results) => {
+					if (error) throw error;
+					const insertedID = results.insertId;
+					console.log('Inserted UUID: ', insertedID);
+				});
+
+				// 어떤 IP로 부터 포트 스캐닝이 감지되었는지 클라이언트에게 보냄
+				io.emit('alarm', { alarmId: insertedID, message: alarmInfo });
+				res.sendStatus(200);
+			}
+		})
+		.catch((error) => {
+			console.error(error);
+			res.sendStatus(500);
+		})			
+});
+
+// 대응 완료 시 알람의 조치 플래그 업데이트
+app.put('/alarmAction', (req, res) => {
+	const alarmId = req.query.id;
+	const alarmUpdate = 'UPDATE dash_alarm SET flag = ? WHERE id = ?';
+
+	connection.query(alarmUpdate, [1 , alarmId], (error, results) => {
+		if (error) throw error;
+		res.status(200);
+	});
 });
 
 io.on('connection', (socket) => {

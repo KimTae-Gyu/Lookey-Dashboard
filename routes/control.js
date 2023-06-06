@@ -4,6 +4,10 @@ const invokeLambda = require('../aws.js');
 
 const router = express.Router(); // 라우터 객체 생성
 
+router.get('/nfw', (req, res) => {
+    res.sendFile(path.join(__dirname, '../d4_nfwcon.html'));
+});
+
 router.post('/nfw', async (req, res) => {
     // payload를 활용해서 NFW 룰그룹 JSON을 생성해야함.
     const payload = {

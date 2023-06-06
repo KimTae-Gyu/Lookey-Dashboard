@@ -57,21 +57,21 @@
         <div class="control-box"> 
             <div class="big-desc">Network Firewall 규칙 설정</div>
             <div class="input-box">
-                <form action="http://localhost:3000/control/nfw" method="POST">
+                <form action="http://52.6.101.20:3000/control/nfw" method="POST">
                     <span id="wrap-form">
                         <span class="input-source-port">
                             <span class="mid-desc" for="source-port">출발 포트</span>
-                            <input type="text" id="source-port" name="sourcePort">
+                            <input type="text" id="source-port" name="sourcePort" value="ANY">
                         </span>
                         <span class="input-source">
                             <span class="mid-desc" for="source">출발 IP</span>
-                            <input type="text" id="source" name="source">
+                            <input type="text" id="source" name="source" value="10.10.10.10">
                         </span>
                         <span class="input-protocol">
                             <span class="mid-desc" for="protocol">프로토콜</span>
                             <select name="protocol" id="protocol" onchange="changeProtocol(this.value)">
                                 <option value="IP">IP</option>
-                                <option value="TCP" id="targetCheck">TCP</option>
+                                <option value="TCP" id="targetCheck" selected>TCP</option>
                                 <option value="UDP">UDP</option>
                             </select>
                         </span>
@@ -84,7 +84,7 @@
                                 <script>
                                     function changeProtocol(value) {
                                         if (value === "TCP") {
-                                            document.getElementById("action").innerHTML += '<option value="REJECT">거부</option>';
+                                            document.getElementById("action").innerHTML += '<option value="REJECT" selected>거부</option>';
                                             } 
                                         else {
                                         // TCP가 선택되지 않은 경우, 거부 옵션을 제거합니다.
@@ -99,16 +99,16 @@
                         </span>
                         <span class="input-dest-port">
                             <span class="mid-desc" for="dest-port">도착 포트</span>
-                            <input type="text" id="dest-port" name="destPort">
+                            <input type="text" id="dest-port" name="destPort" value="ANY">
                         </span>
                         <span class="input-dest">
                             <span class="mid-desc" for="dest">도착 IP</span>
-                            <input type="text" id="dest" name="dest">
+                            <input type="text" id="dest" name="dest" value="ANY">
                         </span>
                         <span class="input-direction">
                             <span class="mid-desc" for="direction">방향</span>
                             <select name="direction" id="direction">
-                                <option value="FORWARD">단방향</option>
+                                <option value="FORWARD" selected>단방향</option>
                                 <option value="ANY">양방향</option>
                             </select>
                         </span>
@@ -143,5 +143,32 @@
             </table>
         </div>
     </section>
+<script>
+    // 현재 페이지의 URL 가져오기
+    const currentURL = window.location.href;
+
+    // URL에서 쿼리 스트링 파싱
+    const urlParams = new URLSearchParams(window.location.search);
+
+    // 쿼리 스트링이 존재하는지 확인
+    if (urlParams.has('id')) {
+        // 쿼리 스트링이 paramName을 포함하는 경우
+        const alarmId = urlParams.get('id');
+        const submitButton = document.getElementById('input-button');
+        
+        submitButton.addEventListener('click', (alarmId) => {
+            fetch(`http://52.6.101.20:3000/alarmAction?id=${alarmId}`, {
+                method: 'PUT',
+            })
+            .then((response) => response.json())
+            .then((data) => {
+                console.log('Alarm Update: ', data);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+        });     
+    } 
+</script>
 </body>
 </html>

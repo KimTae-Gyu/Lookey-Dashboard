@@ -1,14 +1,22 @@
-function showModal(message) {
+function showModal(alarmData) {
 	// 모달 요소 가져오기
 	const modalContainer = document.getElementById('modalContainer');
 	const modalMessage = document.getElementById('modalMessage');
 	const modalCloseButton = document.getElementById('modalCloseButton');
+	const modalActionButton = document.getElementById('modalActionButton');
 
 	// // 모달 내용 설정
-	modalMessage.textContent = message;
+	modalMessage.textContent = alarmData.message;
 
 	// 모달 보이기
 	modalContainer.style.display = 'block';
+
+	// 대응 버튼 클릭 이벤트 핸들러
+	modalActionButton.addEventListener('click', () => {		
+		// 모달 숨기기
+		modalContainer.style.display = 'none';
+		window.location.href = `http://52.6.101.20:3000/control/nfw?id=${alarmData.alarmId}`;
+	});
 
 	// 닫기 버튼 클릭 이벤트 핸들러
 	modalCloseButton.addEventListener('click', () => {
