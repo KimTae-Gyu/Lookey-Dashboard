@@ -35,6 +35,8 @@ connection.connect((err) => {
 	console.log('MySQL 연결 성공');
 });
 
+app.locals.connection = connection;
+
 // MongoDB 설정 및 연결
 const mongoConnection = mongoose.createConnection(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 // MongoDB 연결 성공 및 실패 이벤트 처리
