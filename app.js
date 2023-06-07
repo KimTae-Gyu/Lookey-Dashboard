@@ -207,11 +207,10 @@ app.post('/alarm', (req, res) => {
 				const alarmId = uuidv4();
 				const userId = 'dash';
 
-				const alarmInfo = "Port Scanning이 감지되었습니다.\n\n IP: ";
-        let insertedId;
+				const alarmInfo = "Port Scanning이 감지되었습니다.<br/> IP: ";       		
         
 				groupByResult.forEach(res => {
-					alarmInfo + res.src_ip + "     ";
+					alarmInfo += res.src_ip + "    ";
 				});
 
 				connection.query(alarmInsert, [alarmId, userId, alarmInfo], (error, results) => {
