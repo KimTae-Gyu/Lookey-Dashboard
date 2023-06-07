@@ -148,8 +148,8 @@ app.get('/log/waf/groupBy', (req, res) => {
 app.get('/geoip', (req, res) => {
 	const ipAddress = req.query.ip;
 	const apiUrl = `https://geolite.info/geoip/v2.1/city/${ipAddress}`;
-	const username = '867355';
-	const password = '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';
+	const username = '875182';
+	const password = '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';
 	const headers = {
 		Authorization: `Basic ${Buffer.from(`${username}:${password}`).toString('base64')}`,
 		Accept: 'application/json',
