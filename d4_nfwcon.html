@@ -149,26 +149,31 @@
 
     // URL에서 쿼리 스트링 파싱
     const urlParams = new URLSearchParams(window.location.search);
-
     // 쿼리 스트링이 존재하는지 확인
-    if (urlParams.has('id')) {
-        // 쿼리 스트링이 paramName을 포함하는 경우
-        const alarmId = urlParams.get('id');
-        const submitButton = document.getElementById('input-button');
-        
-        submitButton.addEventListener('click', (alarmId) => {
-            fetch(`http://52.6.101.20:3000/alarmAction?id=${alarmId}`, {
-                method: 'PUT',
-            })
-            .then((response) => response.json())
-            .then((data) => {
-                console.log('Alarm Update: ', data);
-            })
-            .catch((error) => {
-                console.error(error);
-            });
-        });     
-    } 
+	    if (urlParams.has('id')) {
+			            // 쿼리 스트링이 paramName을 포함하는 경우
+			            const alarmId = urlParams.get('id');
+			            const form = document.getElementById('controlForm');
+			            
+			            form.addEventListener('submit', () => {
+						                event.preventDefault();
+						                const formData = new FormData(form);
+
+						    fetch(`http://52.6.101.20:3000/alarmAction?id=${alarmId}`, { method: 'PUT' })
+						                .then((response) => response.json())
+						                .then(result => {
+										                return fetch('http://52.6.101.20:3000/control/nfw', {
+														                    method: 'POST',
+														                    body: formData
+														                })
+										            })
+						                .then(response => response.json())
+						                .catch(error => {
+										                console.error(error);
+										            })
+						            });
+			        } 
+
 </script>
 </body>
 </html>
