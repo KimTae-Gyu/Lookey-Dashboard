@@ -22,6 +22,7 @@ router.post('/nfw', async (req, res) => {
             destIP: req.body.dest
         }
     };
+	console.log('payload: ', payload);
 
     try {
         const flag = await invokeLambda(payload);
