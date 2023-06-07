@@ -25,7 +25,7 @@ function mongoWafGroupBy(connection) {
 
 function mongoNfwGroupBy(connection) {
   // 컬렉션 이름
-  const collectionName = 'nfw3';
+  const collectionName = 'nfw4';
   const collection = connection.collection(collectionName);
 
   return collection.aggregate([
@@ -82,7 +82,7 @@ function mongoNfwGroupBy(connection) {
 }
 
 function mongoPortScanGroupBy(connection) {
-  const collectionName = 'nfw3';
+  const collectionName = 'nfw4';
   const collection = connection.collection(collectionName);
 
   return collection.aggregate([
@@ -94,7 +94,9 @@ function mongoPortScanGroupBy(connection) {
     },
     {
       $match: {
-        dest_ports: { $size: { $gte: 100 } }
+        $expr: {
+		$gte: [{ $size: "$dest_ports" }, 200]
+	}
       }
     },
     {
@@ -103,6 +105,11 @@ function mongoPortScanGroupBy(connection) {
         src_ip: "$_id",
         dest_port_count: { $size: "$dest_ports" }
       }
+    },
+	{
+		$sort: {
+			dest_port_count: -1
+		}
 	}
   ])
     .toArray()

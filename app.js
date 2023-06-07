@@ -10,6 +10,7 @@ const cors = require('cors');
 const { wafParse, nfwParse } = require('./logParse.js');
 const { wafMongoInsert, nfwMongoInsert, mongoWafGroupBy, mongoNfwGroupBy, mongoPortScanGroupBy } = require('./mongo.js');
 const mongoose = require('mongoose');
+const { v4: uuidv4 } = require('uuid');
 
 dotenv.config(); // .env 파일 내용을 process.env에 적재
 const app = express();
@@ -200,22 +201,24 @@ app.post('/alarm', (req, res) => {
 		.then((groupByResult) => {	
 			// 포트 스캐닝인 경우 알람 정보를 MySQL에 저장
 			if (groupByResult.length > 0) {
-				const alarmInsert = 'INSERT INTO dash_alarm (alarm_id, alarm_user_id, alarm_info, flag) VALUES (UUID(), ?, ?, false)';
+				const alarmInsert = 'INSERT INTO dash_alarm (id, alarm_user_id, alarm_info, flag) VALUES (?, ?, ?, false)';
+				const alarmId = uuidv4();
 				const userId = 'dash';
-				const alarmInfo = "Port Scanning이 감지되었습니다.\n\n IP: ";
 
+				const alarmInfo = "Port Scanning이 감지되었습니다.\n\n IP: ";
+        let insertedId;
+        
 				groupByResult.forEach(res => {
 					alarmInfo + res.src_ip + "     ";
 				});
 
-				connection.query(alarmInsert, [userId, alarmInfo], (error, results) => {
-					if (error) throw error;
-					const insertedID = results.insertId;
-					console.log('Inserted UUID: ', insertedID);
+				connection.query(alarmInsert, [alarmId, userId, alarmInfo], (error, results) => {
+					if (error) throw error;					
+					console.log('Inserted UUID: ', alarmId);
 				});
 
 				// 어떤 IP로 부터 포트 스캐닝이 감지되었는지 클라이언트에게 보냄
-				io.emit('alarm', { alarmId: insertedID, message: alarmInfo });
+				io.emit('alarm', { alarmId: alarmId, message: alarmInfo });
 				res.sendStatus(200);
 			}
 		})
@@ -227,10 +230,11 @@ app.post('/alarm', (req, res) => {
 
 // 대응 완료 시 알람의 조치 플래그 업데이트
 app.put('/alarmAction', (req, res) => {
+	console.log('alarmAction: ', req.query.id);
 	const alarmId = req.query.id;
-	const alarmUpdate = 'UPDATE dash_alarm SET flag = ? WHERE id = ?';
+	const alarmUpdate = 'UPDATE dash_alarm SET flag = true WHERE id = ?';
 
-	connection.query(alarmUpdate, [1 , alarmId], (error, results) => {
+	connection.query(alarmUpdate, [alarmId], (error, results) => {
 		if (error) throw error;
 		res.status(200);
 	});

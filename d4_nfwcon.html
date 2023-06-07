@@ -6,14 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/d4_nfwcon.css">
     <link rel="stylesheet" href="/web_font.css">
-    <link rel="icon" href="/pic/favicon.ico">
+    <link rel="icon" href="./pic/favicon.ico">
     <title>Lookey Dashboard</title>
 </head>
 <body>
     <header>
-        <img src="/pic/Lookey_logo.png" alt="Lookey Dashboard homepage" class="logo"> <!--회사의 로고-->
+        <img src="./pic/Lookey_logo.png" alt="Lookey Dashboard homepage" class="logo"> <!--회사의 로고-->
         <div class="headLine">
-            <img src="/pic/person.svg" alt="your Picture" class="yourPic"> <!--사람의 사진-->
+            <img src="./pic/person.svg" alt="your Picture" class="yourPic"> <!--사람의 사진-->
             <a class="myinfo" href="D6_myinfo.html" target="_self">내 정보</a>
             <t>|</t>
             <a class="logout" href="d1_login.html" target="_self">로그아웃</a>
@@ -57,7 +57,7 @@
         <div class="control-box"> 
             <div class="big-desc">Network Firewall 규칙 설정</div>
             <div class="input-box">
-                <form action="http://52.6.101.20:3000/control/nfw" method="POST">
+                <form id="controlForm">
                     <span id="wrap-form">
                         <span class="input-source-port">
                             <span class="mid-desc" for="source-port">출발 포트</span>
@@ -154,19 +154,25 @@
     if (urlParams.has('id')) {
         // 쿼리 스트링이 paramName을 포함하는 경우
         const alarmId = urlParams.get('id');
-        const submitButton = document.getElementById('input-button');
+        const form = document.getElementById('controlForm');
         
-        submitButton.addEventListener('click', (alarmId) => {
-            fetch(`http://52.6.101.20:3000/alarmAction?id=${alarmId}`, {
-                method: 'PUT',
-            })
+        form.addEventListener('submit', () => {
+            event.preventDefault();
+            const formData = new FormData(form);
+
+            fetch(`http://52.6.101.20:3000/alarmAction?id=${alarmId}`, { method: 'PUT' })
             .then((response) => response.json())
-            .then((data) => {
-                console.log('Alarm Update: ', data);
+
+            .then(result => {
+                return fetch('http://52.6.101.20:3000/control/nfw', {
+                    method: 'POST',
+                    body: formData
                 })
-            .catch((error) => {
+            })
+            .then(response => response.json())
+            .catch(error => {
                 console.error(error);
-            });
+            })
         });
     } 
 </script>

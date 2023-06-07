@@ -1,10 +1,15 @@
+let modalFlag = false;
+
 function showModal(alarmData) {
+	if (modalFlag === false) {
 	// 모달 요소 가져오기
 		const modalContainer = document.getElementById('modalContainer');
 		const modalMessage = document.getElementById('modalMessage');
 		const modalCloseButton = document.getElementById('modalCloseButton');
 		const modalActionButton = document.getElementById('modalActionButton');
 		
+		modalFlag = true;
+
 		// // 모달 내용 설정
 		modalMessage.textContent = alarmData.message;
 
@@ -15,15 +20,22 @@ function showModal(alarmData) {
 		modalActionButton.addEventListener('click', () => {		
 		// 모달 숨기기
 		modalContainer.style.display = 'none';
+			modalFlag = false;
+
 			window.location.href = `http://52.6.101.20:3000/control/nfw?id=${alarmData.alarmId}`;
 		});
 
 		// 닫기 버튼 클릭 이벤트 핸들러
 		modalCloseButton.addEventListener('click', () => {
+
+			modalFlag = false;
+
 			// 모달 숨기기
 			modalContainer.style.display = 'none';
 		});
 	}
+}
+
 
 // -----------------------------------------------------------------------------
 
@@ -55,21 +67,20 @@ function getNewNfwData() {
 	return fetch('http://52.6.101.20:3000/log/nfw/groupBy')
 		.then(response => response.json())
 		.then(data => {
-			if(firstValue.length > 0) {
-				firstValue = [];
-				firstLabel = [];
-				ipList = [];
-				locations = [];
-				timestamps = [];
-			}
+			firstValue.splice(0, firstValue.length);
+			firstLabel.splice(0, firstLabel.length);
+			ipList.splice(0, ipList.length);
+			locations.splice(0, locations.length);
+			timestamps.splice(0, timestamps.length);
 
 			data.forEach(nfwLog => {
 				firstValue.push(nfwLog.count);
 				firstLabel.push(nfwLog._id);
 				ipList.push(nfwLog._id);				
-				console.log(timestamps);
-				timestamps.push(nfwLog.timestamps[0]);
 
+				console.log(timestamps);
+
+				timestamps.push(nfwLog.timestamps[0]);
 			});
 		})
 		.catch(error => {
@@ -89,7 +100,7 @@ function renderNfwChart() {
 			datasets: [
 				{
 					label: 'IP',
-					data: firstValue.sort(),
+					data: firstValue,
 					backgroundColor: backColor,
 					hoverOffset: 4
 				}]
@@ -164,6 +175,13 @@ function getLocation(ip) {
 function addTableMap() {
 	const table = document.getElementById("map-table");
 	const tbody = table.querySelector("tbody");
+	const rowCount = tbody.rows.length;
+	
+	if (rowCount > 0) {		
+		for(let i=0; i<rowCount; i++){
+			table.deleteRow();
+		}
+	}
 
 	for(let i=0; i<10; i++) {
 		const newRow = tbody.insertRow(); // 새로운 행 생성
