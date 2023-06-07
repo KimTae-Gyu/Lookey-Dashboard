@@ -12,10 +12,10 @@ if (urlParams.has('id')) {
         const ruleData = {
           protocol: formData.get('protocol'),
           sourcePort: formData.get('sourcePort'),
-          sourceIP: formData.get('source'),
+          source: formData.get('source'),
           direction: formData.get('direction'),
           destPort: formData.get('destPort'),
-          destIP: formData.get('dest'),
+          dest: formData.get('dest'),
           action: formData.get('action'),
           alarmId: alarmId
         };
