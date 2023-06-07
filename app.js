@@ -229,7 +229,7 @@ app.post('/alarm', (req, res) => {
 });
 
 // 대응 완료 시 알람의 조치 플래그 업데이트
-app.put('/alarmAction', (req, res) => {
+app.get('/alarmAction', (req, res) => {
 	console.log('alarmAction: ', req.query.id);
 	const alarmId = req.query.id;
 	const alarmUpdate = 'UPDATE dash_alarm SET flag = true WHERE id = ?';
