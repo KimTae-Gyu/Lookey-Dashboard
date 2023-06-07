@@ -149,8 +149,8 @@ app.get('/log/waf/groupBy', (req, res) => {
 app.get('/geoip', (req, res) => {
 	const ipAddress = req.query.ip;
 	const apiUrl = `https://geolite.info/geoip/v2.1/city/${ipAddress}`;
-	const username = '867355';
-	const password = '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';
+	const username = '875182';
+	const password = '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';
 	const headers = {
 		Authorization: `Basic ${Buffer.from(`${username}:${password}`).toString('base64')}`,
 		Accept: 'application/json',
@@ -175,7 +175,7 @@ app.get('/geoip', (req, res) => {
 			res.status(500).send('Internal Server Error');
 		});
 });
-	
+
 app.get('/alarm', (req, res) => {
 	const subscribeURL = req.query.SubscribeURL;
 	fetch(subscribeURL, { method: 'GET' })
@@ -204,11 +204,12 @@ app.post('/alarm', (req, res) => {
 				const alarmInsert = 'INSERT INTO dash_alarm (id, alarm_user_id, alarm_info, flag) VALUES (?, ?, ?, false)';
 				const alarmId = uuidv4();
 				const userId = 'dash';
-				let alarmInfo = "Port Scanning이 감지되었습니다.\nIP: ";
-				let insertedId;
 
+				const alarmInfo = "Port Scanning이 감지되었습니다.\n\n IP: ";
+        let insertedId;
+        
 				groupByResult.forEach(res => {
-					alarmInfo += res.src_ip + " ";
+					alarmInfo + res.src_ip + "     ";
 				});
 
 				connection.query(alarmInsert, [alarmId, userId, alarmInfo], (error, results) => {
@@ -237,6 +238,17 @@ app.put('/alarmAction', (req, res) => {
 		if (error) throw error;
 		res.status(200);
 	});
+});
+
+app.get('/report',(req,res) => {
+	//몽고 db에서 데이터 가져옴
+	// timestamp데이터 -> export.js로 이동
+	
+	//d5Export.py
+	// table1 - alarmTime, 사용자이름, check시간, 조치여부(?)
+	// table2 - 알람시간, 알람내용, 위치, source IP, 시도 행위, 위험도
+	// table3 - 조치시각, 차단 IP(==source IP)
+
 });
 
 io.on('connection', (socket) => {

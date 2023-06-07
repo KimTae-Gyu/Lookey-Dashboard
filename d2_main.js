@@ -9,29 +9,33 @@ function showModal(alarmData) {
 		const modalActionButton = document.getElementById('modalActionButton');
 		
 		modalFlag = true;
+
 		// // 모달 내용 설정
 		modalMessage.textContent = alarmData.message;
 
 		// 모달 보이기
 		modalContainer.style.display = 'block';
 		
-
 		// 대응 버튼 클릭 이벤트 핸들러
 		modalActionButton.addEventListener('click', () => {		
 		// 모달 숨기기
 		modalContainer.style.display = 'none';
 			modalFlag = false;
+
 			window.location.href = `http://52.6.101.20:3000/control/nfw?id=${alarmData.alarmId}`;
 		});
 
 		// 닫기 버튼 클릭 이벤트 핸들러
 		modalCloseButton.addEventListener('click', () => {
+
 			modalFlag = false;
+
 			// 모달 숨기기
 			modalContainer.style.display = 'none';
 		});
 	}
 }
+
 
 // -----------------------------------------------------------------------------
 
@@ -73,6 +77,9 @@ function getNewNfwData() {
 				firstValue.push(nfwLog.count);
 				firstLabel.push(nfwLog._id);
 				ipList.push(nfwLog._id);				
+
+				console.log(timestamps);
+
 				timestamps.push(nfwLog.timestamps[0]);
 			});
 		})

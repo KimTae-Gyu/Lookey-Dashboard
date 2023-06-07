@@ -162,6 +162,7 @@
 
             fetch(`http://52.6.101.20:3000/alarmAction?id=${alarmId}`, { method: 'PUT' })
             .then((response) => response.json())
+
             .then(result => {
                 return fetch('http://52.6.101.20:3000/control/nfw', {
                     method: 'POST',
