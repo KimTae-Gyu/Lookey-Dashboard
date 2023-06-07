@@ -74,7 +74,7 @@ function mongoNfwGroupBy(connection) {
   ])
     .toArray()
     .then((result) => {
-      return result;
+	    return result;
     })
     .catch((error) => {
       throw error;
@@ -103,7 +103,7 @@ function mongoPortScanGroupBy(connection) {
         src_ip: "$_id",
         dest_port_count: { $size: "$dest_ports" }
       }
-    }
+	}
   ])
     .toArray()
     .then((result) => {

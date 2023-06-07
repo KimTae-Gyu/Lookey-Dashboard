@@ -174,7 +174,7 @@ app.get('/geoip', (req, res) => {
 			res.status(500).send('Internal Server Error');
 		});
 });
-	
+
 app.get('/alarm', (req, res) => {
 	const subscribeURL = req.query.SubscribeURL;
 	fetch(subscribeURL, { method: 'GET' })
@@ -202,10 +202,10 @@ app.post('/alarm', (req, res) => {
 			if (groupByResult.length > 0) {
 				const alarmInsert = 'INSERT INTO dash_alarm (alarm_id, alarm_user_id, alarm_info, flag) VALUES (UUID(), ?, ?, false)';
 				const userId = 'dash';
-				const alarmInfo = "Port Scanning이 감지되었습니다.\nIP: ";
+				const alarmInfo = "Port Scanning이 감지되었습니다.\n\n IP: ";
 
 				groupByResult.forEach(res => {
-					alarmInfo + res.src_ip + " ";
+					alarmInfo + res.src_ip + "     ";
 				});
 
 				connection.query(alarmInsert, [userId, alarmInfo], (error, results) => {
@@ -237,7 +237,13 @@ app.put('/alarmAction', (req, res) => {
 });
 
 app.get('/report',(req,res) => {
+	//몽고 db에서 데이터 가져옴
+	// timestamp데이터 -> export.js로 이동
 	
+	//d5Export.py
+	// table1 - alarmTime, 사용자이름, check시간, 조치여부(?)
+	// table2 - 알람시간, 알람내용, 위치, source IP, 시도 행위, 위험도
+	// table3 - 조치시각, 차단 IP(==source IP)
 
 });
 
