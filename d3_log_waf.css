@@ -203,12 +203,12 @@ form{
     flex-wrap: wrap;
     flex-direction: row;
     place-content: start;
-    gap : 20px;
+    gap : 5px;
     padding : 20px;
     background-color: var(--deep-gray);
 }
 input{
-    padding : 5px 10px 5px 10px;
+    padding : 5px;
     font-size: 120%;
 }
 

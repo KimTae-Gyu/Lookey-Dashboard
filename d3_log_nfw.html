@@ -9,8 +9,8 @@
     <link rel="stylesheet" href="web_font.css">
     <link rel="icon" href="./pic/favicon.ico">
     <script src="d3_log_nfw.js" defer></script>
-    <script src="/socket.io/socket.io.js"></script>
-    <script> const socket = io(); </script>
+    <!--<script src="/socket.io/socket.io.js"></script>
+    <script> const socket = io(); </script>-->
     <title>Lookey Dashboard</title>
 </head>
 <body>
@@ -55,12 +55,20 @@
             <li> <a class="export" href="export.html" target="_self">내보내기</a> </li>
         </ul>
         <p class="address"> 관리자 : 02-000-0000 </p>
+        <button id="csv-export" onclick="csvExport()">csv export</button>
     </nav>
     <!--임시 데이터 적용 중 / 클릭하면 비안전 예시도 볼 수 있도록 제공할 것-->    
     <section>
         <div class="log-control">
             <form>
                 <!--추후 JQuery 사용해야할 듯?-->
+                <span class="input-start">
+                    <span class="mid-desc" for="start-day">시작날짜</span>
+                    <input type="date" id="start-day">
+                </span>
+                <span class="input-end">
+                    <span class="mid-desc" for="end-day">종료날짜</span>
+                    <input type="date" id="end-day">
                 <span class="input-start">
                     <span class="mid-desc" for="start-time">시작시간</span>
                     <input type="time" id="start-time">
@@ -83,7 +91,6 @@
                 </span>
                 <input type="button" value="찾기" id="input-button">
             </form>
-            <button id="csv-export" onclick="csvExport()">csv export</button>
         </div>
         <div class="log-page">
             <table id="table", class="table">
