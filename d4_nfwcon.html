@@ -11,9 +11,9 @@
 </head>
 <body>
     <header>
-        <img src="./pic/Lookey_logo.png" alt="Lookey Dashboard homepage" class="logo"> <!--회사의 로고-->
+        <img src="/pic/Lookey_logo.png" alt="Lookey Dashboard homepage" class="logo"> <!--회사의 로고-->
         <div class="headLine">
-            <img src="./pic/person.svg" alt="your Picture" class="yourPic"> <!--사람의 사진-->
+            <img src="/pic/person.svg" alt="your Picture" class="yourPic"> <!--사람의 사진-->
             <a class="myinfo" href="D6_myinfo.html" target="_self">내 정보</a>
             <t>|</t>
             <a class="logout" href="d1_login.html" target="_self">로그아웃</a>
@@ -143,37 +143,6 @@
             </table>
         </div>
     </section>
-<script>
-    // 현재 페이지의 URL 가져오기
-    const currentURL = window.location.href;
-
-    // URL에서 쿼리 스트링 파싱
-    const urlParams = new URLSearchParams(window.location.search);
-
-    // 쿼리 스트링이 존재하는지 확인
-    if (urlParams.has('id')) {
-        // 쿼리 스트링이 paramName을 포함하는 경우
-        const alarmId = urlParams.get('id');
-        const form = document.getElementById('controlForm');
-        
-        form.addEventListener('submit', () => {
-            event.preventDefault();
-            const formData = new FormData(form);
-
-            fetch(`http://52.6.101.20:3000/alarmAction?id=${alarmId}`, { method: 'PUT' })
-            .then((response) => response.json())
-            .then(result => {
-                return fetch('http://52.6.101.20:3000/control/nfw', {
-                    method: 'POST',
-                    body: formData
-                })
-            })
-            .then(response => response.json())
-            .catch(error => {
-                console.error(error);
-            })
-        });
-    } 
-</script>
+<script src="/d4_nfwcon.js"></script>
 </body>
 </html>

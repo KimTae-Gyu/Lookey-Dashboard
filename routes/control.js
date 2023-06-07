@@ -26,7 +26,13 @@ router.post('/nfw', async (req, res) => {
     try {
         const flag = await invokeLambda(payload);
         if (flag) {
-            res.redirect('/');
+            const connection = req.app.locals.connection;
+            const alarmUpdate = 'UPDATE dash_alarm SET flag=true WHERE id=?'
+
+            connection.query(alarmUpdate, [req.body.alarmId], (error, results) => {
+                if (error) throw error;
+		        res.redirect('/');
+            });
         } else {
             res.sendStatus(500);
         }

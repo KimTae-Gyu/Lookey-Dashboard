@@ -35,6 +35,8 @@ connection.connect((err) => {
 	console.log('MySQL 연결 성공');
 });
 
+app.locals.connection = connection;
+
 // MongoDB 설정 및 연결
 const mongoConnection = mongoose.createConnection(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 // MongoDB 연결 성공 및 실패 이벤트 처리
@@ -150,7 +152,7 @@ app.get('/geoip', (req, res) => {
 	const ipAddress = req.query.ip;
 	const apiUrl = `https://geolite.info/geoip/v2.1/city/${ipAddress}`;
 	const username = '867355';
-	const password = '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';
+	const password = 'AIzaSyB8PNtOtvMSJuUp6OqPOpNX7rGWULCDYp4';
 	const headers = {
 		Authorization: `Basic ${Buffer.from(`${username}:${password}`).toString('base64')}`,
 		Accept: 'application/json',
