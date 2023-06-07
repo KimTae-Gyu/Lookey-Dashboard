@@ -236,6 +236,11 @@ app.put('/alarmAction', (req, res) => {
 	});
 });
 
+app.get('/report',(req,res) => {
+	
+
+});
+
 io.on('connection', (socket) => {
 	console.log('클라이언트가 연결되었습니다.');
 	// socket.on('wafLogs', (data) => {
