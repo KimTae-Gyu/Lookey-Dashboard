@@ -10,6 +10,8 @@ const cors = require('cors');
 const { wafParse, nfwParse } = require('./logParse.js');
 const { wafMongoInsert, nfwMongoInsert, mongoWafGroupBy, mongoNfwGroupBy } = require('./mongo.js');
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+const fs = require('fs');
 
 dotenv.config(); // .env 파일 내용을 process.env에 적재
 const app = express();
@@ -223,6 +225,49 @@ app.post('/alarm', (req, res) => {
 	console.log('Message : ', req.body.SubscribeURL);
 	io.emit('alarm');
 });
+
+
+//----------------링크 생성---------------------
+
+app.use(express.json());
+app.use(bodyParser.json({ limit: '500mb' }));
+app.use(express.urlencoded({ extended: true }));
+
+app.post('/processData', (req, res) => {
+	const chunkData = req.body.chunk; // 받은 chunk 데이터
+  	const chunkIndex = req.body.chunkIndex; // 받은 chunk의 인덱스
+  	const chunksLen = req.body.chunksLen; // 전체 chunk의 개수
+	const fileId = Date.now().toString();
+
+  // chunk 데이터를 원하는 방식으로 처리하고 저장 등의 작업을 수행
+  // 여기서는 파일로 저장하는 예시를 보여줍니다.
+  const fileName = `report_${fileId}.txt`;
+  const writeStream = fs.createWriteStream(fileName, { flags: 'a' });
+
+  // chunk 데이터를 파일에 작성
+  writeStream.write(chunkData);
+
+  // 모든 chunk가 전송되었을 때 파일을 닫고 응답을 보냄
+  if (chunkIndex === chunksLen) {
+    writeStream.end();
+    res.json({ success: true, message: 'Chunk data received and processed' });
+  } else {
+    res.json({ success: true, message: 'Chunk data received' });
+	/*
+    // 전달받은 데이터 처리
+    const fileUrl = req.body.fileUrl;
+	console.log(fileUrl);
+	const downloadLink = `${fileUrl}`;
+	console.log(downloadLink);
+    // 클라이언트에 다운로드 링크 반환
+    res.json({ success: true, downloadLink: downloadLink});
+
+	*/
+};
+})
+//---------------------------------------------------------
+
+
 
 io.on('connection', (socket) => {
 	console.log('클라이언트가 연결되었습니다.');

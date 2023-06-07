@@ -55,7 +55,7 @@
             <p class="address"> 관리자 : 02-000-0000 </p>
         </nav>
         <section>
-            <form action="/runPython" method="POST" aria-label="form">
+            <form id="my-form" action="http://localhost:5000/sendData" method="POST" aria-label="form">
                 <div id="alarm-select">
                     <div class="mid-desc">알람 리스트</div>
                     <div id="alarm-list">
@@ -63,8 +63,9 @@
                         </ul>
                     </div>
                     <div id="note" class="sm-desc">비고</div>
-                    <textarea name="note" class="text-box" type="text" rows="4" cols="100" aria-label="textarea"></textarea><br>
-                    <input id="download-button" type="submit" value="download" onclick="runPython()">
+                    <textarea name="noteWrite" class="text-box" type="text" rows="4" cols="100" aria-label="textarea"></textarea><br>
+                    <input id="download-button" type="submit" value="download">
+                    <div id="thisLink"></div>
                 </div>
             </form>
         </section>
