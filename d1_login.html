@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<!--<script src="app.js" defer></script>-->
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="d1_login.css">
+        <link rel="stylesheet" href="web_font.css">
+        <link rel="icon" href="./pic/favicon.ico">
+        <title>Lookey Company Dashboard</title>
+    </head>
+    <center>
+    <body>
+        <img src="./pic/Lookey_logo.png" alt="Lookey Dashboard Homepage">
+        <div class="login">
+            <div class="description">로그인 하세요</div>
+            <form action="/login" target="_self" method="post" autocomplete="off">
+                <div id="id_box">
+                    <div class="label" for="id">ID</div>
+                    <input type="text" id="id" name="id" placeholder="Enter your ID" required>
+                </div>
+                <div id="pw_box">
+                    <div class="label"for="password">PW</div>
+                    <input type= "password" id="password" name="password" placeholder="Enter your Password" required>
+                </div>
+                <button type="submit">login</button>
+            </form>
+            <p> 관리자 : 02-000-0000 </p>
+        </div>
+    </body>
+    </center>
+</html>

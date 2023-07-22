@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="d2_main.css">
+    <link rel="stylesheet" href="web_font.css">
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8PNtOtvMSJuUp6OqPOpNX7rGWULCDYp4&callback=initMap&v=weekly"
+        defer></script>
+    <script src="https://unpkg.com/@googlemaps/markerclusterer/dist/index.min.js"></script>
+    <link rel="icon" href="./pic/favicon.ico">
+    <script src="d2_main.js" defer></script>
+    <script src="d2_main_sub.js" defer></script>
+    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.3/leaflet.css" integrity="sha512-mD70nAW2ThLsWH0zif8JPbfraZ8hbCtjQ+5RU1m4+ztZq6/MymyZeB55pWsi4YAX+73yvcaJyk61mzfYMvtm9w==" crossorigin="anonymous" referrerpolicy="no-referrer" />!-->
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.3.0/chart.umd.js" integrity="sha512-CMF3tQtjOoOJoOKlsS7/2loJlkyctwzSoDK/S40iAB+MqWSaf50uObGQSk5Ny/gfRhRCjNLvoxuCvdnERU4WGg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"> </script>
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.3/leaflet.js" integrity="sha512-Dqm3h1Y4qiHUjbhxTuBGQsza0Tfppn53SHlu/uj1f+RT+xfShfe7r6czRf5r2NmllO2aKx+tYJgoxboOkn1Scg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>!-->
+    <script src="/socket.io/socket.io.js"></script>
+    <script> const socket = io(); </script>
+    <title>Lookey Dashboard</title>
+</head>
+
+<body>
+    <header>
+        <img src="./pic/Lookey_logo.png" alt="Lookey Dashboard homepage" class="logo"> <!--회사의 로고-->
+        <div class="headLine">
+            <img src="./pic/person.svg" alt="your Picture" class="yourPic"> <!--사람의 사진-->
+            <a class="myinfo" href="" target="_self">내 정보</a>
+            <t>|</t>
+            <a class="logout" href="/logout" target="_self">로그아웃</a>
+            <!--<img src="alarm.png" alt="alarm icon" class="alarm-icon">-->
+            <!--<a class="alarm" href="d7_alarm.html>알람</a>-->
+            <!--<button type="button" id="alarm-button" name="alarm">
+                <img src="./pic/notification.svg" alt="alarm" class="alarm"> 알람 버튼
+            </button>-->
+        </div>
+    </header>
+    <!--기존 nav자리-->
+    <nav>
+        <div id="expand-menu" name="expand-menu" class="expand-menu">
+            <!--<img src="./pic/menu.svg" alt="menu icon" class="menuicon">-->
+        </div>
+        <label for="expand-menu" class="index">메뉴</label>
+        <ul id="main">
+            <div class="index">Main</div> <!--볼드 처리-->
+            <li> <a class="mainlog" href="d2_main.html" target="_self">HOME</a></li> <!--볼드 처리-->
+            <!--<li><a class="livelog" href="livelog.html" target="_self">실시간 로그</a></li>-->
+        </ul>
+        <ul id="aws-log">
+            <div class="index">AWS 보안 로그</div>
+            <li> <a class="nfwlog" href="d3_log_nfw.html" target="_self">Network firewall 로그</a> </li>
+            <li> <a class="waflog" href="d3_log_waf.html" target="_self">WAF 로그</a> </li>
+            <li> <a class="gdlog" href="d3_log_gd.html" target="_self">GuardDuty 로그</a> </li>
+            <!--<li> <a class="nsglog" href="D4_nsglog.html" target="_self">NACL/SG 로그</a></li>-->
+        </ul>
+        <ul id="aws-con">
+            <div class="index">AWS 제어 항목</div>
+            <li> <a class="nfwcon" href="/control/nfw" target="_self">Network firewall Rule Set</a> </li>
+        </ul>
+        <ul id="aws-exp">
+            <div class="index">기타 항목</div>
+            <li> <a class="export" href="d5_export.html" target="_self">내보내기</a> </li>
+        </ul>
+        <p class="address"> 관리자 : 02-000-0000 </p>
+        <button id="clickThis" onclick="downloadFile()">화면 다운로드</button>
+    </nav>
+    <!--임시 데이터 적용 중 / 클릭하면 비안전 예시도 볼 수 있도록 제공할 것-->
+    <div id="modalContainer" class="modal-container">
+        <div class="modal-content">
+            <span id="modalMessage"></span>
+        <div class="button-container">
+            <button id="modalActionButton">Action</button>
+            <button id="modalCloseButton">Close</button>
+        </div>
+        </div>
+    </div>
+    <section>  
+        <div class="circle-log">
+            <div class="firstlog" alt="지표 1">
+                <div class="desc">네트워크 F/W 차단 IP</div>
+                <canvas id="firstLogChart"></canvas>
+            </div>
+            <div class="secondlog" alt="지표 2">
+                <div class="desc">WAF 차단 룰셋</div>
+                <canvas id="secondLogChart"></canvas>
+            </div>
+            <!--<div class="grade-log">-->
+                <div class="fourthlog">
+                    <div class="desc">GuardDuty 위험도별 개수</div>
+                    <center>
+                        <div class="gd">
+                            <canvas id="fourthLogChart" style="display: block; height: 220px;width: 350px;"></canvas>
+                        </div>
+                    </center>
+                </div>
+            <!--</div>-->
+        </div>
+        <!--<div class="api-log">-->
+            <div class="map-log">
+                <div class="thirdlog">
+                    <div class="desc">네트워크 F/W 및 WAF 차단 지도</div>
+                    <center>
+                        <div id="map"> </div>
+                    </center>
+                </div>
+                <div class="thirdlog-list">
+                    <table id="map-table", class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">시간</th>
+                                <th scope="col">국가</th>
+                                <th scope="col">IP</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        <!--</div>-->
+    </section>
+    <script>
+        // 서버에 NFW 로그가 새로 들어오면 차트 갱신
+        socket.on('nfwNew', (data) => {
+            renderNfwChartAndMap();
+        });
+        // 서버에 WAF 로그가 새로 들어오면 차트 갱신
+        socket.on('wafNew', (data) => {
+            renderWafChart();
+        });
+        // 서버에 로그가 새로 들어오면 침입 탐지 경고
+        socket.on('alarm', (data) => {
+            showModal(data);
+        });
+    </script>
+</body>
+
+</html>

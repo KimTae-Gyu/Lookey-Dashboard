@@ -1,0 +1,265 @@
+/*전체*/
+*{
+    box-sizing: border-box;
+}
+
+html{
+    background-color: var(--light-gray);
+}
+
+body{
+    margin : 0;
+    display: grid;
+    grid-template-columns: 200px 5% 10fr;
+    grid-template-rows: 40px 1fr;
+    grid-gap: 10px;
+    grid-template-areas: 
+        "header header header"
+        "menubar menubar section";
+}
+
+/*링크*/
+a{
+    color: var(--black); /* 링크의 기본 색상을 상속 */
+    text-decoration: none; /* 밑줄 제거 */
+}
+
+a:hover{
+    color: var(--blue);
+    font-style : italic;
+}
+
+/*헤더*/
+header{
+    grid-area: header;
+    position :fixed;
+    top : 0;
+    left : 0;
+    width : 100%;
+    border-bottom : solid 2px; 
+    background-color: var(--deep-green);
+    border-color : var(--deep-green);
+    display : grid;
+    grid-column : 1 / span 12;
+    grid-row : 0;
+    padding : 5px;
+    margin-bottom: 2px;
+
+}
+
+.logo {
+    grid-column : 1 / 1   ;  
+    grid-row : 0;
+    height : 30px;
+}
+
+.headLine{
+    grid-column : 12;
+    display : flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-self: end;
+}
+
+.yourPic{
+    height : 30px;
+    margin-right : 5px;
+}
+
+.myinfo:hover,.logout:hover {
+    color : var(--light-green);
+}
+
+.myinfo {
+    margin : 0 5px 0 5px;
+}
+
+.logout {
+    margin : 0 5px 0 5px;
+}
+.alarm {
+    height: 100px;
+    margin-right : 5px;
+}
+
+/* #alarm-button{
+    border-radius: 100%;
+    border-color : #CCCCCC;
+    background-color: #CCCCCC;
+}*/
+
+
+
+/*네비게이션 바 위치*/
+/*네비게이션 바*/
+nav{
+    grid-area : menubar;
+    display : flex;
+    flex-direction: column;
+    /* grid-gap: 5px;
+    grid-template-rows: 3rem 1fr 0.8fr 0.5fr 0.5fr 0.5fr;
+    grid-template-areas :
+        "menuname"
+        "mainlog"
+        "awslog"
+        "control"
+        "export"
+        "address";*/
+    left : 0;
+    border : solid 2px;
+    background-color: var(--gray);
+    border-color : var(--gray);
+    margin-top: 0px;
+    padding : 5px 20px 0px 5px;
+}
+
+li{
+    list-style-type: none;
+    font-size : 20px;
+    margin-left : 5px;
+    padding-left : 10px;
+    border-left : 5px solid var(--black);
+    margin-bottom : 15px;
+}
+
+li:hover{
+    list-style-type: none;
+    font-size : 20px;
+    margin-left : 5px;
+    padding-left : 10px;
+    border-left : 5px solid var(--blue);
+    margin-bottom : 15px;
+}
+
+/*메뉴 아이콘 및 정보*/
+/*#expand-menu{
+    background-color : var(--white);
+    grid-area : menuicon;
+    align-self: left;
+}
+ .menuicon{
+    margin : 5px;
+    width : 45px;
+    height : 45px;
+}*/
+
+.index{
+    font-size : 25px;
+    border-color : var(--black);
+    padding-left : 5px;
+    padding-bottom : 5px;
+    /*margin-right: auto;*/
+}
+
+#aws-log .index{
+    font-weight : 600;
+}
+
+.gdlog{
+    font-weight : 600;
+    color:var(--blue);
+}
+
+label{
+    /*grid-area: menuname;*/
+    padding-top : 5px;
+    margin-left : 10px;
+    font-weight: 900;
+}
+
+section{
+    grid-area : section;
+    gap : 5px;
+    margin-right : 10px;
+    width : 100%;
+    min-height: 900px;
+    padding-right : 10px;
+    display : flex;
+    flex-direction: column;
+}
+
+.log-page{
+    overflow :auto;
+}
+
+table{
+    border : solid 2px;
+    border-color : var(--deep-gray);
+    width : 100%;
+    background-color: var(--white);
+    border-collapse : collapse;
+}
+
+th, td{
+    border : solid 2px;
+    border-color : var(--deep-gray);
+    padding : 10px;
+}
+
+/*form*/
+form{
+    display : flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    place-content: start;
+    gap : 20px;
+    padding : 20px;
+    background-color: var(--deep-gray);
+}
+input{
+    padding : 5px 10px 5px 10px;
+    font-size: 120%;
+}
+
+select {
+    padding : 5px 20px 5px 20px;
+    font-size: 120%;
+}
+
+option {
+    font-size: 120%;
+}
+
+#input-button {
+    font-size: 120%;
+    padding : 5px 20px 5px 20px;
+    background-color: var(--light-gray);
+}
+
+#input-button:active{
+    background-color: var(--light-black);
+    color : var(--light-gray);
+}
+
+/*맨 위 제목*/
+#main-desc{
+    background-color: var(--light-green);
+    font-size: 200%;
+    font-weight: 700;
+    margin-bottom: 5px;
+    width : 100%;
+    text-align: center;
+    
+}
+
+/*큰 설명*/
+.big-desc{
+    background-color: var(--light-green);
+    font-size: 160%;
+    font-weight: 700;
+    text-align: center;
+    
+}
+
+/*중간 설명*/
+.mid-desc{
+    font-size: 140%;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+/*작은 설명*/
+.sm-desc{
+    font-size: 120%;
+    font-weight: 500;
+}

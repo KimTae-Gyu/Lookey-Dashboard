@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="d3_log_gd.css">
+    <!--<link rel="stylesheet" href="d2_main.css">-->
+    <link rel="stylesheet" href="web_font.css">
+    <link rel="icon" href="./pic/favicon.ico">
+    <script src="d3_log_gd.js" defer></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script> const socket = io(); </script>
+    <title>Lookey Dashboard</title>
+</head>
+<body>
+    <header>
+        <img src="./pic/Lookey_logo.png" alt="Lookey Dashboard homepage" class="logo"> <!--회사의 로고-->
+        <div class="headLine">
+            <img src="./pic/person.svg" alt="your Picture" class="yourPic"> <!--사람의 사진-->
+            <a class="myinfo" href="d6_myinfo.html" target="_self">내 정보</a>
+            <t>|</t>
+            <a class="logout" href="d1_login.html" target="_self">로그아웃</a>
+            <!--<img src="alarm.png" alt="alarm icon" class="alarm-icon">-->
+            <!--<a class="alarm" href="d7_alarm.html>알람</a>-->
+            <!--<button type="button" id="alarm-button" name="alarm">
+                <img src="./pic/notification.svg" alt="alarm" class="alarm"> 알람 버튼
+            </button>-->
+        </div>
+    </header>   
+    <!--기존 nav자리-->
+    <nav>
+        <div id="expand-menu" name="expand-menu" class="expand-menu">
+            <!--<img src="./pic/menu.svg" alt="menu icon" class="menuicon">-->
+        </div>
+        <label for="expand-menu" class="index">메뉴</label>
+        <ul id="main">
+            <div class="index">Main</div> <!--볼드 처리-->
+            <li> <a class="mainlog" href="d2_main.html" target="_self">HOME</a></li> <!--볼드 처리-->
+            <!--<li><a class="livelog" href="livelog.html" target="_self">실시간 로그</a></li>-->
+        </ul>
+        <ul id="aws-log">
+            <div class="index">AWS 보안 로그</div>
+            <li> <a class="nfwlog" href="d3_log_nfw.html" target="_self">Network firewall 로그</a> </li>
+            <li> <a class="waflog" href="d3_log_waf.html" target="_self">WAF 로그</a> </li>
+            <li> <a class="gdlog" href="d3_log_gd.html" target="_self">GuardDuty 로그</a> </li>
+            <!--<li> <a class="nsglog" href="D4_nsglog.html" target="_self">NACL/SG 로그</a></li>-->
+        </ul>
+        <ul id="aws-con">
+            <div class="index">AWS 제어 항목</div>
+            <li> <a class="nfwcon" href="d4_nfwcon.html" target="_self">Network firewall Rule Set</a> </li>
+        </ul>
+        <ul id="aws-exp">
+            <div class="index">기타 항목</div>
+            <li> <a class="export" href="export.html" target="_self">내보내기</a> </li>
+        </ul>
+        <p class="address"> 관리자 : 02-000-0000 </p>
+    </nav>
+    <!--임시 데이터 적용 중 / 클릭하면 비안전 예시도 볼 수 있도록 제공할 것-->    
+    <section>
+        <div class="log-control">
+            <form>
+                <!--추후 JQuery 사용해야할 듯?-->
+                <span class="input-start">
+                    <span class="mid-desc" for="start-time">시작시간</span>
+                    <input type="time" id="start-time">
+                </span>
+                <span class="input-end">
+                    <span class="mid-desc" for="end-time">종료시간</span>
+                    <input type="time" id="end-time">
+                </span>
+                <span class="input-search">
+                    <span class="mid-desc" for="search-word">검색단어</span>
+                    <input type="search" id="search-word">
+                </span>
+                <span class="input-severity">
+                    <span class="mid-desc" for="severity">심각도</span>
+                    <select name="severity" id="severity">
+                        <option value="all">all</option>
+                        <option value="low">low</option>
+                        <option value="mid">mid</option>
+                        <option value="high">high</option>
+                    </select>
+                </span>
+                <input type="button" value="찾기" id="input-button">
+            </form>
+            <button id="csv-export" onclick="csvExport()">csv export</button>
+        </div>
+        <div class="log-page">
+            <table id="table", class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">시간</th>
+                        <th scope="col">유형</th>
+                        <th scope="col">이름</th>
+                        <th scope="col">설명</th>
+                        <th scope="col">심각도</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </section>
+    <!--스크립트 생략-->
+    <!--<script>
+        socket.on('wafLogs', (data) => {
+            console.log(data);
+            console.log('호출');
+            const logList = document.getElementById('logList');
+            const logItem = document.createElement('li');	   
+            //const parsedData = JSON.parse(data);
+            logItem.innerText = data;
+            logList.appendChild(logItem);
+        });
+    </script>-->
+</body>
+</html>

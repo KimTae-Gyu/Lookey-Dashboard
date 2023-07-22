@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CroxyWatch</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        html, body { height: 100%; }
+    </style>
+</head>
+<body>
+    <!-- Header Wrapper, 로고를 사이드 메뉴 위에 위치시키기 위함-->
+    <div class="flex justify-center">
+        <!-- Header -->
+        <header class="flex-initial flex items-center border-2 w-9/12 h-16 px-4">
+            <a href="/" class="">Logo</a>
+            <div class="ml-auto">
+                <% if (loggedIn) { %>
+                    <a href="/logout"><button class="rounded bg-[#addfad] text-gray-100 font-semibold px-4 py-2">로그 아웃</button></a>
+                    <button class="rounded bg-[#86efac] text-gray-100 font-semibold px-4 py-2">내 정보</button>
+                <% } else { %>
+                    <a href="/login"><button class="rounded bg-[#addfad] text-gray-100 font-semibold px-4 py-2">로그인</button></a>
+                <% } %>
+            </div>    
+        </header>
+    </div>
+    <!-- Nav, Section Wrapper, flex로 나열 및 페이지의 가운데 정렬-->
+    <div class="flex border-2 justify-center">
+        <!-- Nav, 사이드 메뉴 -->
+        <nav class="flex-initial border-2 h-full w-fit">
+            <ul>
+                <li class="mb-3">
+                    <p class="font-semibold font-sans">HOME</p>
+                    <ul class="pl-3">
+                        <div class="border-l px-2 my-2">
+                            <li class="text-xs font-sans">종합 대시보드</li>
+                        </div>
+                    </ul>
+                </li> 
+                <li class="mb-3">
+                    <p class="font-semibold">AWS 보안 로그</p>
+                    <ul class="pl-3">
+                        <div class="border-l px-2 my-2">
+                            <li class="text-xs mb-2">Network Firewall 로그</li>
+                            <li class="text-xs mb-2">WAF 로그</li>
+                            <li class="text-xs mb-2">GuardDuty 로그</li>
+                        </div>                        
+                    </ul>
+                </li>
+                <li class="mb-3">
+                    <p class="font-semibold">AWS 제어 항목</p>
+                    <ul class="pl-3">
+                        <div class="border-l px-2 my-2">
+                            <li class="text-xs mb-2">N/F Rule Set</li>
+                        </div>                        
+                    </ul>
+                </li>
+                <li>
+                    <p class="font-semibold">내보내기</p>
+                </li>
+            </ul>
+        </nav>
+        <!-- Section, 버튼과 차트 -->
+        <section class="flex-initial border-4 h-8/12 w-8/12 p-6">
+            <div class="flex gap-4 mb-4">
+                <button class="rounded bg-[#addfad] text-gray-100 font-semibold px-4 py-2">종합 대시보드</button>
+                <button class="rounded bg-[#86efac] text-gray-100 font-semibold px-4 py-2">메인</button>                
+                <button class="rounded bg-[#86efac] text-gray-100 font-semibold px-4 py-2">세부1</button>
+                <button class="rounded bg-[#86efac] text-gray-100 font-semibold px-4 py-2">세부2</button>
+                <button class="rounded bg-[#86efac] text-gray-100 font-semibold px-4 py-2">세부3</button>
+            </div>
+            <div class="grid grid-cols-2">
+                <div class="box-border col-span-1 h-64 border-4">차트</div>
+                <div class="box-border col-span-1 h-64 border-4">차트</div>
+                <div class="box-border col-span-1 h-64 border-4">차트</div>
+                <div class="box-border col-span-1 h-64 border-4">차트</div>
+            </div>            
+        </section>
+    </div>
+</body>
+</html>

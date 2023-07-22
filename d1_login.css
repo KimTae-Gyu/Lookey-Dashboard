@@ -1,0 +1,112 @@
+
+
+html {
+    background-color: var(--gray);
+}
+img {
+    margin-top : 50px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 30%;
+    max-width : 200px;
+    user-select: none;
+  }
+
+.login {
+    font-size : 100%;
+    color : var(--black);
+    border : solid 2px;
+    border-color : var(--deep-gray);
+    background-color : var(--white);
+    padding : 5% auto 5% auto;
+    margin-top : 10px;
+    margin-bottom : 5%;
+    min-width : 350px;
+    min-height: 400px;
+    max-width : 500px;
+    max-height: 600px;
+    vertical-align: middle;
+    user-select: none;
+}
+.description{
+    font-size: 200%;
+    font-weight: 800;
+    text-align: center;
+    margin : 10% auto 0% auto;
+}
+
+/*ID*/
+#id_box{
+    padding-left : 10%;
+    text-align: left;
+    margin : 5%;
+}
+/*PW*/
+#pw_box{
+    padding-left : 10%;
+    text-align: left;
+    margin : 5%;
+}
+
+.label{
+    font-family: 'Pretendard-Regular';
+    font-weight: 400;
+    font-size: 200%;
+    justify-content: left;
+}
+
+input[type="text"]{
+    width : 350px;
+    height: 50px;
+    font-size: 150%;
+    box-sizing: border-box;
+    border-radius: 5px;
+    border-color: var(--deep-gray);
+    background-color: var(--light-gray);
+}
+
+input[type="text"]:focus{
+    background-color: var(--gray);
+    border-color: var(--deep-gray)
+}
+
+input[type="password"]{
+    width : 350px;
+    height: 50px;
+    font-size: 150%;
+    box-sizing: border-box;
+    border-radius: 5px;
+    border-color: var(--deep-gray);
+    background-color: var(--light-gray);
+}
+
+input[type="password"]:focus{
+    background-color: var(--gray);
+    border-color: var(--deep-gray)
+}
+
+button[type="submit"]{
+    margin-top : 50px;
+    width :350px;
+    height:50px;
+    font-size: 150%;
+    box-sizing: border-box;
+    border-radius: 5px;
+    background-color: var(--deep-green);
+    border-color: var(--deep-green);
+}
+
+button[type="submit"]:focus{
+    background-color: var(--light-green);
+    border-color : var(--light-green);
+}
+
+p{
+    padding-top : 5%;
+    padding-bottom: 10%;
+    margin-bottom: 5%;
+    text-align: center;
+    font-style:italic;
+}
+
+@import "reset.css";
